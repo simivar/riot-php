@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Riot\Tests\Unit;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
@@ -14,9 +15,11 @@ use Riot\Exception as RiotException;
 
 final class ConnectionTest extends TestCase
 {
-    private RequestFactoryInterface $requestFactory;
+    /** @var MockObject&RequestFactoryInterface */
+    private $requestFactory;
 
-    private ResponseInterface $response;
+    /** @var MockObject&ResponseInterface */
+    private $response;
 
     public function setUp(): void
     {
@@ -42,7 +45,7 @@ final class ConnectionTest extends TestCase
         $connection = new Connection(
             $this->createMock(ClientInterface::class),
             'my-api-token',
-            $this->requestFactory,
+            $this->requestFactory, // @phpstan-ignore-line
         );
 
         $connection->get('region', 'path');
@@ -50,6 +53,7 @@ final class ConnectionTest extends TestCase
 
     /**
      * @dataProvider statusCodesAndExceptionsProvider
+     * @psalm-param class-string<\Throwable> $expectedException
      */
     public function testThrowsProperExceptionOnError(int $statusCode, string $expectedException): void
     {
@@ -73,7 +77,7 @@ final class ConnectionTest extends TestCase
         $connection = new Connection(
             $client,
             'my-api-token',
-            $this->requestFactory,
+            $this->requestFactory, // @phpstan-ignore-line
         );
         $connection->get('region', 'path');
     }
@@ -101,20 +105,23 @@ final class ConnectionTest extends TestCase
         self::assertInstanceOf(ResponseInterface::class, $result);
     }
 
+    /**
+     * @return array<array<int, class-string|int>>
+     */
     public function statusCodesAndExceptionsProvider(): array
     {
         return [
-            [400, RiotException\BadRequestException::class,],
-            [401, RiotException\UnauthorizedException::class,],
-            [403, RiotException\ForbiddenException::class,],
-            [404, RiotException\DataNotFoundException::class,],
-            [405, RiotException\MethodNotAllowedException::class,],
-            [415, RiotException\UnsupportedMediaTypeException::class,],
-            [429, RiotException\RateLimitExceededException::class,],
-            [500, RiotException\InternalServerErrorException::class,],
-            [502, RiotException\BadGatewayException::class,],
-            [503, RiotException\ServiceUnavailableException::class,],
-            [504, RiotException\GatewayTimeoutException::class,],
+            [400, RiotException\BadRequestException::class],
+            [401, RiotException\UnauthorizedException::class],
+            [403, RiotException\ForbiddenException::class],
+            [404, RiotException\DataNotFoundException::class],
+            [405, RiotException\MethodNotAllowedException::class],
+            [415, RiotException\UnsupportedMediaTypeException::class],
+            [429, RiotException\RateLimitExceededException::class],
+            [500, RiotException\InternalServerErrorException::class],
+            [502, RiotException\BadGatewayException::class],
+            [503, RiotException\ServiceUnavailableException::class],
+            [504, RiotException\GatewayTimeoutException::class],
         ];
     }
 }

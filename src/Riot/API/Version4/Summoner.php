@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Riot\API\Version4;
 
+use function json_decode;
 use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
-use Riot\Exception as RiotException;
-use function json_decode;
 use Riot\API\AbstractApi;
 use Riot\DTO\SummonerDTO;
+use Riot\Exception as RiotException;
 
 final class Summoner extends AbstractApi
 {
@@ -36,6 +36,7 @@ final class Summoner extends AbstractApi
         );
 
         $body = $response->getBody()->getContents();
+
         return SummonerDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
     }
 
@@ -62,6 +63,7 @@ final class Summoner extends AbstractApi
         );
 
         $body = $response->getBody()->getContents();
+
         return SummonerDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
     }
 
@@ -88,6 +90,7 @@ final class Summoner extends AbstractApi
         );
 
         $body = $response->getBody()->getContents();
+
         return SummonerDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
     }
 
@@ -114,6 +117,7 @@ final class Summoner extends AbstractApi
         );
 
         $body = $response->getBody()->getContents();
+
         return SummonerDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
     }
 }

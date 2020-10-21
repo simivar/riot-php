@@ -3,3 +3,7 @@ parameters:
 	paths:
 		- src
 		- tests
+	ignoreErrors:
+		-
+			message: '#Unsafe usage of new static\(\)\.#'
+			path: src/Riot/Exception/RiotApiException.php

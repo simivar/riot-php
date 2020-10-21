@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Riot\API\Version4;
 
+use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
 use Riot\API\AbstractApi;
 use Riot\Exception as RiotException;
-use JsonException;
 
 final class ThirdPartyCode extends AbstractApi
 {
@@ -34,6 +34,7 @@ final class ThirdPartyCode extends AbstractApi
         );
 
         $body = $response->getBody()->getContents();
+
         return json_decode($body, true, 512, JSON_THROW_ON_ERROR);
     }
 }
