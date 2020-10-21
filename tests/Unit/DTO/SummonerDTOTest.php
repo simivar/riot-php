@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Riot\Tests\DTO;
+namespace Riot\Tests\Unit\DTO;
 
 use PHPUnit\Framework\TestCase;
 use Riot\DTO\SummonerDTO;

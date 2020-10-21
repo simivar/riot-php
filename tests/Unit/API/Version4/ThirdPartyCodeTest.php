@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Riot\Tests\API\Version4;
+namespace Riot\Tests\Unit\API\Version4;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;

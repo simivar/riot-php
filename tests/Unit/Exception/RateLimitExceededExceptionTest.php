@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Riot\Tests\Exception;
+namespace Riot\Tests\Unit\Exception;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
