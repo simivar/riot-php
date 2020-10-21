@@ -4,17 +4,25 @@ declare(strict_types=1);
 
 namespace Riot;
 
+use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
+use Riot\Exception\BadGatewayException;
+use Riot\Exception\BadRequestException;
+use Riot\Exception\GatewayTimeoutException;
+use Riot\Exception\DataNotFoundException;
+use Riot\Exception\ForbiddenException;
+use Riot\Exception\InternalServerErrorException;
+use Riot\Exception\MethodNotAllowedException;
 use Riot\Exception\RateLimitExceededException;
+use Riot\Exception\ServiceUnavailableException;
+use Riot\Exception\UnauthorizedException;
+use Riot\Exception\UnsupportedMediaTypeException;
 
 final class Connection implements ConnectionInterface
 {
     private const API_URL = 'api.riotgames.com';
-
-    private const STATUS_CODE_LIMIT_EXCEEDED = 429;
-    private const STATUS_CODE_OK = 200;
 
     private ClientInterface $client;
 
@@ -29,7 +37,21 @@ final class Connection implements ConnectionInterface
         $this->requestFactory = $requestFactory;
     }
 
-    public function get(string $region, string $path): ?ResponseInterface
+    /**
+     * @throws BadGatewayException
+     * @throws BadRequestException
+     * @throws DataNotFoundException
+     * @throws ForbiddenException
+     * @throws GatewayTimeoutException
+     * @throws InternalServerErrorException
+     * @throws MethodNotAllowedException
+     * @throws RateLimitExceededException
+     * @throws ServiceUnavailableException
+     * @throws UnauthorizedException
+     * @throws UnsupportedMediaTypeException
+     * @throws ClientExceptionInterface
+     */
+    public function get(string $region, string $path): ResponseInterface
     {
         $request = $this->requestFactory->createRequest(
             'GET',
@@ -38,15 +60,51 @@ final class Connection implements ConnectionInterface
         $request = $request->withAddedHeader('X-Riot-Token', $this->riotApiToken);
 
         $response = $this->client->sendRequest($request);
-        if (self::STATUS_CODE_LIMIT_EXCEEDED === $response->getStatusCode()) {
-            throw RateLimitExceededException::createFromResponse($response);
-        }
-
-        // todo throw exception?
         if (self::STATUS_CODE_OK !== $response->getStatusCode()) {
-            return null;
+            $this->statusCodeToException($response);
         }
 
         return $response;
+    }
+
+    /**
+     * @throws BadGatewayException
+     * @throws BadRequestException
+     * @throws DataNotFoundException
+     * @throws ForbiddenException
+     * @throws GatewayTimeoutException
+     * @throws InternalServerErrorException
+     * @throws MethodNotAllowedException
+     * @throws RateLimitExceededException
+     * @throws ServiceUnavailableException
+     * @throws UnauthorizedException
+     * @throws UnsupportedMediaTypeException
+     */
+    private function statusCodeToException(ResponseInterface $response): void
+    {
+        switch ($response->getStatusCode()) {
+            case self::STATUS_CODE_BAD_REQUEST:
+                throw BadRequestException::createFromResponse('Bad request', $response);
+            case self::STATUS_CODE_UNAUTHORIZED:
+                throw UnauthorizedException::createFromResponse('Unauthorized', $response);
+            case self::STATUS_CODE_FORBIDDEN:
+                throw ForbiddenException::createFromResponse('Forbidden', $response);
+            case self::STATUS_CODE_DATA_NOT_FOUND:
+                throw DataNotFoundException::createFromResponse('Data not found', $response);
+            case self::STATUS_CODE_METHOD_NOT_ALLOWED:
+                throw MethodNotAllowedException::createFromResponse('Method not allowed', $response);
+            case self::STATUS_CODE_UNSUPPORTED_MEDIA_TYPE:
+                throw UnsupportedMediaTypeException::createFromResponse('Unsupported media type', $response);
+            case self::STATUS_CODE_LIMIT_EXCEEDED:
+                throw RateLimitExceededException::createFromResponse('Rate limit exceeded', $response);
+            case self::STATUS_CODE_INTERNAL_SERVER_ERROR:
+                throw InternalServerErrorException::createFromResponse('Internal server error', $response);
+            case self::STATUS_CODE_BAD_GATEWAY:
+                throw BadGatewayException::createFromResponse('Bad gateway', $response);
+            case self::STATUS_CODE_SERVICE_UNAVAILABLE:
+                throw ServiceUnavailableException::createFromResponse('Service unavailable', $response);
+            case self::STATUS_CODE_GATEWAY_TIMEOUT:
+                throw GatewayTimeoutException::createFromResponse('Gateway timeout', $response);
+        }
     }
 }
