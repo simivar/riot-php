@@ -9,7 +9,7 @@ use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Riot\Exception\RateLimitExceededException;
 
-final class Connection
+final class Connection implements ConnectionInterface
 {
     private const API_URL = 'api.riotgames.com';
 

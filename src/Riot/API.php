@@ -9,11 +9,12 @@ use Riot\API\Version4\ThirdPartyCode;
 
 final class API
 {
-    private Connection $riotConnection;
+    private ConnectionInterface $riotConnection;
 
+    /** @var array<string, mixed> */
     private array $apis;
 
-    public function __construct(Connection $riotConnection)
+    public function __construct(ConnectionInterface $riotConnection)
     {
         $this->riotConnection = $riotConnection;
     }

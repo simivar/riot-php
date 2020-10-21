@@ -73,6 +73,9 @@ final class SummonerDTO implements DTOInterface
         return $this->summonerLevel;
     }
 
+    /**
+     * @param array<string, mixed> $data
+     */
     public static function createFromArray(array $data): SummonerDTO
     {
         return new self(
