@@ -30,4 +30,64 @@ final class Summoner extends AbstractApi
 
         return SummonerDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
     }
+
+    /**
+     * @throws RateLimitExceededException
+     * @throws \JsonException
+     */
+    public function getByAccountId(string $encryptedAccountId, string $region): ?SummonerDTO
+    {
+        $response = $this->riotConnection->get(
+            $region,
+            sprintf('lol/summoner/v4/summoners/by-account/%s', $encryptedAccountId),
+        );
+
+        if (null === $response) {
+            return null;
+        }
+
+        $body = $response->getBody()->getContents();
+
+        return SummonerDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
+    }
+
+    /**
+     * @throws RateLimitExceededException
+     * @throws \JsonException
+     */
+    public function getByPuuid(string $encryptedPuuid, string $region): ?SummonerDTO
+    {
+        $response = $this->riotConnection->get(
+            $region,
+            sprintf('lol/summoner/v4/summoners/by-puuid/%s', $encryptedPuuid),
+        );
+
+        if (null === $response) {
+            return null;
+        }
+
+        $body = $response->getBody()->getContents();
+
+        return SummonerDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
+    }
+
+    /**
+     * @throws RateLimitExceededException
+     * @throws \JsonException
+     */
+    public function getById(string $id, string $region): ?SummonerDTO
+    {
+        $response = $this->riotConnection->get(
+            $region,
+            sprintf('lol/summoner/v4/summoners/%s', $id),
+        );
+
+        if (null === $response) {
+            return null;
+        }
+
+        $body = $response->getBody()->getContents();
+
+        return SummonerDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
+    }
 }
