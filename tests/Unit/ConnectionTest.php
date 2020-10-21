@@ -4,17 +4,24 @@ declare(strict_types=1);
 
 namespace Riot\Tests\Unit;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Riot\Connection;
-use Riot\Exception\RateLimitExceededException;
+use Riot\Exception as RiotException;
 
 final class ConnectionTest extends TestCase
 {
-    public function testGetBuildsRequestWithApiTokenHeader(): void
+    /** @var MockObject&RequestFactoryInterface */
+    private $requestFactory;
+
+    /** @var MockObject&ResponseInterface */
+    private $response;
+
+    public function setUp(): void
     {
         $request = $this->createMock(RequestInterface::class);
         $request->expects(self::once())
@@ -23,43 +30,40 @@ final class ConnectionTest extends TestCase
             ->willReturnSelf()
         ;
 
-        $requestFactory = $this->createMock(RequestFactoryInterface::class);
-        $requestFactory->expects(self::once())
+        $this->requestFactory = $this->createMock(RequestFactoryInterface::class);
+        $this->requestFactory->expects(self::once())
             ->method('createRequest')
             ->with(self::equalTo('GET'), self::equalTo('https://region.api.riotgames.com/path'))
             ->willReturn($request)
         ;
 
+        $this->response = $this->createMock(ResponseInterface::class);
+    }
+
+    public function testGetBuildsRequestWithApiTokenHeader(): void
+    {
         $connection = new Connection(
             $this->createMock(ClientInterface::class),
             'my-api-token',
-            $requestFactory,
+            $this->requestFactory, // @phpstan-ignore-line
         );
 
         $connection->get('region', 'path');
     }
 
-    public function testThrowsExceptionOnRateLimitExceeded(): void
+    /**
+     * @dataProvider statusCodesAndExceptionsProvider
+     * @psalm-param class-string<\Throwable> $expectedException
+     */
+    public function testThrowsProperExceptionOnError(int $statusCode, string $expectedException): void
     {
-        $this->expectException(RateLimitExceededException::class);
+        $this->expectException($expectedException);
 
-        $request = $this->createMock(RequestInterface::class);
-        $request->expects(self::once())
-            ->method('withAddedHeader')
-            ->willReturnSelf()
-        ;
-        $requestFactory = $this->createMock(RequestFactoryInterface::class);
-        $requestFactory->expects(self::once())
-            ->method('createRequest')
-            ->willReturn($request)
-        ;
-
-        $response = $this->createMock(ResponseInterface::class);
-        $response->expects(self::once())
+        $this->response->expects(self::exactly(2))
             ->method('getStatusCode')
-            ->willReturn(429)
+            ->willReturn($statusCode)
         ;
-        $response
+        $this->response
             ->method('getHeader')
             ->willReturn(['1'])
         ;
@@ -67,92 +71,57 @@ final class ConnectionTest extends TestCase
         $client = $this->createMock(ClientInterface::class);
         $client->expects(self::once())
             ->method('sendRequest')
-            ->willReturn($response)
+            ->willReturn($this->response)
         ;
 
         $connection = new Connection(
             $client,
             'my-api-token',
-            $requestFactory,
+            $this->requestFactory, // @phpstan-ignore-line
         );
         $connection->get('region', 'path');
     }
 
-    public function testReturnsNullOnNonRateLimitExceededError(): void
-    {
-        $request = $this->createMock(RequestInterface::class);
-        $request->expects(self::once())
-            ->method('withAddedHeader')
-            ->willReturnSelf()
-        ;
-        $requestFactory = $this->createMock(RequestFactoryInterface::class);
-        $requestFactory->expects(self::once())
-            ->method('createRequest')
-            ->willReturn($request)
-        ;
-
-        $response = $this->createMock(ResponseInterface::class);
-        $response->expects(self::exactly(2))
-            ->method('getStatusCode')
-            ->willReturn(500)
-        ;
-        $response
-            ->method('getHeader')
-            ->willReturn('1')
-        ;
-
-        $client = $this->createMock(ClientInterface::class);
-        $client->expects(self::once())
-            ->method('sendRequest')
-            ->willReturn($response)
-        ;
-
-        $connection = new Connection(
-            $client,
-            'my-api-token',
-            $requestFactory,
-        );
-        $result = $connection->get('region', 'path');
-
-        self::assertNull($result);
-    }
-
     public function testReturnsResponsesWhenNoError(): void
     {
-        $request = $this->createMock(RequestInterface::class);
-        $request->expects(self::once())
-            ->method('withAddedHeader')
-            ->willReturnSelf()
-        ;
-        $requestFactory = $this->createMock(RequestFactoryInterface::class);
-        $requestFactory->expects(self::once())
-            ->method('createRequest')
-            ->willReturn($request)
-        ;
-
-        $response = $this->createMock(ResponseInterface::class);
-        $response->expects(self::exactly(2))
+        $this->response->expects(self::once())
             ->method('getStatusCode')
             ->willReturn(200)
         ;
-        $response
-            ->method('getHeader')
-            ->willReturn('1')
-        ;
 
         $client = $this->createMock(ClientInterface::class);
         $client->expects(self::once())
             ->method('sendRequest')
-            ->willReturn($response)
+            ->willReturn($this->response)
         ;
 
         $connection = new Connection(
             $client,
             'my-api-token',
-            $requestFactory,
+            $this->requestFactory,
         );
         $result = $connection->get('region', 'path');
 
         self::assertInstanceOf(ResponseInterface::class, $result);
+    }
+
+    /**
+     * @return array<array<int, class-string|int>>
+     */
+    public function statusCodesAndExceptionsProvider(): array
+    {
+        return [
+            [400, RiotException\BadRequestException::class],
+            [401, RiotException\UnauthorizedException::class],
+            [403, RiotException\ForbiddenException::class],
+            [404, RiotException\DataNotFoundException::class],
+            [405, RiotException\MethodNotAllowedException::class],
+            [415, RiotException\UnsupportedMediaTypeException::class],
+            [429, RiotException\RateLimitExceededException::class],
+            [500, RiotException\InternalServerErrorException::class],
+            [502, RiotException\BadGatewayException::class],
+            [503, RiotException\ServiceUnavailableException::class],
+            [504, RiotException\GatewayTimeoutException::class],
+        ];
     }
 }

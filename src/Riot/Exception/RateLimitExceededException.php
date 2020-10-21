@@ -18,6 +18,7 @@ final class RateLimitExceededException extends RiotApiException
 
     public function __construct(
         string $message,
+        string $edgeTraceId,
         int $retryAfter,
         string $rateLimitType,
         string $appRateLimit,
@@ -25,7 +26,7 @@ final class RateLimitExceededException extends RiotApiException
         string $methodRateLimit,
         string $methodRateLimitCount
     ) {
-        parent::__construct($message);
+        parent::__construct($message, $edgeTraceId);
         $this->retryAfter = $retryAfter;
         $this->rateLimitType = $rateLimitType;
         $this->appRateLimit = $appRateLimit;
@@ -64,10 +65,11 @@ final class RateLimitExceededException extends RiotApiException
         return $this->methodRateLimitCount;
     }
 
-    public static function createFromResponse(ResponseInterface $response): self
+    public static function createFromResponse(string $message, ResponseInterface $response): self
     {
         return new self(
-            'Rate limit exceeded',
+            $message,
+            $response->getHeader('x-riot-edge-trace-id')[0],
             (int) $response->getHeader('retry-after')[0],
             $response->getHeader('x-rate-limit-type')[0],
             $response->getHeader('x-app-rate-limit')[0],

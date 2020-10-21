@@ -13,9 +13,10 @@ final class RateLimitExceededExceptionTest extends TestCase
     public function testCreateFromResponseReturnsProperObject(): void
     {
         $response = $this->createMock(ResponseInterface::class);
-        $response->expects(self::exactly(6))
+        $response->expects(self::exactly(7))
             ->method('getHeader')
             ->withConsecutive(
+                ['x-riot-edge-trace-id'],
                 ['retry-after'],
                 ['x-rate-limit-type'],
                 ['x-app-rate-limit'],
@@ -24,6 +25,7 @@ final class RateLimitExceededExceptionTest extends TestCase
                 ['x-method-rate-limit-count'],
             )
             ->willReturn(
+                ['trace-id'],
                 ['1'],
                 ['application'],
                 ['20:1,100:120'],
@@ -33,7 +35,8 @@ final class RateLimitExceededExceptionTest extends TestCase
             )
         ;
 
-        $object = RateLimitExceededException::createFromResponse($response);
+        $object = RateLimitExceededException::createFromResponse('message', $response);
+        self::assertSame('trace-id', $object->getEdgeTraceId());
         self::assertSame(1, $object->getRetryAfter());
         self::assertSame('application', $object->getRateLimitType());
         self::assertSame('20:1,100:120', $object->getAppRateLimit());

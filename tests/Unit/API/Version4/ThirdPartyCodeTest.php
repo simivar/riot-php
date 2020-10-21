@@ -12,23 +12,6 @@ use Riot\ConnectionInterface;
 
 final class ThirdPartyCodeTest extends TestCase
 {
-    public function testGetBySummonerIdReturnsNullOnGetNull(): void
-    {
-        $riotConnection = $this->createMock(ConnectionInterface::class);
-        $riotConnection->expects(self::once())
-            ->method('get')
-            ->with(
-                self::equalTo('eun1'),
-                self::equalTo('lol/platform/v4/third-party-code/by-summoner/simivar')
-            )
-            ->willReturn(null)
-        ;
-
-        $summoner = new ThirdPartyCode($riotConnection);
-        $result = $summoner->getBySummonerId('simivar', 'eun1');
-        self::assertNull($result);
-    }
-
     public function testGetBySummonerIdReturnsStringOnSuccess(): void
     {
         $apiResponse = '"test"';
