@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Riot\API\Version4;
@@ -19,11 +20,12 @@ final class ThirdPartyCode extends AbstractApi
             sprintf('lol/platform/v4/third-party-code/by-summoner/%s', $encryptedSummonerId),
         );
 
-        if ($response === null) {
+        if (null === $response) {
             return null;
         }
 
         $body = $response->getBody()->getContents();
+
         return json_decode($body, true, 512, JSON_THROW_ON_ERROR);
     }
 }

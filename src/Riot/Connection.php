@@ -1,12 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Riot;
 
-use Psr\Http\Message\RequestFactoryInterface;
-use Riot\Exception\RateLimitExceededException;
 use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
+use Riot\Exception\RateLimitExceededException;
 
 final class Connection
 {
@@ -37,12 +38,12 @@ final class Connection
         $request = $request->withAddedHeader('X-Riot-Token', $this->riotApiToken);
 
         $response = $this->client->sendRequest($request);
-        if ($response->getStatusCode() === self::STATUS_CODE_LIMIT_EXCEEDED) {
+        if (self::STATUS_CODE_LIMIT_EXCEEDED === $response->getStatusCode()) {
             throw RateLimitExceededException::createFromResponse($response);
         }
 
         // todo throw exception?
-        if ($response->getStatusCode() !== self::STATUS_CODE_OK) {
+        if (self::STATUS_CODE_OK !== $response->getStatusCode()) {
             return null;
         }
 

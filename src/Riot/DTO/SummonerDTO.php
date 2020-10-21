@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Riot\DTO;
@@ -27,8 +28,7 @@ final class SummonerDTO implements DTOInterface
         string $id,
         string $puuid,
         int $summonerLevel
-    )
-    {
+    ) {
         $this->accountId = $accountId;
         $this->profileIconId = $profileIconId;
         $this->revisionDate = $revisionDate;

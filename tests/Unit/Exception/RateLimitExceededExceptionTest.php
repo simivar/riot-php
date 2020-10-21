@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Riot\Tests\Exception;
@@ -29,7 +30,8 @@ final class RateLimitExceededExceptionTest extends TestCase
                 ['13:1,101:120'],
                 ['500:10'],
                 ['101:10'],
-            );
+            )
+        ;
 
         $object = RateLimitExceededException::createFromResponse($response);
         self::assertSame(1, $object->getRetryAfter());

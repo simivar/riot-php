@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Riot\Tests\Unit;
@@ -19,13 +20,15 @@ final class ConnectionTest extends TestCase
         $request->expects(self::once())
             ->method('withAddedHeader')
             ->with(self::equalTo('X-Riot-Token'), self::equalTo('my-api-token'))
-            ->willReturnSelf();
+            ->willReturnSelf()
+        ;
 
         $requestFactory = $this->createMock(RequestFactoryInterface::class);
         $requestFactory->expects(self::once())
             ->method('createRequest')
             ->with(self::equalTo('GET'), self::equalTo('https://region.api.riotgames.com/path'))
-            ->willReturn($request);
+            ->willReturn($request)
+        ;
 
         $connection = new Connection(
             $this->createMock(ClientInterface::class),
@@ -43,24 +46,29 @@ final class ConnectionTest extends TestCase
         $request = $this->createMock(RequestInterface::class);
         $request->expects(self::once())
             ->method('withAddedHeader')
-            ->willReturnSelf();
+            ->willReturnSelf()
+        ;
         $requestFactory = $this->createMock(RequestFactoryInterface::class);
         $requestFactory->expects(self::once())
             ->method('createRequest')
-            ->willReturn($request);
+            ->willReturn($request)
+        ;
 
         $response = $this->createMock(ResponseInterface::class);
         $response->expects(self::once())
             ->method('getStatusCode')
-            ->willReturn(429);
+            ->willReturn(429)
+        ;
         $response
             ->method('getHeader')
-            ->willReturn(['1']);
+            ->willReturn(['1'])
+        ;
 
         $client = $this->createMock(ClientInterface::class);
         $client->expects(self::once())
             ->method('sendRequest')
-            ->willReturn($response);
+            ->willReturn($response)
+        ;
 
         $connection = new Connection(
             $client,
@@ -75,24 +83,29 @@ final class ConnectionTest extends TestCase
         $request = $this->createMock(RequestInterface::class);
         $request->expects(self::once())
             ->method('withAddedHeader')
-            ->willReturnSelf();
+            ->willReturnSelf()
+        ;
         $requestFactory = $this->createMock(RequestFactoryInterface::class);
         $requestFactory->expects(self::once())
             ->method('createRequest')
-            ->willReturn($request);
+            ->willReturn($request)
+        ;
 
         $response = $this->createMock(ResponseInterface::class);
         $response->expects(self::exactly(2))
             ->method('getStatusCode')
-            ->willReturn(500);
+            ->willReturn(500)
+        ;
         $response
             ->method('getHeader')
-            ->willReturn('1');
+            ->willReturn('1')
+        ;
 
         $client = $this->createMock(ClientInterface::class);
         $client->expects(self::once())
             ->method('sendRequest')
-            ->willReturn($response);
+            ->willReturn($response)
+        ;
 
         $connection = new Connection(
             $client,
@@ -109,24 +122,29 @@ final class ConnectionTest extends TestCase
         $request = $this->createMock(RequestInterface::class);
         $request->expects(self::once())
             ->method('withAddedHeader')
-            ->willReturnSelf();
+            ->willReturnSelf()
+        ;
         $requestFactory = $this->createMock(RequestFactoryInterface::class);
         $requestFactory->expects(self::once())
             ->method('createRequest')
-            ->willReturn($request);
+            ->willReturn($request)
+        ;
 
         $response = $this->createMock(ResponseInterface::class);
         $response->expects(self::exactly(2))
             ->method('getStatusCode')
-            ->willReturn(200);
+            ->willReturn(200)
+        ;
         $response
             ->method('getHeader')
-            ->willReturn('1');
+            ->willReturn('1')
+        ;
 
         $client = $this->createMock(ClientInterface::class);
         $client->expects(self::once())
             ->method('sendRequest')
-            ->willReturn($response);
+            ->willReturn($response)
+        ;
 
         $connection = new Connection(
             $client,

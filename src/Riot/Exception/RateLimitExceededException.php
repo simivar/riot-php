@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Riot\Exception;
@@ -23,8 +24,7 @@ final class RateLimitExceededException extends RiotApiException
         string $appRateLimitCount,
         string $methodRateLimit,
         string $methodRateLimitCount
-    )
-    {
+    ) {
         parent::__construct($message);
         $this->retryAfter = $retryAfter;
         $this->rateLimitType = $rateLimitType;
