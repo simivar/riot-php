@@ -35,8 +35,11 @@ jobs:
       - name: Setup problem matchers for PHPUnit
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
-      - name: Run Tests
-        run: php vendor/bin/phpunit --coverage-text
+      - name: Run Unit Tests
+        run: php vendor/bin/phpunit --testsuite unit --coverage-text
+
+      - name: Run Integration Tests
+        run: php vendor/bin/phpunit --testsuite integration --coverage-text
 
       - name: Run Infection
         run: infection --no-progress --show-mutations --only-covered
