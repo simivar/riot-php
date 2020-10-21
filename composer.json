@@ -1,0 +1,29 @@
+{
+    "name": "simivar/riot-php",
+    "description": "Dependency-injection based wrapper around Riot Games APIs.",
+    "keywords": [
+        "riot", "riot games", "lol", "league of legends", "valorant", "teamfight tactics", "tft",
+        "legends of runeterra", "lor", "psr-17", "psr-17", "httplug"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "simivar",
+            "email": "simivar@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Riot\\": "src/Riot"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Riot\\Tests\\": "tests"
+        }
+    }
+}
