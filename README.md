@@ -18,7 +18,7 @@ composer require simivar/riot-php symfony/http-client nyholm/psr7
 ## APIs Coverage
 | API                  | Docs                                                              | Status | 
 | -------------------- | ----------------------------------------------------------------- | ------ |
-| Account v1           | [docs](https://developer.riotgames.com/apis#account-v1)           | -      |
+| Account v1           | [docs](https://developer.riotgames.com/apis#account-v1)           | 100%   |
 | Champion Mastery v4  | [docs](https://developer.riotgames.com/apis#champion-mastery-v4)  | -      |
 | Champion v3          | [docs](https://developer.riotgames.com/apis#champion-v3)          | -      |
 | Clash v1             | [docs](https://developer.riotgames.com/apis#clash-v1)             | -      |
