@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Riot;
 
+use Riot\API\Version1\Account;
 use Riot\API\Version4\Summoner;
 use Riot\API\Version4\ThirdPartyCode;
 
@@ -35,5 +36,14 @@ final class API
         }
 
         return $this->apis['thirdPartyCodeV4'];
+    }
+
+    public function getAccountV1Api(): Account
+    {
+        if (!isset($this->apis['accountV1'])) {
+            $this->apis['accountV1'] = new Account($this->riotConnection);
+        }
+
+        return $this->apis['accountV1'];
     }
 }
