@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Riot;
 
 use Riot\API\Version1\Account;
+use Riot\API\Version4\ChampionMastery;
 use Riot\API\Version4\Summoner;
 use Riot\API\Version4\ThirdPartyCode;
 
@@ -45,5 +46,14 @@ final class API
         }
 
         return $this->apis['accountV1'];
+    }
+
+    public function getChampionMasteryV4Api(): ChampionMastery
+    {
+        if (!isset($this->apis['championMasteryV4'])) {
+            $this->apis['championMasteryV4'] = new ChampionMastery($this->riotConnection);
+        }
+
+        return $this->apis['championMasteryV4'];
     }
 }
