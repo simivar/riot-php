@@ -19,6 +19,8 @@ final class IncidentDTOCollection extends AbstractCollection
 
     /**
      * @param array<array<string, mixed>> $data
+     *
+     * @return IncidentDTOCollection<IncidentDTO>
      */
     public static function createFromArray(array $data): self
     {

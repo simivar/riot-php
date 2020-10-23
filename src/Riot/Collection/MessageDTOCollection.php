@@ -19,6 +19,8 @@ final class MessageDTOCollection extends AbstractCollection
 
     /**
      * @param array<array<string, array|string>> $data
+     *
+     * @return MessageDTOCollection<MessageDTO>
      */
     public static function createFromArray(array $data): self
     {

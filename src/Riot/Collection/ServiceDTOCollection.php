@@ -19,6 +19,8 @@ final class ServiceDTOCollection extends AbstractCollection
 
     /**
      * @param array<array<string, array|string>> $data
+     *
+     * @return ServiceDTOCollection<ServiceDTO>
      */
     public static function createFromArray(array $data): self
     {
