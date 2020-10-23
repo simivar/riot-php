@@ -34,6 +34,8 @@ final class ResponseDecoderTest extends TestCase
 
     /**
      * @dataProvider provideNonArrayValues
+     *
+     * @param mixed $value
      */
     public function testGetBodyContentsDecodedAsArrayThrowsExceptionOnNonArray($value): void
     {
@@ -76,6 +78,8 @@ final class ResponseDecoderTest extends TestCase
 
     /**
      * @dataProvider provideNonIntValues
+     *
+     * @param mixed $value
      */
     public function testGetBodyContentsDecodedAsIntThrowsExceptionOnNonInt($value): void
     {
@@ -118,6 +122,8 @@ final class ResponseDecoderTest extends TestCase
 
     /**
      * @dataProvider provideNonStringValues
+     *
+     * @param mixed $value
      */
     public function testGetBodyContentsDecodedAsStringThrowsErrorOnNonString($value): void
     {
@@ -139,6 +145,9 @@ final class ResponseDecoderTest extends TestCase
         $decoder->getBodyContentsDecodedAsString();
     }
 
+    /**
+     * @return string[][]
+     */
     public function provideNonStringValues(): array
     {
         return [
@@ -149,6 +158,9 @@ final class ResponseDecoderTest extends TestCase
         ];
     }
 
+    /**
+     * @return string[][]
+     */
     public function provideNonIntValues(): array
     {
         return [
@@ -159,6 +171,9 @@ final class ResponseDecoderTest extends TestCase
         ];
     }
 
+    /**
+     * @return string[][]
+     */
     public function provideNonArrayValues(): array
     {
         return [

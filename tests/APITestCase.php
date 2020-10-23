@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Riot\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\StreamInterface;
 use Riot\API\ResponseDecoderInterface;
 use Riot\ConnectionInterface;
 
