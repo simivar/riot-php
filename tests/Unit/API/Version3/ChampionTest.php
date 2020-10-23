@@ -4,43 +4,16 @@ declare(strict_types=1);
 
 namespace Tests\Riot\Unit\API\Version3;
 
-use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\StreamInterface;
 use Riot\API\Version3\Champion;
-use Riot\ConnectionInterface;
 use Riot\DTO\ChampionInfoDTO;
+use Riot\Tests\APITestCase;
 
-final class ChampionTest extends TestCase
+final class ChampionTest extends APITestCase
 {
-    private function setUpJsonResponse(string $path, string $apiResponse): ConnectionInterface
-    {
-        $stream = $this->createMock(StreamInterface::class);
-        $stream->expects(self::once())
-            ->method('getContents')
-            ->willReturn($apiResponse)
-        ;
-
-        $response = $this->createMock(ResponseInterface::class);
-        $response->expects(self::once())
-            ->method('getBody')
-            ->willReturn($stream)
-        ;
-
-        $riotConnection = $this->createMock(ConnectionInterface::class);
-        $riotConnection->expects(self::once())
-            ->method('get')
-            ->with(self::equalTo('eun1'), self::equalTo($path))
-            ->willReturn($response)
-        ;
-
-        return $riotConnection;
-    }
-
     public function testGetByPuuidReturnsAccountDTOOnSuccess(): void
     {
-        $summoner = new Champion($this->setUpJsonResponse(
-            '/lol/platform/v3/champion-rotations',
+        $summoner = new Champion($this->createConnectionMock(
+            'lol/platform/v3/champion-rotations',
             '{
                 "freeChampionIds": [1],
                 "freeChampionIdsForNewPlayers": [18],

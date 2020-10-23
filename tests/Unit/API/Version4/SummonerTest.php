@@ -4,65 +4,48 @@ declare(strict_types=1);
 
 namespace Tests\Riot\Unit\API\Version4;
 
-use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\StreamInterface;
 use Riot\API\Version4\Summoner;
-use Riot\ConnectionInterface;
 use Riot\DTO\SummonerDTO;
+use Riot\Tests\APITestCase;
 
-final class SummonerTest extends TestCase
+final class SummonerTest extends APITestCase
 {
-    private function setUpJsonResponse(string $path): ConnectionInterface
-    {
-        $apiResponse = '{"id": "1","accountId": "2","puuid": "3","name": "Simivar","profileIconId": 4,"revisionDate": 5,"summonerLevel": 6}';
-
-        $stream = $this->createMock(StreamInterface::class);
-        $stream->expects(self::once())
-            ->method('getContents')
-            ->willReturn($apiResponse)
-        ;
-
-        $response = $this->createMock(ResponseInterface::class);
-        $response->expects(self::once())
-            ->method('getBody')
-            ->willReturn($stream)
-        ;
-
-        $riotConnection = $this->createMock(ConnectionInterface::class);
-        $riotConnection->expects(self::once())
-            ->method('get')
-            ->with(self::equalTo('eun1'), self::equalTo($path))
-            ->willReturn($response)
-        ;
-
-        return $riotConnection;
-    }
-
     public function testGetByNameReturnsSummonerDTOOnSuccess(): void
     {
-        $summoner = new Summoner($this->setUpJsonResponse('lol/summoner/v4/summoners/by-name/simivar'));
+        $summoner = new Summoner($this->createConnectionMock(
+            'lol/summoner/v4/summoners/by-name/simivar',
+            '{"id": "1","accountId": "2","puuid": "3","name": "Simivar","profileIconId": 4,"revisionDate": 5,"summonerLevel": 6}',
+        ));
         $result = $summoner->getByName('simivar', 'eun1');
         self::assertInstanceOf(SummonerDTO::class, $result);
     }
 
     public function testGetByAccountIdReturnsSummonerDTOOnSuccess(): void
     {
-        $summoner = new Summoner($this->setUpJsonResponse('lol/summoner/v4/summoners/by-account/simivar'));
+        $summoner = new Summoner($this->createConnectionMock(
+            'lol/summoner/v4/summoners/by-account/simivar',
+            '{"id": "1","accountId": "2","puuid": "3","name": "Simivar","profileIconId": 4,"revisionDate": 5,"summonerLevel": 6}',
+        ));
         $result = $summoner->getByAccountId('simivar', 'eun1');
         self::assertInstanceOf(SummonerDTO::class, $result);
     }
 
     public function testGetByPuuidReturnsSummonerDTOOnSuccess(): void
     {
-        $summoner = new Summoner($this->setUpJsonResponse('lol/summoner/v4/summoners/by-puuid/simivar'));
+        $summoner = new Summoner($this->createConnectionMock(
+            'lol/summoner/v4/summoners/by-puuid/simivar',
+            '{"id": "1","accountId": "2","puuid": "3","name": "Simivar","profileIconId": 4,"revisionDate": 5,"summonerLevel": 6}',
+        ));
         $result = $summoner->getByPuuid('simivar', 'eun1');
         self::assertInstanceOf(SummonerDTO::class, $result);
     }
 
     public function testGetByIdReturnsSummonerDTOOnSuccess(): void
     {
-        $summoner = new Summoner($this->setUpJsonResponse('lol/summoner/v4/summoners/simivar'));
+        $summoner = new Summoner($this->createConnectionMock(
+            'lol/summoner/v4/summoners/simivar',
+            '{"id": "1","accountId": "2","puuid": "3","name": "Simivar","profileIconId": 4,"revisionDate": 5,"summonerLevel": 6}',
+        ));
         $result = $summoner->getById('simivar', 'eun1');
         self::assertInstanceOf(SummonerDTO::class, $result);
     }

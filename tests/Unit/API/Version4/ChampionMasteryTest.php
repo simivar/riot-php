@@ -4,46 +4,19 @@ declare(strict_types=1);
 
 namespace Tests\Riot\Unit\API\Version4;
 
-use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\StreamInterface;
 use Riot\API\Version4\ChampionMastery;
 use Riot\Collection\ChampionMasteryDTOCollection;
-use Riot\ConnectionInterface;
 use Riot\DTO\ChampionMasteryDTO;
+use Riot\Tests\APITestCase;
 
-final class ChampionMasteryTest extends TestCase
+final class ChampionMasteryTest extends APITestCase
 {
-    private function setUpJsonResponse(string $path, string $apiResponse): ConnectionInterface
-    {
-        $stream = $this->createMock(StreamInterface::class);
-        $stream->expects(self::once())
-            ->method('getContents')
-            ->willReturn($apiResponse)
-        ;
-
-        $response = $this->createMock(ResponseInterface::class);
-        $response->expects(self::once())
-            ->method('getBody')
-            ->willReturn($stream)
-        ;
-
-        $riotConnection = $this->createMock(ConnectionInterface::class);
-        $riotConnection->expects(self::once())
-            ->method('get')
-            ->with(self::equalTo('eun1'), self::equalTo($path))
-            ->willReturn($response)
-        ;
-
-        return $riotConnection;
-    }
-
     public function testGetBySummonerIdReturnsEmptyCollectionOnEmptyArray(): void
     {
-        $summoner = new ChampionMastery($this->setUpJsonResponse(
-            '/lol/champion-mastery/v4/champion-masteries/by-summoner/1',
-            '[]'),
-        );
+        $summoner = new ChampionMastery($this->createConnectionMock(
+            'lol/champion-mastery/v4/champion-masteries/by-summoner/1',
+            '[]',
+        ));
         $result = $summoner->getBySummonerId('1', 'eun1');
         self::assertInstanceOf(ChampionMasteryDTOCollection::class, $result);
         self::assertTrue($result->isEmpty());
@@ -51,8 +24,8 @@ final class ChampionMasteryTest extends TestCase
 
     public function testGetBySummonerIdReturnsCollectionOnSuccess(): void
     {
-        $summoner = new ChampionMastery($this->setUpJsonResponse(
-            '/lol/champion-mastery/v4/champion-masteries/by-summoner/1',
+        $summoner = new ChampionMastery($this->createConnectionMock(
+            'lol/champion-mastery/v4/champion-masteries/by-summoner/1',
             '[{
                 "championId": 51,
                 "championLevel": 6,
@@ -63,8 +36,8 @@ final class ChampionMasteryTest extends TestCase
                 "chestGranted": true,
                 "tokensEarned": 0,
                 "summonerId": "some_id"
-            }]'),
-        );
+            }]'
+        ));
         $result = $summoner->getBySummonerId('1', 'eun1');
         self::assertInstanceOf(ChampionMasteryDTOCollection::class, $result);
         self::assertFalse($result->isEmpty());
@@ -73,8 +46,8 @@ final class ChampionMasteryTest extends TestCase
 
     public function testGetBySummonerIdAndChampionIdReturnsAccountDTOOnSuccess(): void
     {
-        $summoner = new ChampionMastery($this->setUpJsonResponse(
-            '/lol/champion-mastery/v4/champion-masteries/by-summoner/1/by-champion/2',
+        $summoner = new ChampionMastery($this->createConnectionMock(
+            'lol/champion-mastery/v4/champion-masteries/by-summoner/1/by-champion/2',
             '{
                 "championId": 51,
                 "championLevel": 6,
@@ -93,8 +66,8 @@ final class ChampionMasteryTest extends TestCase
 
     public function testGetScoreBySummonerIdReturnsActiveShardDTOOnSuccess(): void
     {
-        $summoner = new ChampionMastery($this->setUpJsonResponse(
-            '/lol/champion-mastery/v4/scores/by-summoner/1',
+        $summoner = new ChampionMastery($this->createConnectionMock(
+            'lol/champion-mastery/v4/scores/by-summoner/1',
             '136'
         ));
         $result = $summoner->getScoreBySummonerId('1', 'eun1');
