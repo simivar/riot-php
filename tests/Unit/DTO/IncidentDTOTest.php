@@ -6,19 +6,17 @@ namespace Riot\Tests\Unit\DTO;
 
 use PHPUnit\Framework\TestCase;
 use Riot\Collection\MessageDTOCollection;
-use Riot\Collection\TranslationDTOCollection;
 use Riot\DTO\IncidentDTO;
-use Riot\DTO\MessageDTO;
 
 final class IncidentDTOTest extends TestCase
 {
     public function testCreateFromArrayCreatesProperObject(): void
     {
         $data = [
-            "id" => 500,
-            "active" => false,
-            "created_at" => "2020-01-22T02:27:02.532Z",
-            "updates" => [],
+            'id' => 500,
+            'active' => false,
+            'created_at' => '2020-01-22T02:27:02.532Z',
+            'updates' => [],
         ];
         $object = IncidentDTO::createFromArray($data);
         self::assertSame(500, $object->getId());

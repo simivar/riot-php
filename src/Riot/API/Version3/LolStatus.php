@@ -7,7 +7,6 @@ namespace Riot\API\Version3;
 use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
 use Riot\API\AbstractApi;
-use Riot\DTO\ChampionInfoDTO;
 use Riot\DTO\ShardStatusDTO;
 use Riot\Exception as RiotException;
 

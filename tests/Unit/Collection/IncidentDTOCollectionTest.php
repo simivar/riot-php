@@ -14,11 +14,11 @@ final class IncidentDTOCollectionTest extends TestCase
     {
         $data = [
             [
-                "id" => 500,
-                "active" => false,
-                "created_at" => "2020-01-22T02:27:02.532Z",
-                "updates" => [],
-            ]
+                'id' => 500,
+                'active' => false,
+                'created_at' => '2020-01-22T02:27:02.532Z',
+                'updates' => [],
+            ],
         ];
         $object = IncidentDTOCollection::createFromArray($data);
         self::assertFalse($object->isEmpty());

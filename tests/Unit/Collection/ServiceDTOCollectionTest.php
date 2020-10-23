@@ -18,7 +18,7 @@ final class ServiceDTOCollectionTest extends TestCase
                 'slug' => 'game',
                 'status' => 'online',
                 'incidents' => [],
-            ]
+            ],
         ];
         $object = ServiceDTOCollection::createFromArray($data);
         self::assertFalse($object->isEmpty());

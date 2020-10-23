@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Riot\Unit\API\Version3;
 
-use Riot\API\Version3\Champion;
 use Riot\API\Version3\LolStatus;
-use Riot\DTO\ChampionInfoDTO;
 use Riot\DTO\ShardStatusDTO;
 use Riot\Tests\APITestCase;
 

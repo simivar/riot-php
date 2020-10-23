@@ -14,15 +14,15 @@ final class MessageDTOCollectionTest extends TestCase
     {
         $data = [
             [
-                "id" => "5e27b2f68d0391127f333f21",
-                "author" => "",
-                "heading" => "10.02",
-                "content" => "Some content",
-                "severity" => "info",
-                "created_at" => "2020-01-22T02:27:02.532Z",
-                "updated_at" => "2020-01-22T03:27:02.532Z",
-                "translations" => [],
-            ]
+                'id' => '5e27b2f68d0391127f333f21',
+                'author' => '',
+                'heading' => '10.02',
+                'content' => 'Some content',
+                'severity' => 'info',
+                'created_at' => '2020-01-22T02:27:02.532Z',
+                'updated_at' => '2020-01-22T03:27:02.532Z',
+                'translations' => [],
+            ],
         ];
         $object = MessageDTOCollection::createFromArray($data);
         self::assertFalse($object->isEmpty());

@@ -17,7 +17,7 @@ final class TranslationDTOCollectionTest extends TestCase
                 'updated_at' => 'a',
                 'locale' => 'b',
                 'content' => 'c',
-            ]
+            ],
         ];
         $object = TranslationDTOCollection::createFromArray($data);
         self::assertFalse($object->isEmpty());
