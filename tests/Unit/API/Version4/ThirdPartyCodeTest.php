@@ -11,9 +11,9 @@ final class ThirdPartyCodeTest extends APITestCase
 {
     public function testGetBySummonerIdReturnsStringOnSuccess(): void
     {
-        $thirdPartyCode = new ThirdPartyCode($this->createConnectionMock(
+        $thirdPartyCode = new ThirdPartyCode($this->createStringConnectionMock(
             'lol/platform/v4/third-party-code/by-summoner/simivar',
-            '"test"',
+            'test',
         ));
         $result = $thirdPartyCode->getBySummonerId('simivar', 'eun1');
         self::assertSame('test', $result);
