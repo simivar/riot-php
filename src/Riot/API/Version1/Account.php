@@ -58,7 +58,7 @@ final class Account extends AbstractApi
     {
         $response = $this->riotConnection->get(
             $geoRegion,
-            sprintf('/riot/account/v1/accounts/by-riot-id/%s/%s', $gameName, $tagLine),
+            sprintf('riot/account/v1/accounts/by-riot-id/%s/%s', $gameName, $tagLine),
         );
         $body = $response->getBody()->getContents();
 
@@ -84,7 +84,7 @@ final class Account extends AbstractApi
     {
         $response = $this->riotConnection->get(
             $geoRegion,
-            sprintf('/riot/account/v1/active-shards/by-game/%s/by-puuid/%s', $game, $puuid),
+            sprintf('riot/account/v1/active-shards/by-game/%s/by-puuid/%s', $game, $puuid),
         );
         $body = $response->getBody()->getContents();
 

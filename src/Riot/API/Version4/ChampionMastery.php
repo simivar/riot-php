@@ -34,7 +34,7 @@ final class ChampionMastery extends AbstractApi
     {
         $response = $this->riotConnection->get(
             $region,
-            sprintf('/lol/champion-mastery/v4/champion-masteries/by-summoner/%s', $encryptedSummonerId),
+            sprintf('lol/champion-mastery/v4/champion-masteries/by-summoner/%s', $encryptedSummonerId),
         );
 
         $body = $response->getBody()->getContents();
@@ -70,7 +70,7 @@ final class ChampionMastery extends AbstractApi
         $response = $this->riotConnection->get(
             $region,
             sprintf(
-                '/lol/champion-mastery/v4/champion-masteries/by-summoner/%s/by-champion/%s',
+                'lol/champion-mastery/v4/champion-masteries/by-summoner/%s/by-champion/%s',
                 $encryptedSummonerId,
                 $championId,
             ),
@@ -101,7 +101,7 @@ final class ChampionMastery extends AbstractApi
         $response = $this->riotConnection->get(
             $region,
             sprintf(
-                '/lol/champion-mastery/v4/scores/by-summoner/%s',
+                'lol/champion-mastery/v4/scores/by-summoner/%s',
                 $encryptedSummonerId,
             ),
         );

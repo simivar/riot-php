@@ -31,7 +31,7 @@ final class Champion extends AbstractApi
     {
         $response = $this->riotConnection->get(
             $region,
-            '/lol/platform/v3/champion-rotations',
+            'lol/platform/v3/champion-rotations',
         );
 
         $body = $response->getBody()->getContents();
