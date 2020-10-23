@@ -73,4 +73,13 @@ final class API
 
         return $this->apis['lolStatusV3'];
     }
+
+    public function getLorRankedV1Api(): Version1\LorRanked
+    {
+        if (!isset($this->apis['lorRankedV1'])) {
+            $this->apis['lorRankedV1'] = new Version1\LorRanked($this->riotConnection);
+        }
+
+        return $this->apis['lorRankedV1'];
+    }
 }

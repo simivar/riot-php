@@ -19,6 +19,8 @@ final class TranslationDTOCollection extends AbstractCollection
 
     /**
      * @param array<array<string, string>> $data
+     *
+     * @return TranslationDTOCollection<TranslationDTO>
      */
     public static function createFromArray(array $data): self
     {

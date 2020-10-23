@@ -5,28 +5,28 @@ declare(strict_types=1);
 namespace Riot\Collection;
 
 use Ramsey\Collection\AbstractCollection;
-use Riot\DTO\ServiceDTO;
+use Riot\DTO\PlayerDTO;
 
-final class ServiceDTOCollection extends AbstractCollection
+final class PlayerDTOCollection extends AbstractCollection
 {
     /**
      * @codeCoverageIgnore
      */
     public function getType(): string
     {
-        return ServiceDTO::class;
+        return PlayerDTO::class;
     }
 
     /**
-     * @param array<array<string, array|string>> $data
+     * @param array<array<string, string|int>> $data
      *
-     * @return ServiceDTOCollection<ServiceDTO>
+     * @return PlayerDTOCollection<PlayerDTO>
      */
     public static function createFromArray(array $data): self
     {
         $collection = new self();
         foreach ($data as $item) {
-            $collection->add(ServiceDTO::createFromArray($item));
+            $collection->add(PlayerDTO::createFromArray($item));
         }
 
         return $collection;
