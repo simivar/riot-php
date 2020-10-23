@@ -64,4 +64,13 @@ final class API
 
         return $this->apis['championV3'];
     }
+
+    public function getLolStatusV3Api(): Version3\LolStatus
+    {
+        if (!isset($this->apis['lolStatusV3'])) {
+            $this->apis['lolStatusV3'] = new Version3\LolStatus($this->riotConnection);
+        }
+
+        return $this->apis['lolStatusV3'];
+    }
 }
