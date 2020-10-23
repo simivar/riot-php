@@ -82,4 +82,13 @@ final class API
 
         return $this->apis['lorRankedV1'];
     }
+
+    public function getSpectatorV4Api(): Version4\Spectator
+    {
+        if (!isset($this->apis['spectatorV4'])) {
+            $this->apis['spectatorV4'] = new Version4\Spectator($this->riotConnection);
+        }
+
+        return $this->apis['spectatorV4'];
+    }
 }
