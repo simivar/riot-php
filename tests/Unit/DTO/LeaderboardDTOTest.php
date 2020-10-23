@@ -7,7 +7,6 @@ namespace Riot\Tests\Unit\DTO;
 use PHPUnit\Framework\TestCase;
 use Riot\Collection\PlayerDTOCollection;
 use Riot\DTO\LeaderboardDTO;
-use Riot\DTO\PlayerDTO;
 
 final class LeaderboardDTOTest extends TestCase
 {
