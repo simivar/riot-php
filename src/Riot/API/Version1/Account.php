@@ -34,9 +34,8 @@ final class Account extends AbstractApi
             $geoRegion,
             sprintf('riot/account/v1/accounts/by-puuid/%s', $puuid),
         );
-        $body = $response->getBody()->getContents();
 
-        return AccountDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
+        return AccountDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
     /**
@@ -60,9 +59,8 @@ final class Account extends AbstractApi
             $geoRegion,
             sprintf('riot/account/v1/accounts/by-riot-id/%s/%s', $gameName, $tagLine),
         );
-        $body = $response->getBody()->getContents();
 
-        return AccountDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
+        return AccountDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
     /**
@@ -86,8 +84,7 @@ final class Account extends AbstractApi
             $geoRegion,
             sprintf('riot/account/v1/active-shards/by-game/%s/by-puuid/%s', $game, $puuid),
         );
-        $body = $response->getBody()->getContents();
 
-        return ActiveShardDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
+        return ActiveShardDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 }

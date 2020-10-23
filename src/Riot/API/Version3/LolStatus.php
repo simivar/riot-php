@@ -34,8 +34,6 @@ final class LolStatus extends AbstractApi
             'lol/status/v3/shard-data',
         );
 
-        $body = $response->getBody()->getContents();
-
-        return ShardStatusDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
+        return ShardStatusDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 }

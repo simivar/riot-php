@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Riot;
 
-use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
+use Riot\API\ResponseDecoder;
+use Riot\API\ResponseDecoderInterface;
 use Riot\Exception\BadGatewayException;
 use Riot\Exception\BadRequestException;
 use Riot\Exception\DataNotFoundException;
@@ -37,21 +38,7 @@ final class Connection implements ConnectionInterface
         $this->requestFactory = $requestFactory;
     }
 
-    /**
-     * @throws BadGatewayException
-     * @throws BadRequestException
-     * @throws DataNotFoundException
-     * @throws ForbiddenException
-     * @throws GatewayTimeoutException
-     * @throws InternalServerErrorException
-     * @throws MethodNotAllowedException
-     * @throws RateLimitExceededException
-     * @throws ServiceUnavailableException
-     * @throws UnauthorizedException
-     * @throws UnsupportedMediaTypeException
-     * @throws ClientExceptionInterface
-     */
-    public function get(string $region, string $path): ResponseInterface
+    public function get(string $region, string $path): ResponseDecoderInterface
     {
         $request = $this->requestFactory->createRequest(
             'GET',
@@ -64,7 +51,7 @@ final class Connection implements ConnectionInterface
             $this->statusCodeToException($response);
         }
 
-        return $response;
+        return new ResponseDecoder($response);
     }
 
     /**

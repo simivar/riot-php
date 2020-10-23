@@ -10,6 +10,7 @@ use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Riot\API\ResponseDecoderInterface;
 use Riot\Connection;
 use Riot\Exception as RiotException;
 
@@ -102,7 +103,7 @@ final class ConnectionTest extends TestCase
         );
         $result = $connection->get('region', 'path');
 
-        self::assertInstanceOf(ResponseInterface::class, $result);
+        self::assertInstanceOf(ResponseDecoderInterface::class, $result);
     }
 
     /**

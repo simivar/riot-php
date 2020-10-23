@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Riot;
 
+use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
-use Psr\Http\Message\ResponseInterface;
+use Riot\API\ResponseDecoderInterface;
 use Riot\Exception as RiotException;
 
 interface ConnectionInterface
@@ -24,6 +25,7 @@ interface ConnectionInterface
     public const STATUS_CODE_GATEWAY_TIMEOUT = 504;
 
     /**
+     * @throws JsonException
      * @throws RiotException\BadGatewayException
      * @throws RiotException\BadRequestException
      * @throws RiotException\DataNotFoundException
@@ -37,5 +39,5 @@ interface ConnectionInterface
      * @throws RiotException\UnsupportedMediaTypeException
      * @throws ClientExceptionInterface
      */
-    public function get(string $region, string $path): ResponseInterface;
+    public function get(string $region, string $path): ResponseDecoderInterface;
 }

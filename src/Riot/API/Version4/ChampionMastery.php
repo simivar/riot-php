@@ -37,8 +37,7 @@ final class ChampionMastery extends AbstractApi
             sprintf('lol/champion-mastery/v4/champion-masteries/by-summoner/%s', $encryptedSummonerId),
         );
 
-        $body = $response->getBody()->getContents();
-        $championMasteries = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
+        $championMasteries = $response->getBodyContentsDecodedAsArray();
         $collection = new ChampionMasteryDTOCollection();
         foreach ($championMasteries as $championMastery) {
             $collection->add(ChampionMasteryDTO::createFromArray($championMastery));
@@ -76,9 +75,7 @@ final class ChampionMastery extends AbstractApi
             ),
         );
 
-        $body = $response->getBody()->getContents();
-
-        return ChampionMasteryDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
+        return ChampionMasteryDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
     /**
@@ -106,7 +103,7 @@ final class ChampionMastery extends AbstractApi
             ),
         );
 
-        $body = $response->getBody()->getContents();
+        $body = $response->getResponse()->getBody()->getContents();
 
         return json_decode($body, true, 512, JSON_THROW_ON_ERROR);
     }

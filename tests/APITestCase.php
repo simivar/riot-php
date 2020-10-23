@@ -7,6 +7,7 @@ namespace Riot\Tests;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
+use Riot\API\ResponseDecoderInterface;
 use Riot\ConnectionInterface;
 
 class APITestCase extends TestCase
@@ -23,6 +24,33 @@ class APITestCase extends TestCase
         $response->expects(self::once())
             ->method('getBody')
             ->willReturn($stream)
+        ;
+
+        $riotResponse = $this->createMock(ResponseDecoderInterface::class);
+        $riotResponse->expects(self::once())
+            ->method('getResponse')
+            ->willReturn($response)
+        ;
+
+        $riotConnection = $this->createMock(ConnectionInterface::class);
+        $riotConnection->expects(self::once())
+            ->method('get')
+            ->with(self::equalTo('eun1'), self::equalTo($path))
+            ->willReturn($riotResponse)
+        ;
+
+        return $riotConnection;
+    }
+
+    /**
+     * @param array<mixed> $apiResponse
+     */
+    protected function createObjectConnectionMock(string $path, array $apiResponse): ConnectionInterface
+    {
+        $response = $this->createMock(ResponseDecoderInterface::class);
+        $response->expects(self::once())
+            ->method('getBodyContentsDecodedAsArray')
+            ->willReturn($apiResponse)
         ;
 
         $riotConnection = $this->createMock(ConnectionInterface::class);

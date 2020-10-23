@@ -12,15 +12,15 @@ final class ChampionTest extends APITestCase
 {
     public function testGetByPuuidReturnsAccountDTOOnSuccess(): void
     {
-        $summoner = new Champion($this->createConnectionMock(
+        $champion = new Champion($this->createObjectConnectionMock(
             'lol/platform/v3/champion-rotations',
-            '{
-                "freeChampionIds": [1],
-                "freeChampionIdsForNewPlayers": [18],
-                "maxNewPlayerLevel": 10
-            }'),
-        );
-        $result = $summoner->getChampionRotations('eun1');
+            [
+                'maxNewPlayerLevel' => 10,
+                'freeChampionIds' => [1, 6],
+                'freeChampionIdsForNewPlayers' => [18, 81],
+            ]
+        ));
+        $result = $champion->getChampionRotations('eun1');
         self::assertInstanceOf(ChampionInfoDTO::class, $result);
     }
 }

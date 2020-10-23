@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Riot\API\Version4;
 
-use function json_decode;
 use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
 use Riot\API\AbstractApi;
@@ -35,9 +34,7 @@ final class Summoner extends AbstractApi
             sprintf('lol/summoner/v4/summoners/by-name/%s', $summonerName),
         );
 
-        $body = $response->getBody()->getContents();
-
-        return SummonerDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
+        return SummonerDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
     /**
@@ -62,9 +59,7 @@ final class Summoner extends AbstractApi
             sprintf('lol/summoner/v4/summoners/by-account/%s', $encryptedAccountId),
         );
 
-        $body = $response->getBody()->getContents();
-
-        return SummonerDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
+        return SummonerDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
     /**
@@ -89,9 +84,7 @@ final class Summoner extends AbstractApi
             sprintf('lol/summoner/v4/summoners/by-puuid/%s', $encryptedPuuid),
         );
 
-        $body = $response->getBody()->getContents();
-
-        return SummonerDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
+        return SummonerDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
     /**
@@ -116,8 +109,6 @@ final class Summoner extends AbstractApi
             sprintf('lol/summoner/v4/summoners/%s', $id),
         );
 
-        $body = $response->getBody()->getContents();
-
-        return SummonerDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
+        return SummonerDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 }

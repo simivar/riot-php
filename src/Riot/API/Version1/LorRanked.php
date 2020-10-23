@@ -33,8 +33,7 @@ final class LorRanked extends AbstractApi
             $geoRegion,
             'lor/ranked/v1/leaderboards',
         );
-        $body = $response->getBody()->getContents();
 
-        return LeaderboardDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
+        return LeaderboardDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 }

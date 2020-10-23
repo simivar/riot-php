@@ -34,8 +34,6 @@ final class Champion extends AbstractApi
             'lol/platform/v3/champion-rotations',
         );
 
-        $body = $response->getBody()->getContents();
-
-        return ChampionInfoDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
+        return ChampionInfoDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 }

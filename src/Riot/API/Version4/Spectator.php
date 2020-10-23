@@ -35,9 +35,7 @@ final class Spectator extends AbstractApi
             sprintf('lol/spectator/v4/active-games/by-summoner/%s', $encryptedSummonerId),
         );
 
-        $body = $response->getBody()->getContents();
-
-        return CurrentGameInfoDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
+        return CurrentGameInfoDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
     /**
@@ -62,8 +60,6 @@ final class Spectator extends AbstractApi
             'lol/spectator/v4/featured-games',
         );
 
-        $body = $response->getBody()->getContents();
-
-        return FeaturedGamesDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
+        return FeaturedGamesDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 }
