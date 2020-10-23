@@ -6,6 +6,12 @@
          backupGlobals="false"
          colors="true"
 >
+    <coverage>
+        <include>
+            <directory>src</directory>
+        </include>
+    </coverage>
+
     <testsuites>
         <testsuite name="unit">
             <directory>tests/Unit</directory>
