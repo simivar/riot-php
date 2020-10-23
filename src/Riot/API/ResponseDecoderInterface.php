@@ -16,4 +16,8 @@ interface ResponseDecoderInterface
      * @return array<mixed>
      */
     public function getBodyContentsDecodedAsArray(): array;
+
+    public function getBodyContentsDecodedAsString(): string;
+
+    public function getBodyContentsDecodedAsInt(): int;
 }

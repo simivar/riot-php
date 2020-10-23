@@ -68,9 +68,9 @@ final class ChampionMasteryTest extends APITestCase
 
     public function testGetScoreBySummonerIdReturnsActiveShardDTOOnSuccess(): void
     {
-        $championMastery = new ChampionMastery($this->createConnectionMock(
+        $championMastery = new ChampionMastery($this->createIntConnectionMock(
             'lol/champion-mastery/v4/scores/by-summoner/1',
-            '136'
+            136,
         ));
         $result = $championMastery->getScoreBySummonerId('1', 'eun1');
         self::assertSame(136, $result);

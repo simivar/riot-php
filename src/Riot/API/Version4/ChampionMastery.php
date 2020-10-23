@@ -103,8 +103,6 @@ final class ChampionMastery extends AbstractApi
             ),
         );
 
-        $body = $response->getResponse()->getBody()->getContents();
-
-        return json_decode($body, true, 512, JSON_THROW_ON_ERROR);
+        return $response->getBodyContentsDecodedAsInt();
     }
 }

@@ -31,4 +31,18 @@ final class ResponseDecoder implements ResponseDecoderInterface
 
         return json_decode($body, true, 512, JSON_THROW_ON_ERROR);
     }
+
+    public function getBodyContentsDecodedAsInt(): int
+    {
+        $body = $this->response->getBody()->getContents();
+
+        return json_decode($body, true, 512, JSON_THROW_ON_ERROR);
+    }
+
+    public function getBodyContentsDecodedAsString(): string
+    {
+        $body = $this->response->getBody()->getContents();
+
+        return json_decode($body, true, 512, JSON_THROW_ON_ERROR);
+    }
 }
