@@ -24,7 +24,7 @@ composer require simivar/riot-php symfony/http-client nyholm/psr7
 | Clash v1             | [docs](https://developer.riotgames.com/apis#clash-v1)             | -      |
 | League Exp v4        | [docs](https://developer.riotgames.com/apis#league-exp-v4)        | -      |
 | League v4            | [docs](https://developer.riotgames.com/apis#league-v4)            | -      |
-| Lol Status v3        | [docs](https://developer.riotgames.com/apis#lol-status-v3)        | -      |
+| Lol Status v3        | [docs](https://developer.riotgames.com/apis#lol-status-v3)        | 100%   |
 | Lor Match v1         | [docs](https://developer.riotgames.com/apis#lor-match-v1)         | -      |
 | Lor Ranked v1        | [docs](https://developer.riotgames.com/apis#lor-ranked-v1)        | -      |
 | Match v4             | [docs](https://developer.riotgames.com/apis#match-v4)             | -      |
