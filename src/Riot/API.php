@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Riot;
 
-use Riot\API\Version1\Account;
-use Riot\API\Version4\ChampionMastery;
-use Riot\API\Version4\Summoner;
-use Riot\API\Version4\ThirdPartyCode;
+use Riot\API\Version1;
+use Riot\API\Version3;
+use Riot\API\Version4;
 
 final class API
 {
@@ -21,39 +20,48 @@ final class API
         $this->riotConnection = $riotConnection;
     }
 
-    public function getSummonerV4Api(): Summoner
+    public function getSummonerV4Api(): Version4\Summoner
     {
         if (!isset($this->apis['summonerV4'])) {
-            $this->apis['summonerV4'] = new Summoner($this->riotConnection);
+            $this->apis['summonerV4'] = new Version4\Summoner($this->riotConnection);
         }
 
         return $this->apis['summonerV4'];
     }
 
-    public function getThirdPartyCodeV4Api(): ThirdPartyCode
+    public function getThirdPartyCodeV4Api(): Version4\ThirdPartyCode
     {
         if (!isset($this->apis['thirdPartyCodeV4'])) {
-            $this->apis['thirdPartyCodeV4'] = new ThirdPartyCode($this->riotConnection);
+            $this->apis['thirdPartyCodeV4'] = new Version4\ThirdPartyCode($this->riotConnection);
         }
 
         return $this->apis['thirdPartyCodeV4'];
     }
 
-    public function getAccountV1Api(): Account
+    public function getAccountV1Api(): Version1\Account
     {
         if (!isset($this->apis['accountV1'])) {
-            $this->apis['accountV1'] = new Account($this->riotConnection);
+            $this->apis['accountV1'] = new Version1\Account($this->riotConnection);
         }
 
         return $this->apis['accountV1'];
     }
 
-    public function getChampionMasteryV4Api(): ChampionMastery
+    public function getChampionMasteryV4Api(): Version4\ChampionMastery
     {
         if (!isset($this->apis['championMasteryV4'])) {
-            $this->apis['championMasteryV4'] = new ChampionMastery($this->riotConnection);
+            $this->apis['championMasteryV4'] = new Version4\ChampionMastery($this->riotConnection);
         }
 
         return $this->apis['championMasteryV4'];
+    }
+
+    public function getChampionV3Api(): Version3\Champion
+    {
+        if (!isset($this->apis['championV3'])) {
+            $this->apis['championV3'] = new Version3\Champion($this->riotConnection);
+        }
+
+        return $this->apis['championV3'];
     }
 }
