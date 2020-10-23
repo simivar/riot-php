@@ -32,13 +32,14 @@ final class ChampionMastery extends AbstractApi
      */
     public function getBySummonerId(string $encryptedSummonerId, string $region): ChampionMasteryDTOCollection
     {
-        $response = $this->riotConnection->getAsDecodedArray(
+        $response = $this->riotConnection->get(
             $region,
             sprintf('lol/champion-mastery/v4/champion-masteries/by-summoner/%s', $encryptedSummonerId),
         );
 
+        $championMasteries = $response->getBodyContentsDecodedAsArray();
         $collection = new ChampionMasteryDTOCollection();
-        foreach ($response as $championMastery) {
+        foreach ($championMasteries as $championMastery) {
             $collection->add(ChampionMasteryDTO::createFromArray($championMastery));
         }
 
@@ -65,7 +66,7 @@ final class ChampionMastery extends AbstractApi
         int $championId,
         string $region
     ): ChampionMasteryDTO {
-        $response = $this->riotConnection->getAsDecodedArray(
+        $response = $this->riotConnection->get(
             $region,
             sprintf(
                 'lol/champion-mastery/v4/champion-masteries/by-summoner/%s/by-champion/%s',
@@ -74,7 +75,7 @@ final class ChampionMastery extends AbstractApi
             ),
         );
 
-        return ChampionMasteryDTO::createFromArray($response);
+        return ChampionMasteryDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
     /**
@@ -102,7 +103,7 @@ final class ChampionMastery extends AbstractApi
             ),
         );
 
-        $body = $response->getBody()->getContents();
+        $body = $response->getResponse()->getBody()->getContents();
 
         return json_decode($body, true, 512, JSON_THROW_ON_ERROR);
     }

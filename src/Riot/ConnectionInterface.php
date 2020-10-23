@@ -6,7 +6,7 @@ namespace Riot;
 
 use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
-use Psr\Http\Message\ResponseInterface;
+use Riot\API\ResponseDecoderInterface;
 use Riot\Exception as RiotException;
 
 interface ConnectionInterface
@@ -25,24 +25,6 @@ interface ConnectionInterface
     public const STATUS_CODE_GATEWAY_TIMEOUT = 504;
 
     /**
-     * @throws RiotException\BadGatewayException
-     * @throws RiotException\BadRequestException
-     * @throws RiotException\DataNotFoundException
-     * @throws RiotException\ForbiddenException
-     * @throws RiotException\GatewayTimeoutException
-     * @throws RiotException\InternalServerErrorException
-     * @throws RiotException\MethodNotAllowedException
-     * @throws RiotException\RateLimitExceededException
-     * @throws RiotException\ServiceUnavailableException
-     * @throws RiotException\UnauthorizedException
-     * @throws RiotException\UnsupportedMediaTypeException
-     * @throws ClientExceptionInterface
-     */
-    public function get(string $region, string $path): ResponseInterface;
-
-    /**
-     * @return array<mixed>
-     *
      * @throws JsonException
      * @throws RiotException\BadGatewayException
      * @throws RiotException\BadRequestException
@@ -57,5 +39,5 @@ interface ConnectionInterface
      * @throws RiotException\UnsupportedMediaTypeException
      * @throws ClientExceptionInterface
      */
-    public function getAsDecodedArray(string $region, string $path): array;
+    public function get(string $region, string $path): ResponseDecoderInterface;
 }

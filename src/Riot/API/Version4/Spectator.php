@@ -30,12 +30,12 @@ final class Spectator extends AbstractApi
      */
     public function getActiveGamesBySummonerId(string $encryptedSummonerId, string $region): CurrentGameInfoDTO
     {
-        $response = $this->riotConnection->getAsDecodedArray(
+        $response = $this->riotConnection->get(
             $region,
             sprintf('lol/spectator/v4/active-games/by-summoner/%s', $encryptedSummonerId),
         );
 
-        return CurrentGameInfoDTO::createFromArray($response);
+        return CurrentGameInfoDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
     /**
@@ -55,11 +55,11 @@ final class Spectator extends AbstractApi
      */
     public function getFeaturedGames(string $region): FeaturedGamesDTO
     {
-        $response = $this->riotConnection->getAsDecodedArray(
+        $response = $this->riotConnection->get(
             $region,
             'lol/spectator/v4/featured-games',
         );
 
-        return FeaturedGamesDTO::createFromArray($response);
+        return FeaturedGamesDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 }

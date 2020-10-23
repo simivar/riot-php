@@ -10,7 +10,7 @@ use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\StreamInterface;
+use Riot\API\ResponseDecoderInterface;
 use Riot\Connection;
 use Riot\Exception as RiotException;
 
@@ -103,42 +103,7 @@ final class ConnectionTest extends TestCase
         );
         $result = $connection->get('region', 'path');
 
-        self::assertInstanceOf(ResponseInterface::class, $result);
-    }
-
-    public function testGetObjectReturnsDecodedJson(): void
-    {
-        $this->response->expects(self::once())
-            ->method('getStatusCode')
-            ->willReturn(200)
-        ;
-
-        $stream = $this->createMock(StreamInterface::class);
-        $stream->expects(self::once())
-            ->method('getContents')
-            ->willReturn('{"id":1}')
-        ;
-
-        $this->response->expects(self::once())
-            ->method('getBody')
-            ->willReturn($stream)
-        ;
-
-        $client = $this->createMock(ClientInterface::class);
-        $client->expects(self::once())
-            ->method('sendRequest')
-            ->willReturn($this->response)
-        ;
-
-        $connection = new Connection(
-            $client,
-            'my-api-token',
-            $this->requestFactory,
-        );
-        $result = $connection->getAsDecodedArray('region', 'path');
-
-        self::assertIsArray($result);
-        self::assertSame(['id' => 1], $result);
+        self::assertInstanceOf(ResponseDecoderInterface::class, $result);
     }
 
     /**

@@ -29,12 +29,12 @@ final class Summoner extends AbstractApi
      */
     public function getByName(string $summonerName, string $region): SummonerDTO
     {
-        $response = $this->riotConnection->getAsDecodedArray(
+        $response = $this->riotConnection->get(
             $region,
             sprintf('lol/summoner/v4/summoners/by-name/%s', $summonerName),
         );
 
-        return SummonerDTO::createFromArray($response);
+        return SummonerDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
     /**
@@ -54,12 +54,12 @@ final class Summoner extends AbstractApi
      */
     public function getByAccountId(string $encryptedAccountId, string $region): SummonerDTO
     {
-        $response = $this->riotConnection->getAsDecodedArray(
+        $response = $this->riotConnection->get(
             $region,
             sprintf('lol/summoner/v4/summoners/by-account/%s', $encryptedAccountId),
         );
 
-        return SummonerDTO::createFromArray($response);
+        return SummonerDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
     /**
@@ -79,12 +79,12 @@ final class Summoner extends AbstractApi
      */
     public function getByPuuid(string $encryptedPuuid, string $region): SummonerDTO
     {
-        $response = $this->riotConnection->getAsDecodedArray(
+        $response = $this->riotConnection->get(
             $region,
             sprintf('lol/summoner/v4/summoners/by-puuid/%s', $encryptedPuuid),
         );
 
-        return SummonerDTO::createFromArray($response);
+        return SummonerDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
     /**
@@ -104,11 +104,11 @@ final class Summoner extends AbstractApi
      */
     public function getById(string $id, string $region): SummonerDTO
     {
-        $response = $this->riotConnection->getAsDecodedArray(
+        $response = $this->riotConnection->get(
             $region,
             sprintf('lol/summoner/v4/summoners/%s', $id),
         );
 
-        return SummonerDTO::createFromArray($response);
+        return SummonerDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 }

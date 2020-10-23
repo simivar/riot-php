@@ -7,6 +7,8 @@ namespace Riot;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
+use Riot\API\ResponseDecoder;
+use Riot\API\ResponseDecoderInterface;
 use Riot\Exception\BadGatewayException;
 use Riot\Exception\BadRequestException;
 use Riot\Exception\DataNotFoundException;
@@ -36,7 +38,7 @@ final class Connection implements ConnectionInterface
         $this->requestFactory = $requestFactory;
     }
 
-    public function get(string $region, string $path): ResponseInterface
+    public function get(string $region, string $path): ResponseDecoderInterface
     {
         $request = $this->requestFactory->createRequest(
             'GET',
@@ -49,16 +51,7 @@ final class Connection implements ConnectionInterface
             $this->statusCodeToException($response);
         }
 
-        return $response;
-    }
-
-    public function getAsDecodedArray(string $region, string $path): array
-    {
-        $response = $this->get($region, $path);
-
-        $body = $response->getBody()->getContents();
-
-        return json_decode($body, true, 512, JSON_THROW_ON_ERROR);
+        return new ResponseDecoder($response);
     }
 
     /**

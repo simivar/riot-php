@@ -33,7 +33,7 @@ final class ThirdPartyCode extends AbstractApi
             sprintf('lol/platform/v4/third-party-code/by-summoner/%s', $encryptedSummonerId),
         );
 
-        $body = $response->getBody()->getContents();
+        $body = $response->getResponse()->getBody()->getContents();
 
         return json_decode($body, true, 512, JSON_THROW_ON_ERROR);
     }
