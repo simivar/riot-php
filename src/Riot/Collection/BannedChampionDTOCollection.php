@@ -18,7 +18,7 @@ final class BannedChampionDTOCollection extends AbstractCollection
     }
 
     /**
-     * @param array<array<string, array|string>> $data
+     * @param array<array<string, string|int>> $data
      *
      * @return BannedChampionDTOCollection<BannedChampionDTO>
      */

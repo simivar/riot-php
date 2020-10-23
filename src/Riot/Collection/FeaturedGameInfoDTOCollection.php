@@ -18,7 +18,7 @@ final class FeaturedGameInfoDTOCollection extends AbstractCollection
     }
 
     /**
-     * @param array<array<string, array|string>> $data
+     * @param array<array<string, array|string|int>> $data
      *
      * @return FeaturedGameInfoDTOCollection<FeaturedGameInfoDTO>
      */

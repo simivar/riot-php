@@ -18,7 +18,7 @@ final class ParticipantDTOCollection extends AbstractCollection
     }
 
     /**
-     * @param array<array<string, array|string>> $data
+     * @param array<array<string, int|string|bool>> $data
      *
      * @return ParticipantDTOCollection<ParticipantDTO>
      */

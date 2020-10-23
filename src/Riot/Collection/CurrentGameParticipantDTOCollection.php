@@ -18,7 +18,7 @@ final class CurrentGameParticipantDTOCollection extends AbstractCollection
     }
 
     /**
-     * @param array<array<string, array|string>> $data
+     * @param array<array<string, int|string|array|bool>> $data
      *
      * @return CurrentGameParticipantDTOCollection<CurrentGameParticipantDTO>
      */
