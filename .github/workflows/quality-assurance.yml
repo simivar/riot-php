@@ -36,7 +36,7 @@ jobs:
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Run Unit Tests
-        run: php vendor/bin/phpunit --testsuite unit --coverage-text
+        run: php vendor/bin/phpunit --testsuite unit --coverage-text --coverage-clover=coverage-unit.xml
 
       - name: Run Integration Tests
         run: php vendor/bin/phpunit --testsuite integration --coverage-text
@@ -52,3 +52,8 @@ jobs:
 
       - name: Run Psalm
         run: psalm --output-format=github
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          file: ./coverage-unit.xml
