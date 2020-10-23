@@ -34,4 +34,19 @@ class APITestCase extends TestCase
 
         return $riotConnection;
     }
+
+    /**
+     * @param array<mixed> $apiResponse
+     */
+    protected function createObjectConnectionMock(string $path, array $apiResponse): ConnectionInterface
+    {
+        $riotConnection = $this->createMock(ConnectionInterface::class);
+        $riotConnection->expects(self::once())
+            ->method('getAsDecodedArray')
+            ->with(self::equalTo('eun1'), self::equalTo($path))
+            ->willReturn($apiResponse)
+        ;
+
+        return $riotConnection;
+    }
 }

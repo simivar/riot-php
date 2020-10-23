@@ -13,32 +13,34 @@ final class ChampionMasteryTest extends APITestCase
 {
     public function testGetBySummonerIdReturnsEmptyCollectionOnEmptyArray(): void
     {
-        $summoner = new ChampionMastery($this->createConnectionMock(
+        $championMastery = new ChampionMastery($this->createObjectConnectionMock(
             'lol/champion-mastery/v4/champion-masteries/by-summoner/1',
-            '[]',
+            [],
         ));
-        $result = $summoner->getBySummonerId('1', 'eun1');
+        $result = $championMastery->getBySummonerId('1', 'eun1');
         self::assertInstanceOf(ChampionMasteryDTOCollection::class, $result);
         self::assertTrue($result->isEmpty());
     }
 
     public function testGetBySummonerIdReturnsCollectionOnSuccess(): void
     {
-        $summoner = new ChampionMastery($this->createConnectionMock(
+        $championMastery = new ChampionMastery($this->createObjectConnectionMock(
             'lol/champion-mastery/v4/champion-masteries/by-summoner/1',
-            '[{
-                "championId": 51,
-                "championLevel": 6,
-                "championPoints": 32750,
-                "lastPlayTime": 1603376987000,
-                "championPointsSinceLastLevel": 11150,
-                "championPointsUntilNextLevel": 0,
-                "chestGranted": true,
-                "tokensEarned": 0,
-                "summonerId": "some_id"
-            }]'
+            [
+                [
+                    'championId' => 80,
+                    'championLevel' => 1,
+                    'championPoints' => 719,
+                    'lastPlayTime' => 1581627749000,
+                    'championPointsSinceLastLevel' => 719,
+                    'championPointsUntilNextLevel' => 1081,
+                    'chestGranted' => false,
+                    'tokensEarned' => 0,
+                    'summonerId' => 'some_id',
+                ],
+            ]
         ));
-        $result = $summoner->getBySummonerId('1', 'eun1');
+        $result = $championMastery->getBySummonerId('1', 'eun1');
         self::assertInstanceOf(ChampionMasteryDTOCollection::class, $result);
         self::assertFalse($result->isEmpty());
         self::assertInstanceOf(ChampionMasteryDTO::class, $result->offsetGet(0));
@@ -46,31 +48,31 @@ final class ChampionMasteryTest extends APITestCase
 
     public function testGetBySummonerIdAndChampionIdReturnsAccountDTOOnSuccess(): void
     {
-        $summoner = new ChampionMastery($this->createConnectionMock(
+        $championMastery = new ChampionMastery($this->createObjectConnectionMock(
             'lol/champion-mastery/v4/champion-masteries/by-summoner/1/by-champion/2',
-            '{
-                "championId": 51,
-                "championLevel": 6,
-                "championPoints": 32750,
-                "lastPlayTime": 1603376987000,
-                "championPointsSinceLastLevel": 11150,
-                "championPointsUntilNextLevel": 0,
-                "chestGranted": true,
-                "tokensEarned": 0,
-                "summonerId": "some_id"
-            }'
+            [
+                'championId' => 80,
+                'championLevel' => 1,
+                'championPoints' => 719,
+                'lastPlayTime' => 1581627749000,
+                'championPointsSinceLastLevel' => 719,
+                'championPointsUntilNextLevel' => 1081,
+                'chestGranted' => false,
+                'tokensEarned' => 0,
+                'summonerId' => 'some_id',
+            ]
         ));
-        $result = $summoner->getBySummonerIdAndChampionId('1', 2, 'eun1');
+        $result = $championMastery->getBySummonerIdAndChampionId('1', 2, 'eun1');
         self::assertInstanceOf(ChampionMasteryDTO::class, $result);
     }
 
     public function testGetScoreBySummonerIdReturnsActiveShardDTOOnSuccess(): void
     {
-        $summoner = new ChampionMastery($this->createConnectionMock(
+        $championMastery = new ChampionMastery($this->createConnectionMock(
             'lol/champion-mastery/v4/scores/by-summoner/1',
             '136'
         ));
-        $result = $summoner->getScoreBySummonerId('1', 'eun1');
+        $result = $championMastery->getScoreBySummonerId('1', 'eun1');
         self::assertSame(136, $result);
     }
 }

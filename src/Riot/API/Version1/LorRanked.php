@@ -29,12 +29,11 @@ final class LorRanked extends AbstractApi
      */
     public function getLeaderboards(string $geoRegion): LeaderboardDTO
     {
-        $response = $this->riotConnection->get(
+        $response = $this->riotConnection->getAsDecodedArray(
             $geoRegion,
             'lor/ranked/v1/leaderboards',
         );
-        $body = $response->getBody()->getContents();
 
-        return LeaderboardDTO::createFromArray(json_decode($body, true, 512, JSON_THROW_ON_ERROR));
+        return LeaderboardDTO::createFromArray($response);
     }
 }

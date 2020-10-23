@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Riot;
 
-use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -37,20 +36,6 @@ final class Connection implements ConnectionInterface
         $this->requestFactory = $requestFactory;
     }
 
-    /**
-     * @throws BadGatewayException
-     * @throws BadRequestException
-     * @throws DataNotFoundException
-     * @throws ForbiddenException
-     * @throws GatewayTimeoutException
-     * @throws InternalServerErrorException
-     * @throws MethodNotAllowedException
-     * @throws RateLimitExceededException
-     * @throws ServiceUnavailableException
-     * @throws UnauthorizedException
-     * @throws UnsupportedMediaTypeException
-     * @throws ClientExceptionInterface
-     */
     public function get(string $region, string $path): ResponseInterface
     {
         $request = $this->requestFactory->createRequest(
@@ -65,6 +50,15 @@ final class Connection implements ConnectionInterface
         }
 
         return $response;
+    }
+
+    public function getAsDecodedArray(string $region, string $path): array
+    {
+        $response = $this->get($region, $path);
+
+        $body = $response->getBody()->getContents();
+
+        return json_decode($body, true, 512, JSON_THROW_ON_ERROR);
     }
 
     /**
