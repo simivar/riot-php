@@ -7,6 +7,7 @@ namespace Riot\API\Version4;
 use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
 use Riot\API\AbstractApi;
+use Riot\Enum\RegionEnum;
 use Riot\Exception as RiotException;
 
 final class ThirdPartyCode extends AbstractApi
@@ -26,10 +27,10 @@ final class ThirdPartyCode extends AbstractApi
      * @throws RiotException\UnsupportedMediaTypeException
      * @throws ClientExceptionInterface
      */
-    public function getBySummonerId(string $encryptedSummonerId, string $region): string
+    public function getBySummonerId(string $encryptedSummonerId, RegionEnum $region): string
     {
         $response = $this->riotConnection->get(
-            $region,
+            $region->__toString(),
             sprintf('lol/platform/v4/third-party-code/by-summoner/%s', $encryptedSummonerId),
         );
 

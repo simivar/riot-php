@@ -7,6 +7,7 @@ namespace Tests\Riot\Unit\API\Version4;
 use Riot\API\Version4\Spectator;
 use Riot\Collection\FeaturedGameInfoDTOCollection;
 use Riot\DTO\CurrentGameInfoDTO;
+use Riot\Enum\RegionEnum;
 use Riot\Tests\APITestCase;
 
 final class SpectatorTest extends APITestCase
@@ -29,9 +30,10 @@ final class SpectatorTest extends APITestCase
                 'bannedChampions' => [],
                 'gameStartTime' => 1603484102577,
                 'gameLength' => 403,
-            ]
+            ],
+            'eun1'
         ));
-        $result = $spectator->getActiveGamesBySummonerId('1', 'eun1');
+        $result = $spectator->getActiveGamesBySummonerId('1', RegionEnum::EUN1());
         self::assertInstanceOf(CurrentGameInfoDTO::class, $result);
     }
 
@@ -42,9 +44,10 @@ final class SpectatorTest extends APITestCase
             [
                 'gameList' => [],
                 'clientRefreshInterval' => 300,
-            ]
+            ],
+            'eun1'
         ));
-        $result = $spectator->getFeaturedGames('eun1');
+        $result = $spectator->getFeaturedGames(RegionEnum::EUN1());
         self::assertSame(300, $result->getClientRefreshInterval());
         self::assertInstanceOf(FeaturedGameInfoDTOCollection::class, $result->getGameList());
     }

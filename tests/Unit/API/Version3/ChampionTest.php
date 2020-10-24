@@ -6,6 +6,7 @@ namespace Tests\Riot\Unit\API\Version3;
 
 use Riot\API\Version3\Champion;
 use Riot\DTO\ChampionInfoDTO;
+use Riot\Enum\RegionEnum;
 use Riot\Tests\APITestCase;
 
 final class ChampionTest extends APITestCase
@@ -20,7 +21,7 @@ final class ChampionTest extends APITestCase
                 'freeChampionIdsForNewPlayers' => [18, 81],
             ]
         ));
-        $result = $champion->getChampionRotations('eun1');
+        $result = $champion->getChampionRotations(RegionEnum::EUN1());
         self::assertInstanceOf(ChampionInfoDTO::class, $result);
     }
 }

@@ -7,6 +7,7 @@ namespace Tests\Riot\Unit\API\Version1;
 use Riot\API\Version1\Account;
 use Riot\DTO\AccountDTO;
 use Riot\DTO\ActiveShardDTO;
+use Riot\Enum\GeoRegionEnum;
 use Riot\Tests\APITestCase;
 
 final class AccountTest extends APITestCase
@@ -19,9 +20,10 @@ final class AccountTest extends APITestCase
                 'puuid' => 'a1',
                 'gameName' => 'b2',
                 'tagLine' => 'EUNE',
-            ]
+            ],
+            'europe'
         ));
-        $result = $account->getByPuuid('1', 'eun1');
+        $result = $account->getByPuuid('1', GeoRegionEnum::EUROPE());
         self::assertInstanceOf(AccountDTO::class, $result);
     }
 
@@ -33,9 +35,10 @@ final class AccountTest extends APITestCase
                 'puuid' => 'a1',
                 'gameName' => 'b2',
                 'tagLine' => 'EUNE',
-            ]
+            ],
+            'europe'
         ));
-        $result = $account->getByGameNameAndTagLine('1', '2', 'eun1');
+        $result = $account->getByGameNameAndTagLine('1', '2', GeoRegionEnum::EUROPE());
         self::assertInstanceOf(AccountDTO::class, $result);
     }
 
@@ -47,9 +50,10 @@ final class AccountTest extends APITestCase
                 'puuid' => 'a1',
                 'game' => 'b2',
                 'activeShard' => 'c3',
-            ]
+            ],
+            'europe'
         ));
-        $result = $account->getByGameAndPuuid('1', '2', 'eun1');
+        $result = $account->getByGameAndPuuid('1', '2', GeoRegionEnum::EUROPE());
         self::assertInstanceOf(ActiveShardDTO::class, $result);
     }
 }

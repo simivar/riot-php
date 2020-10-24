@@ -8,6 +8,7 @@ use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
 use Riot\API\AbstractApi;
 use Riot\DTO\MatchDTO;
+use Riot\Enum\GeoRegionEnum;
 use Riot\Exception as RiotException;
 
 final class LorMatch extends AbstractApi
@@ -29,10 +30,10 @@ final class LorMatch extends AbstractApi
      *
      * @return array<string>
      */
-    public function getIdsByPuuid(string $puuid, string $geoRegion): array
+    public function getIdsByPuuid(string $puuid, GeoRegionEnum $geoRegion): array
     {
         $response = $this->riotConnection->get(
-            $geoRegion,
+            $geoRegion->__toString(),
             sprintf('lor/match/v1/matches/by-puuid/%s/ids', $puuid),
         );
 
@@ -54,10 +55,10 @@ final class LorMatch extends AbstractApi
      * @throws RiotException\UnsupportedMediaTypeException
      * @throws ClientExceptionInterface
      */
-    public function getById(string $matchId, string $geoRegion): MatchDTO
+    public function getById(string $matchId, GeoRegionEnum $geoRegion): MatchDTO
     {
         $response = $this->riotConnection->get(
-            $geoRegion,
+            $geoRegion->__toString(),
             sprintf('lor/match/v1/matches/%s', $matchId),
         );
 

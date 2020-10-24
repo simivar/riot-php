@@ -8,6 +8,7 @@ use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
 use Riot\API\AbstractApi;
 use Riot\DTO\LeaderboardDTO;
+use Riot\Enum\GeoRegionEnum;
 use Riot\Exception as RiotException;
 
 final class LorRanked extends AbstractApi
@@ -27,10 +28,10 @@ final class LorRanked extends AbstractApi
      * @throws RiotException\UnsupportedMediaTypeException
      * @throws ClientExceptionInterface
      */
-    public function getLeaderboards(string $geoRegion): LeaderboardDTO
+    public function getLeaderboards(GeoRegionEnum $geoRegion): LeaderboardDTO
     {
         $response = $this->riotConnection->get(
-            $geoRegion,
+            $geoRegion->__toString(),
             'lor/ranked/v1/leaderboards',
         );
 

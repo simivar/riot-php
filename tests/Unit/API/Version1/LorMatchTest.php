@@ -6,6 +6,7 @@ namespace Tests\Riot\Unit\API\Version1;
 
 use Riot\API\Version1\LorMatch;
 use Riot\DTO\MatchDTO;
+use Riot\Enum\GeoRegionEnum;
 use Riot\Tests\APITestCase;
 
 final class LorMatchTest extends APITestCase
@@ -21,9 +22,10 @@ final class LorMatchTest extends APITestCase
                 '025348b8-f9d5-434f-a5dc-ac67ba93c813',
                 'af791950-7701-485b-86bb-199451f7a906',
                 '5d2b6f91-5436-4f30-a8b5-3b8c5911040b',
-            ]
+            ],
+            'europe',
         ));
-        $result = $lorMatch->getIdsByPuuid('1', 'eun1');
+        $result = $lorMatch->getIdsByPuuid('1', GeoRegionEnum::EUROPE());
         self::assertIsArray($result);
         self::assertArrayHasKey(0, $result);
         self::assertSame('1888057d-42b7-41b7-a4cc-b29d1bb8ae96', $result[0]);
@@ -50,9 +52,10 @@ final class LorMatchTest extends APITestCase
                     'players' => [],
                     'total_turn_count' => 15,
                 ],
-            ]
+            ],
+            'europe',
         ));
-        $result = $lorMatch->getById('1', 'eun1');
+        $result = $lorMatch->getById('1', GeoRegionEnum::EUROPE());
         self::assertInstanceOf(MatchDTO::class, $result);
     }
 }

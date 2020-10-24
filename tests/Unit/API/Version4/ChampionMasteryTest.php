@@ -7,6 +7,7 @@ namespace Tests\Riot\Unit\API\Version4;
 use Riot\API\Version4\ChampionMastery;
 use Riot\Collection\ChampionMasteryDTOCollection;
 use Riot\DTO\ChampionMasteryDTO;
+use Riot\Enum\RegionEnum;
 use Riot\Tests\APITestCase;
 
 final class ChampionMasteryTest extends APITestCase
@@ -16,8 +17,9 @@ final class ChampionMasteryTest extends APITestCase
         $championMastery = new ChampionMastery($this->createObjectConnectionMock(
             'lol/champion-mastery/v4/champion-masteries/by-summoner/1',
             [],
+            'eun1',
         ));
-        $result = $championMastery->getBySummonerId('1', 'eun1');
+        $result = $championMastery->getBySummonerId('1', RegionEnum::EUN1());
         self::assertInstanceOf(ChampionMasteryDTOCollection::class, $result);
         self::assertTrue($result->isEmpty());
     }
@@ -38,9 +40,10 @@ final class ChampionMasteryTest extends APITestCase
                     'tokensEarned' => 0,
                     'summonerId' => 'some_id',
                 ],
-            ]
+            ],
+            'eun1',
         ));
-        $result = $championMastery->getBySummonerId('1', 'eun1');
+        $result = $championMastery->getBySummonerId('1', RegionEnum::EUN1());
         self::assertInstanceOf(ChampionMasteryDTOCollection::class, $result);
         self::assertFalse($result->isEmpty());
         self::assertInstanceOf(ChampionMasteryDTO::class, $result->offsetGet(0));
@@ -60,9 +63,10 @@ final class ChampionMasteryTest extends APITestCase
                 'chestGranted' => false,
                 'tokensEarned' => 0,
                 'summonerId' => 'some_id',
-            ]
+            ],
+            'eun1',
         ));
-        $result = $championMastery->getBySummonerIdAndChampionId('1', 2, 'eun1');
+        $result = $championMastery->getBySummonerIdAndChampionId('1', 2, RegionEnum::EUN1());
         self::assertInstanceOf(ChampionMasteryDTO::class, $result);
     }
 
@@ -71,8 +75,9 @@ final class ChampionMasteryTest extends APITestCase
         $championMastery = new ChampionMastery($this->createIntConnectionMock(
             'lol/champion-mastery/v4/scores/by-summoner/1',
             136,
+            'eun1',
         ));
-        $result = $championMastery->getScoreBySummonerId('1', 'eun1');
+        $result = $championMastery->getScoreBySummonerId('1', RegionEnum::EUN1());
         self::assertSame(136, $result);
     }
 }

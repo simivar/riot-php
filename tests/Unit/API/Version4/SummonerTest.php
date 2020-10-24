@@ -6,6 +6,7 @@ namespace Tests\Riot\Unit\API\Version4;
 
 use Riot\API\Version4\Summoner;
 use Riot\DTO\SummonerDTO;
+use Riot\Enum\RegionEnum;
 use Riot\Tests\APITestCase;
 
 final class SummonerTest extends APITestCase
@@ -23,8 +24,9 @@ final class SummonerTest extends APITestCase
                 'puuid' => '6',
                 'summonerLevel' => 7,
             ],
+            'eun1',
         ));
-        $result = $summoner->getByName('simivar', 'eun1');
+        $result = $summoner->getByName('simivar', RegionEnum::EUN1());
         self::assertInstanceOf(SummonerDTO::class, $result);
     }
 
@@ -41,8 +43,9 @@ final class SummonerTest extends APITestCase
                 'puuid' => '6',
                 'summonerLevel' => 7,
             ],
+            'eun1',
         ));
-        $result = $summoner->getByAccountId('simivar', 'eun1');
+        $result = $summoner->getByAccountId('simivar', RegionEnum::EUN1());
         self::assertInstanceOf(SummonerDTO::class, $result);
     }
 
@@ -59,8 +62,9 @@ final class SummonerTest extends APITestCase
                 'puuid' => '6',
                 'summonerLevel' => 7,
             ],
+            'eun1',
         ));
-        $result = $summoner->getByPuuid('simivar', 'eun1');
+        $result = $summoner->getByPuuid('simivar', RegionEnum::EUN1());
         self::assertInstanceOf(SummonerDTO::class, $result);
     }
 
@@ -77,8 +81,9 @@ final class SummonerTest extends APITestCase
                 'puuid' => '6',
                 'summonerLevel' => 7,
             ],
+            'eun1',
         ));
-        $result = $summoner->getById('simivar', 'eun1');
+        $result = $summoner->getById('simivar', RegionEnum::EUN1());
         self::assertInstanceOf(SummonerDTO::class, $result);
     }
 }

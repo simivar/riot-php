@@ -6,6 +6,7 @@ namespace Tests\Riot\Unit\API\Version3;
 
 use Riot\API\Version3\LolStatus;
 use Riot\DTO\ShardStatusDTO;
+use Riot\Enum\RegionEnum;
 use Riot\Tests\APITestCase;
 
 final class LolStatusTest extends APITestCase
@@ -23,9 +24,10 @@ final class LolStatusTest extends APITestCase
                 'services' => [],
                 'slug' => 'host-test',
                 'region_tag' => 'region',
-            ]
+            ],
+            'eun1'
         ));
-        $result = $lolStatus->getShardData('eun1');
+        $result = $lolStatus->getShardData(RegionEnum::EUN1());
         self::assertInstanceOf(ShardStatusDTO::class, $result);
     }
 }
