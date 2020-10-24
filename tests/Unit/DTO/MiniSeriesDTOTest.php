@@ -13,13 +13,13 @@ final class MiniSeriesDTOTest extends TestCase
     {
         $data = [
             'losses' => 1,
-            'progress' => 'some-progress',
+            'progress' => 'WNN',
             'target' => 2,
             'wins' => 3,
         ];
         $object = MiniSeriesDTO::createFromArray($data);
         self::assertSame(1, $object->getLosses());
-        self::assertSame('some-progress', $object->getProgress());
+        self::assertSame('WNN', $object->getProgress());
         self::assertSame(2, $object->getTarget());
         self::assertSame(3, $object->getWins());
     }

@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace Tests\Riot\Unit\API\Version4;
 
 use Riot\API\Version4\League;
+use Riot\Collection\LeagueEntryDTOCollection;
+use Riot\DTO\LeagueEntryDTO;
 use Riot\DTO\LeagueListDTO;
+use Riot\Enum\DivisionEnum;
 use Riot\Enum\QueueEnum;
 use Riot\Enum\RegionEnum;
+use Riot\Enum\TierEnum;
 use Riot\Tests\APITestCase;
 
 final class LeagueTest extends APITestCase
@@ -27,6 +31,66 @@ final class LeagueTest extends APITestCase
         ));
         $result = $league->getChallengerLeaguesByQueue(QueueEnum::RANKED_SOLO_5x5(), RegionEnum::EUN1());
         self::assertInstanceOf(LeagueListDTO::class, $result);
+    }
+
+    public function testGetBySummonerIdReturnsProperObjectOnSuccess(): void
+    {
+        $league = new League($this->createObjectConnectionMock(
+            'lol/league/v4/entries/by-summoner/1',
+            [
+                [
+                    'leagueId' => 'some-league-id',
+                    'queueType' => 'RANKED_SOLO_5x5',
+                    'tier' => 'SILVER',
+                    'rank' => 'I',
+                    'summonerId' => 'some-summoner-id',
+                    'summonerName' => 'Player One',
+                    'leaguePoints' => 5,
+                    'wins' => 34,
+                    'losses' => 35,
+                    'veteran' => false,
+                    'inactive' => false,
+                    'freshBlood' => false,
+                    'hotStreak' => false,
+                ],
+            ],
+            'eun1',
+        ));
+        $result = $league->getBySummonerId('1', RegionEnum::EUN1());
+        self::assertInstanceOf(LeagueEntryDTOCollection::class, $result);
+    }
+
+    public function testGetByQueueAndTierAndDivisionReturnsProperObjectOnSuccess(): void
+    {
+        $league = new League($this->createObjectConnectionMock(
+            'lol/league/v4/entries/RANKED_SOLO_5x5/DIAMOND/II?page=2',
+            [
+                [
+                    'leagueId' => 'some-league-id',
+                    'queueType' => 'RANKED_SOLO_5x5',
+                    'tier' => 'SILVER',
+                    'rank' => 'I',
+                    'summonerId' => 'some-summoner-id',
+                    'summonerName' => 'Player One',
+                    'leaguePoints' => 5,
+                    'wins' => 34,
+                    'losses' => 35,
+                    'veteran' => false,
+                    'inactive' => false,
+                    'freshBlood' => false,
+                    'hotStreak' => false,
+                ],
+            ],
+            'eun1',
+        ));
+        $result = $league->getByQueueAndTierAndDivision(
+            QueueEnum::RANKED_SOLO_5x5(),
+            TierEnum::DIAMOND(),
+            DivisionEnum::II(),
+            RegionEnum::EUN1(),
+            2
+        );
+        self::assertInstanceOf(LeagueEntryDTOCollection::class, $result);
     }
 
     public function testGetGrandmasterLeaguesByQueueReturnsProperObjectOnSuccess(): void
