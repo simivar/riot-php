@@ -26,6 +26,7 @@ final class LorMatch extends AbstractApi
      * @throws RiotException\UnauthorizedException
      * @throws RiotException\UnsupportedMediaTypeException
      * @throws ClientExceptionInterface
+     *
      * @return array<string>
      */
     public function getIdsByPuuid(string $puuid, string $geoRegion): array
