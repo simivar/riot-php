@@ -20,6 +20,7 @@ use MyCLabs\Enum\Enum;
  * @method static self PBE()
  *
  * @extends Enum<string>
+ * @psalm-immutable
  */
 final class RegionEnum extends Enum
 {

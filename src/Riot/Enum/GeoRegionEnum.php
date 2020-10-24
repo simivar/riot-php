@@ -12,6 +12,7 @@ use MyCLabs\Enum\Enum;
  * @method static self EUROPE()
  *
  * @extends Enum<string>
+ * @psalm-immutable
  */
 final class GeoRegionEnum extends Enum
 {
