@@ -100,4 +100,13 @@ final class API
 
         return $this->apis['lorMatchV1'];
     }
+
+    public function getLeagueV4Api(): Version4\League
+    {
+        if (!isset($this->apis['leagueV4'])) {
+            $this->apis['leagueV4'] = new Version4\League($this->riotConnection);
+        }
+
+        return $this->apis['leagueV4'];
+    }
 }
