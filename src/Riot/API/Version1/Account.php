@@ -9,6 +9,7 @@ use Psr\Http\Client\ClientExceptionInterface;
 use Riot\API\AbstractApi;
 use Riot\DTO\AccountDTO;
 use Riot\DTO\ActiveShardDTO;
+use Riot\Enum\GeoRegionEnum;
 use Riot\Exception as RiotException;
 
 final class Account extends AbstractApi
@@ -28,10 +29,10 @@ final class Account extends AbstractApi
      * @throws RiotException\UnsupportedMediaTypeException
      * @throws ClientExceptionInterface
      */
-    public function getByPuuid(string $puuid, string $geoRegion): AccountDTO
+    public function getByPuuid(string $puuid, GeoRegionEnum $geoRegion): AccountDTO
     {
         $response = $this->riotConnection->get(
-            $geoRegion,
+            $geoRegion->__toString(),
             sprintf('riot/account/v1/accounts/by-puuid/%s', $puuid),
         );
 
@@ -53,10 +54,10 @@ final class Account extends AbstractApi
      * @throws RiotException\UnsupportedMediaTypeException
      * @throws ClientExceptionInterface
      */
-    public function getByGameNameAndTagLine(string $gameName, string $tagLine, string $geoRegion): AccountDTO
+    public function getByGameNameAndTagLine(string $gameName, string $tagLine, GeoRegionEnum $geoRegion): AccountDTO
     {
         $response = $this->riotConnection->get(
-            $geoRegion,
+            $geoRegion->__toString(),
             sprintf('riot/account/v1/accounts/by-riot-id/%s/%s', $gameName, $tagLine),
         );
 
@@ -78,10 +79,10 @@ final class Account extends AbstractApi
      * @throws RiotException\UnsupportedMediaTypeException
      * @throws ClientExceptionInterface
      */
-    public function getByGameAndPuuid(string $game, string $puuid, string $geoRegion): ActiveShardDTO
+    public function getByGameAndPuuid(string $game, string $puuid, GeoRegionEnum $geoRegion): ActiveShardDTO
     {
         $response = $this->riotConnection->get(
-            $geoRegion,
+            $geoRegion->__toString(),
             sprintf('riot/account/v1/active-shards/by-game/%s/by-puuid/%s', $game, $puuid),
         );
 

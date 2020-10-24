@@ -19,7 +19,9 @@
         "psr/http-message": "^1.0",
         "psr/http-factory": "^1.0",
         "ext-json": "*",
-        "ramsey/collection": "^1.1"
+        "ramsey/collection": "^1.1",
+        "webmozart/assert": "^1.9",
+        "myclabs/php-enum": "^1.7"
     },
     "autoload": {
         "psr-4": {

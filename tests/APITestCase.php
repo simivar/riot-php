@@ -13,7 +13,7 @@ class APITestCase extends TestCase
     /**
      * @param array<mixed> $apiResponse
      */
-    protected function createObjectConnectionMock(string $path, array $apiResponse): ConnectionInterface
+    protected function createObjectConnectionMock(string $path, array $apiResponse, string $region = 'eun1'): ConnectionInterface
     {
         $response = $this->createMock(ResponseDecoderInterface::class);
         $response->expects(self::once())
@@ -24,7 +24,7 @@ class APITestCase extends TestCase
         $riotConnection = $this->createMock(ConnectionInterface::class);
         $riotConnection->expects(self::once())
             ->method('get')
-            ->with(self::equalTo('eun1'), self::equalTo($path))
+            ->with(self::equalTo($region), self::equalTo($path))
             ->willReturn($response)
         ;
 
