@@ -91,4 +91,13 @@ final class API
 
         return $this->apis['spectatorV4'];
     }
+
+    public function getLorMatchV1Api(): Version1\LorMatch
+    {
+        if (!isset($this->apis['lorMatchV1'])) {
+            $this->apis['lorMatchV1'] = new Version1\LorMatch($this->riotConnection);
+        }
+
+        return $this->apis['lorMatchV1'];
+    }
 }
