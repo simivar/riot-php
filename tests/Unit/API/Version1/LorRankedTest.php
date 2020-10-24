@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Riot\Unit\API\Version1;
 
-use Riot\API\Version1\Account;
 use Riot\API\Version1\LorRanked;
-use Riot\DTO\AccountDTO;
-use Riot\DTO\ActiveShardDTO;
 use Riot\DTO\LeaderboardDTO;
 use Riot\Tests\APITestCase;
 
