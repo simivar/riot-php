@@ -6,7 +6,6 @@ namespace Tests\Riot\Unit\API\Version4;
 
 use Riot\API\Version4\League;
 use Riot\Collection\LeagueEntryDTOCollection;
-use Riot\DTO\LeagueEntryDTO;
 use Riot\DTO\LeagueListDTO;
 use Riot\Enum\DivisionEnum;
 use Riot\Enum\QueueEnum;

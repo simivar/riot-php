@@ -7,6 +7,7 @@ namespace Riot\Tests\Unit\DTO;
 use PHPUnit\Framework\TestCase;
 use Riot\Collection\LeagueEntryDTOCollection;
 use Riot\DTO\LeagueEntryDTO;
+
 final class LeagueEntryDTOCollectionTest extends TestCase
 {
     public function testCreateFromArrayCreatesProperObject(): void

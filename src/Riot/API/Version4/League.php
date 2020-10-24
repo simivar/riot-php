@@ -40,8 +40,7 @@ final class League extends AbstractApi
         DivisionEnum $division,
         RegionEnum $region,
         int $page = 1
-    ): LeagueEntryDTOCollection
-    {
+    ): LeagueEntryDTOCollection {
         $response = $this->riotConnection->get(
             $region->__toString(),
             sprintf(
