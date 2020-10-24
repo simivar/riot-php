@@ -6,6 +6,7 @@ namespace Tests\Riot\Unit\API\Version1;
 
 use Riot\API\Version1\LorRanked;
 use Riot\DTO\LeaderboardDTO;
+use Riot\Enum\GeoRegionEnum;
 use Riot\Tests\APITestCase;
 
 final class LorRankedTest extends APITestCase
@@ -16,9 +17,10 @@ final class LorRankedTest extends APITestCase
             'lor/ranked/v1/leaderboards',
             [
                 'players' => [],
-            ]
+            ],
+            'europe',
         ));
-        $result = $lorRanked->getLeaderboards('eun1');
+        $result = $lorRanked->getLeaderboards(GeoRegionEnum::EUROPE());
         self::assertInstanceOf(LeaderboardDTO::class, $result);
     }
 }

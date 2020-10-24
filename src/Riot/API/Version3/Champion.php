@@ -8,6 +8,7 @@ use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
 use Riot\API\AbstractApi;
 use Riot\DTO\ChampionInfoDTO;
+use Riot\Enum\RegionEnum;
 use Riot\Exception as RiotException;
 
 final class Champion extends AbstractApi
@@ -27,10 +28,10 @@ final class Champion extends AbstractApi
      * @throws RiotException\UnsupportedMediaTypeException
      * @throws ClientExceptionInterface
      */
-    public function getChampionRotations(string $region): ChampionInfoDTO
+    public function getChampionRotations(RegionEnum $region): ChampionInfoDTO
     {
         $response = $this->riotConnection->get(
-            $region,
+            $region->__toString(),
             'lol/platform/v3/champion-rotations',
         );
 

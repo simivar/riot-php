@@ -9,6 +9,7 @@ use Psr\Http\Client\ClientExceptionInterface;
 use Riot\API\AbstractApi;
 use Riot\Collection\ChampionMasteryDTOCollection;
 use Riot\DTO\ChampionMasteryDTO;
+use Riot\Enum\RegionEnum;
 use Riot\Exception as RiotException;
 
 final class ChampionMastery extends AbstractApi
@@ -30,10 +31,10 @@ final class ChampionMastery extends AbstractApi
      * @throws RiotException\UnsupportedMediaTypeException
      * @throws ClientExceptionInterface
      */
-    public function getBySummonerId(string $encryptedSummonerId, string $region): ChampionMasteryDTOCollection
+    public function getBySummonerId(string $encryptedSummonerId, RegionEnum $region): ChampionMasteryDTOCollection
     {
         $response = $this->riotConnection->get(
-            $region,
+            $region->__toString(),
             sprintf('lol/champion-mastery/v4/champion-masteries/by-summoner/%s', $encryptedSummonerId),
         );
 
@@ -64,10 +65,10 @@ final class ChampionMastery extends AbstractApi
     public function getBySummonerIdAndChampionId(
         string $encryptedSummonerId,
         int $championId,
-        string $region
+        RegionEnum $region
     ): ChampionMasteryDTO {
         $response = $this->riotConnection->get(
-            $region,
+            $region->__toString(),
             sprintf(
                 'lol/champion-mastery/v4/champion-masteries/by-summoner/%s/by-champion/%s',
                 $encryptedSummonerId,
@@ -93,10 +94,10 @@ final class ChampionMastery extends AbstractApi
      * @throws RiotException\UnsupportedMediaTypeException
      * @throws ClientExceptionInterface
      */
-    public function getScoreBySummonerId(string $encryptedSummonerId, string $region): int
+    public function getScoreBySummonerId(string $encryptedSummonerId, RegionEnum $region): int
     {
         $response = $this->riotConnection->get(
-            $region,
+            $region->__toString(),
             sprintf(
                 'lol/champion-mastery/v4/scores/by-summoner/%s',
                 $encryptedSummonerId,

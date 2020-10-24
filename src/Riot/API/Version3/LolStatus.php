@@ -8,6 +8,7 @@ use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
 use Riot\API\AbstractApi;
 use Riot\DTO\ShardStatusDTO;
+use Riot\Enum\RegionEnum;
 use Riot\Exception as RiotException;
 
 final class LolStatus extends AbstractApi
@@ -27,10 +28,10 @@ final class LolStatus extends AbstractApi
      * @throws RiotException\UnsupportedMediaTypeException
      * @throws ClientExceptionInterface
      */
-    public function getShardData(string $region): ShardStatusDTO
+    public function getShardData(RegionEnum $region): ShardStatusDTO
     {
         $response = $this->riotConnection->get(
-            $region,
+            $region->__toString(),
             'lol/status/v3/shard-data',
         );
 

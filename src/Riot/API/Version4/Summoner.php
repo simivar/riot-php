@@ -8,6 +8,7 @@ use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
 use Riot\API\AbstractApi;
 use Riot\DTO\SummonerDTO;
+use Riot\Enum\RegionEnum;
 use Riot\Exception as RiotException;
 
 final class Summoner extends AbstractApi
@@ -27,10 +28,10 @@ final class Summoner extends AbstractApi
      * @throws RiotException\UnsupportedMediaTypeException
      * @throws ClientExceptionInterface
      */
-    public function getByName(string $summonerName, string $region): SummonerDTO
+    public function getByName(string $summonerName, RegionEnum $region): SummonerDTO
     {
         $response = $this->riotConnection->get(
-            $region,
+            $region->__toString(),
             sprintf('lol/summoner/v4/summoners/by-name/%s', $summonerName),
         );
 
@@ -52,10 +53,10 @@ final class Summoner extends AbstractApi
      * @throws RiotException\UnsupportedMediaTypeException
      * @throws ClientExceptionInterface
      */
-    public function getByAccountId(string $encryptedAccountId, string $region): SummonerDTO
+    public function getByAccountId(string $encryptedAccountId, RegionEnum $region): SummonerDTO
     {
         $response = $this->riotConnection->get(
-            $region,
+            $region->__toString(),
             sprintf('lol/summoner/v4/summoners/by-account/%s', $encryptedAccountId),
         );
 
@@ -77,10 +78,10 @@ final class Summoner extends AbstractApi
      * @throws RiotException\UnsupportedMediaTypeException
      * @throws ClientExceptionInterface
      */
-    public function getByPuuid(string $encryptedPuuid, string $region): SummonerDTO
+    public function getByPuuid(string $encryptedPuuid, RegionEnum $region): SummonerDTO
     {
         $response = $this->riotConnection->get(
-            $region,
+            $region->__toString(),
             sprintf('lol/summoner/v4/summoners/by-puuid/%s', $encryptedPuuid),
         );
 
@@ -102,10 +103,10 @@ final class Summoner extends AbstractApi
      * @throws RiotException\UnsupportedMediaTypeException
      * @throws ClientExceptionInterface
      */
-    public function getById(string $id, string $region): SummonerDTO
+    public function getById(string $id, RegionEnum $region): SummonerDTO
     {
         $response = $this->riotConnection->get(
-            $region,
+            $region->__toString(),
             sprintf('lol/summoner/v4/summoners/%s', $id),
         );
 

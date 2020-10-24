@@ -9,6 +9,7 @@ use Psr\Http\Client\ClientExceptionInterface;
 use Riot\API\AbstractApi;
 use Riot\DTO\CurrentGameInfoDTO;
 use Riot\DTO\FeaturedGamesDTO;
+use Riot\Enum\RegionEnum;
 use Riot\Exception as RiotException;
 
 final class Spectator extends AbstractApi
@@ -28,10 +29,10 @@ final class Spectator extends AbstractApi
      * @throws RiotException\UnsupportedMediaTypeException
      * @throws ClientExceptionInterface
      */
-    public function getActiveGamesBySummonerId(string $encryptedSummonerId, string $region): CurrentGameInfoDTO
+    public function getActiveGamesBySummonerId(string $encryptedSummonerId, RegionEnum $region): CurrentGameInfoDTO
     {
         $response = $this->riotConnection->get(
-            $region,
+            $region->__toString(),
             sprintf('lol/spectator/v4/active-games/by-summoner/%s', $encryptedSummonerId),
         );
 
@@ -53,10 +54,10 @@ final class Spectator extends AbstractApi
      * @throws RiotException\UnsupportedMediaTypeException
      * @throws ClientExceptionInterface
      */
-    public function getFeaturedGames(string $region): FeaturedGamesDTO
+    public function getFeaturedGames(RegionEnum $region): FeaturedGamesDTO
     {
         $response = $this->riotConnection->get(
-            $region,
+            $region->__toString(),
             'lol/spectator/v4/featured-games',
         );
 
