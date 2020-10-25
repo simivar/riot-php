@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\DTO\Lol;
+namespace Riot\Tests\Unit\DTO\Lol;
 
 use PHPUnit\Framework\TestCase;
 use Riot\DTO\Lol\TeamBansDTO;
