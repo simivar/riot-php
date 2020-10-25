@@ -8,6 +8,7 @@ use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
 use Riot\API\AbstractApi;
 use Riot\DTO\Lol\MatchDTO;
+use Riot\DTO\Lol\MatchTimelineDTO;
 use Riot\Enum\RegionEnum;
 use Riot\Exception as RiotException;
 
@@ -21,6 +22,16 @@ final class Match extends AbstractApi
         );
 
         return MatchDTO::createFromArray($response->getBodyContentsDecodedAsArray());
+    }
+
+    public function getTimelineByMatchId(int $matchId, RegionEnum $region): MatchTimelineDTO
+    {
+        $response = $this->riotConnection->get(
+            $region->__toString(),
+            sprintf('lol/match/v4/timelines/by-match/%s', $matchId),
+        );
+
+        return MatchTimelineDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
     /**

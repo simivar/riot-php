@@ -6,6 +6,7 @@ namespace Tests\Riot\Unit\API\Version4;
 
 use Riot\API\Version4\Match;
 use Riot\DTO\Lol\MatchDTO;
+use Riot\DTO\Lol\MatchTimelineDTO;
 use Riot\Enum\RegionEnum;
 use Riot\Tests\APITestCase;
 
@@ -36,12 +37,26 @@ final class MatchTest extends APITestCase
         self::assertInstanceOf(MatchDTO::class, $result);
     }
 
+    public function testGetTimelineByMatchIdReturnsProperObjectOnSuccess(): void
+    {
+        $league = new Match($this->createObjectConnectionMock(
+            'lol/match/v4/timelines/by-match/1',
+            [
+                'frames' => [],
+                'frameInterval' => 60000,
+            ],
+            'eun1',
+        ));
+        $result = $league->getTimelineByMatchId(1, RegionEnum::EUN1());
+        self::assertInstanceOf(MatchTimelineDTO::class, $result);
+    }
+
     public function testGetIdsByTournamentCodeProperObjectOnSuccess(): void
     {
         $league = new Match($this->createObjectConnectionMock(
             'lol/match/v4/matches/by-tournament-code/1/ids',
             [
-                1234567890
+                1234567890,
             ],
             'eun1',
         ));
