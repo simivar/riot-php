@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Riot\DTO;
+namespace Riot\DTO\Lor;
+
+use Riot\DTO\DTOInterface;
 
 final class MetadataDTO implements DTOInterface
 {

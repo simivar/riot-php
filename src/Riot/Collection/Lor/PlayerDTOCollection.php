@@ -2,31 +2,31 @@
 
 declare(strict_types=1);
 
-namespace Riot\Collection;
+namespace Riot\Collection\Lor;
 
 use Ramsey\Collection\AbstractCollection;
-use Riot\DTO\LorPlayerDTO;
+use Riot\DTO\Lor\PlayerDTO;
 
 /**
  * @codeCoverageIgnore
  */
-final class LorPlayerDTOCollection extends AbstractCollection
+final class PlayerDTOCollection extends AbstractCollection
 {
     public function getType(): string
     {
-        return LorPlayerDTO::class;
+        return PlayerDTO::class;
     }
 
     /**
      * @param array<array<string, int|string|array>> $data
      *
-     * @return LorPlayerDTOCollection<LorPlayerDTO>
+     * @return PlayerDTOCollection<PlayerDTO>
      */
     public static function createFromArray(array $data): self
     {
         $collection = new self();
         foreach ($data as $item) {
-            $collection->add(LorPlayerDTO::createFromArray($item));
+            $collection->add(PlayerDTO::createFromArray($item));
         }
 
         return $collection;

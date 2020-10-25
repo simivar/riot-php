@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Riot\DTO;
+namespace Riot\DTO\Lor;
 
-use Riot\Collection\LorPlayerDTOCollection;
+use Riot\Collection\Lor\PlayerDTOCollection;
+use Riot\DTO\DTOInterface;
 
 final class InfoDTO implements DTOInterface
 {
@@ -16,20 +17,20 @@ final class InfoDTO implements DTOInterface
 
     private string $gameVersion;
 
-    /** @var LorPlayerDTOCollection<LorPlayerDTO> */
-    private LorPlayerDTOCollection $players;
+    /** @var PlayerDTOCollection<PlayerDTO> */
+    private PlayerDTOCollection $players;
 
     private int $totalTurnCount;
 
     /**
-     * @param LorPlayerDTOCollection<LorPlayerDTO> $players
+     * @param PlayerDTOCollection<PlayerDTO> $players
      */
     public function __construct(
         string $gameMode,
         string $gameType,
         string $gameStartTimeUtc,
         string $gameVersion,
-        LorPlayerDTOCollection $players,
+        PlayerDTOCollection $players,
         int $totalTurnCount
     ) {
         $this->gameMode = $gameMode;
@@ -61,9 +62,9 @@ final class InfoDTO implements DTOInterface
     }
 
     /**
-     * @return LorPlayerDTOCollection<LorPlayerDTO>
+     * @return PlayerDTOCollection<PlayerDTO>
      */
-    public function getPlayers(): LorPlayerDTOCollection
+    public function getPlayers(): PlayerDTOCollection
     {
         return $this->players;
     }
@@ -80,7 +81,7 @@ final class InfoDTO implements DTOInterface
             $data['game_type'],
             $data['game_start_time_utc'],
             $data['game_version'],
-            LorPlayerDTOCollection::createFromArray($data['players']),
+            PlayerDTOCollection::createFromArray($data['players']),
             $data['total_turn_count'],
         );
     }

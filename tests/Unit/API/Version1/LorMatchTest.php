@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Riot\Unit\API\Version1;
 
 use Riot\API\Version1\LorMatch;
-use Riot\DTO\MatchDTO;
+use Riot\DTO\Lor\MatchDTO;
 use Riot\Enum\GeoRegionEnum;
 use Riot\Tests\APITestCase;
 

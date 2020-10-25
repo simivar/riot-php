@@ -7,7 +7,7 @@ namespace Riot\API\Version1;
 use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
 use Riot\API\AbstractApi;
-use Riot\DTO\MatchDTO;
+use Riot\DTO\Lor\MatchDTO;
 use Riot\Enum\GeoRegionEnum;
 use Riot\Exception as RiotException;
 

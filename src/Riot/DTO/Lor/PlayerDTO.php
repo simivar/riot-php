@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Riot\DTO;
+namespace Riot\DTO\Lor;
 
-final class LorPlayerDTO implements DTOInterface
+use Riot\DTO\DTOInterface;
+
+final class PlayerDTO implements DTOInterface
 {
     private string $puuid;
 
