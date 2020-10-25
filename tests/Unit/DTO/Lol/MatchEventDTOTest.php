@@ -7,6 +7,7 @@ namespace Riot\Tests\Unit\DTO\Lol;
 use PHPUnit\Framework\TestCase;
 use Riot\DTO\Lol\MatchEventDTO;
 use Riot\DTO\Lol\MatchPositionDTO;
+use Riot\Enum\TeamEnum;
 
 final class MatchEventDTOTest extends TestCase
 {
@@ -174,6 +175,7 @@ final class MatchEventDTOTest extends TestCase
         self::assertInstanceOf(MatchPositionDTO::class, $object->getPosition());
         self::assertSame(9, $object->getKillerId());
         self::assertEmpty($object->getAssistingParticipantIds());
+        self::assertInstanceOf(TeamEnum::class, $object->getTeamId());
         self::assertSame(100, $object->getTeamId()->getValue());
         self::assertSame('TOWER_BUILDING', $object->getBuildingType());
         self::assertSame('TOP_LANE', $object->getLaneType());

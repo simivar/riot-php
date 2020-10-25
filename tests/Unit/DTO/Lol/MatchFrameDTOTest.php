@@ -15,7 +15,7 @@ final class MatchFrameDTOTest extends TestCase
     {
         $data = [
             'participantFrames' => [
-                '1' => [
+                'a' => [
                     'participantId' => 1,
                     'position' => [
                         'x' => 6970,
@@ -37,8 +37,8 @@ final class MatchFrameDTOTest extends TestCase
         $object = MatchFrameDTO::createFromArray($data);
         self::assertSame(180075, $object->getTimestamp());
         self::assertIsArray($object->getParticipantFrames());
-        self::assertArrayHasKey('1', $object->getParticipantFrames());
-        self::assertInstanceOf(MatchParticipantFrameDTO::class, $object->getParticipantFrames()['1']);
+        self::assertArrayHasKey('a', $object->getParticipantFrames());
+        self::assertInstanceOf(MatchParticipantFrameDTO::class, $object->getParticipantFrames()['a']);
         self::assertInstanceOf(MatchEventDTOCollection::class, $object->getEvents());
     }
 }

@@ -18,7 +18,7 @@ final class MatchFrameDTOCollection extends AbstractCollection
     }
 
     /**
-     * @param array<array<string, int>> $data
+     * @param array<array<string, array|int>> $data
      *
      * @return self<MatchFrameDTO>
      */

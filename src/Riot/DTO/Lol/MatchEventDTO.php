@@ -57,6 +57,9 @@ final class MatchEventDTO implements DTOInterface
 
     private ?int $victimId;
 
+    /**
+     * @param array<int>|null $assistingParticipantIds
+     */
     public function __construct(
         ?string $laneType,
         ?int $skillSlot,
@@ -208,7 +211,7 @@ final class MatchEventDTO implements DTOInterface
     }
 
     /**
-     * @return array<int>
+     * @return array<int, int>
      */
     public function getAssistingParticipantIds(): ?array
     {

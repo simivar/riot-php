@@ -17,7 +17,7 @@ final class MatchFrameDTOCollectionTest extends TestCase
                 'participantFrames' => [],
                 'events' => [],
                 'timestamp' => 180075,
-            ]
+            ],
         ];
         $object = MatchFrameDTOCollection::createFromArray($data);
         self::assertFalse($object->isEmpty());

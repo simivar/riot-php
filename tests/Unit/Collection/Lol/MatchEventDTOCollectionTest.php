@@ -6,9 +6,7 @@ namespace Riot\Tests\Unit\DTO\Lol;
 
 use PHPUnit\Framework\TestCase;
 use Riot\Collection\Lol\MatchEventDTOCollection;
-use Riot\Collection\Lol\MatchFrameDTOCollection;
 use Riot\DTO\Lol\MatchEventDTO;
-use Riot\DTO\Lol\MatchFrameDTO;
 
 final class MatchEventDTOCollectionTest extends TestCase
 {
@@ -20,7 +18,7 @@ final class MatchEventDTOCollectionTest extends TestCase
                 'timestamp' => 9121,
                 'participantId' => 7,
                 'itemId' => 3340,
-            ]
+            ],
         ];
         $object = MatchEventDTOCollection::createFromArray($data);
         self::assertFalse($object->isEmpty());
