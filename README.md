@@ -27,7 +27,7 @@ composer require simivar/riot-php symfony/http-client nyholm/psr7
 | Lol Status v3        | [docs](https://developer.riotgames.com/apis#lol-status-v3)        | 100%   |
 | Lor Match v1         | [docs](https://developer.riotgames.com/apis#lor-match-v1)         | 100%   |
 | Lor Ranked v1        | [docs](https://developer.riotgames.com/apis#lor-ranked-v1)        | 100%   |
-| Match v4             | [docs](https://developer.riotgames.com/apis#match-v4)             | -      |
+| Match v4             | [docs](https://developer.riotgames.com/apis#match-v4)             | 100%   |
 | Spectator v4         | [docs](https://developer.riotgames.com/apis#spectator-v4)         | 100%   |
 | Summoner v4          | [docs](https://developer.riotgames.com/apis#summoner-v4)          | 100%   |
 | Tft League v1        | [docs](https://developer.riotgames.com/apis#tft-league-v1)        | -      |
