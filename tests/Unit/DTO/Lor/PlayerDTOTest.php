@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Riot\Tests\Unit\DTO;
+namespace Riot\Tests\Unit\DTO\Lor;
 
 use PHPUnit\Framework\TestCase;
-use Riot\DTO\LorPlayerDTO;
+use Riot\DTO\Lor\PlayerDTO;
 
-final class LorPlayerDTOTest extends TestCase
+final class PlayerDTOTest extends TestCase
 {
     public function testCreateFromArrayCreatesProperObject(): void
     {
@@ -22,7 +22,7 @@ final class LorPlayerDTOTest extends TestCase
             'game_outcome' => 'loss',
             'order_of_play' => 1,
         ];
-        $object = LorPlayerDTO::createFromArray($data);
+        $object = PlayerDTO::createFromArray($data);
         self::assertSame(
             'aaaa123f99qdPsswfrbER4CURy3iz6vkdrN1sF6-ApDMgsocqU9L1GEFNadd6yKr_uK_s7RPNZi_qg',
             $object->getPuuid(),

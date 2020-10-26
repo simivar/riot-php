@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Riot\Tests\Unit\DTO;
+namespace Riot\Tests\Unit\DTO\Lor;
 
 use PHPUnit\Framework\TestCase;
-use Riot\DTO\MetadataDTO;
+use Riot\DTO\Lor\MetadataDTO;
 
 final class MetadataDTOTest extends TestCase
 {

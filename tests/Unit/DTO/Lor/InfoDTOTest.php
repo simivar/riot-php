@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Riot\Tests\Unit\DTO;
+namespace Riot\Tests\Unit\DTO\Lor;
 
 use PHPUnit\Framework\TestCase;
-use Riot\Collection\LorPlayerDTOCollection;
-use Riot\DTO\InfoDTO;
+use Riot\Collection\Lor\PlayerDTOCollection;
+use Riot\DTO\Lor\InfoDTO;
 
 final class InfoDTOTest extends TestCase
 {
@@ -25,7 +25,7 @@ final class InfoDTOTest extends TestCase
         self::assertSame('Normal', $object->getGameType());
         self::assertSame('2020-10-24T01:35:27.6191820+00:00', $object->getGameStartTimeUtc());
         self::assertSame('live_1_12_12', $object->getGameVersion());
-        self::assertInstanceOf(LorPlayerDTOCollection::class, $object->getPlayers());
+        self::assertInstanceOf(PlayerDTOCollection::class, $object->getPlayers());
         self::assertSame(15, $object->getTotalTurnCount());
     }
 }

@@ -109,4 +109,13 @@ final class API
 
         return $this->apis['leagueV4'];
     }
+
+    public function getMatchV4(): Version4\Matches
+    {
+        if (!isset($this->apis['matchV4'])) {
+            $this->apis['matchV4'] = new Version4\Matches($this->riotConnection);
+        }
+
+        return $this->apis['matchV4'];
+    }
 }

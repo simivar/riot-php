@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Riot\Tests\Unit\DTO;
+namespace Riot\Tests\Unit\DTO\Lor;
 
 use PHPUnit\Framework\TestCase;
-use Riot\Collection\LorPlayerDTOCollection;
-use Riot\DTO\LorPlayerDTO;
+use Riot\Collection\Lor\PlayerDTOCollection;
+use Riot\DTO\Lor\PlayerDTO;
 
-final class LorPlayerDTOCollectionTest extends TestCase
+final class PlayerDTOCollectionTest extends TestCase
 {
     public function testCreateFromArrayCreatesProperObject(): void
     {
@@ -25,15 +25,15 @@ final class LorPlayerDTOCollectionTest extends TestCase
                 'order_of_play' => 1,
             ],
         ];
-        $object = LorPlayerDTOCollection::createFromArray($data);
+        $object = PlayerDTOCollection::createFromArray($data);
         self::assertFalse($object->isEmpty());
-        self::assertInstanceOf(LorPlayerDTO::class, $object->offsetGet(0));
+        self::assertInstanceOf(PlayerDTO::class, $object->offsetGet(0));
     }
 
     public function testCreateFromArrayReturnsEmptyCollectionWhenNoData(): void
     {
         $data = [];
-        $object = LorPlayerDTOCollection::createFromArray($data);
+        $object = PlayerDTOCollection::createFromArray($data);
         self::assertTrue($object->isEmpty());
     }
 }
