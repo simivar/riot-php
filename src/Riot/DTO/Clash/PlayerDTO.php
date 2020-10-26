@@ -23,8 +23,7 @@ final class PlayerDTO implements DTOInterface
         string $teamId,
         PositionEnum $position,
         TeamRoleEnum $role
-    )
-    {
+    ) {
         $this->summonerId = $summonerId;
         $this->teamId = $teamId;
         $this->position = $position;

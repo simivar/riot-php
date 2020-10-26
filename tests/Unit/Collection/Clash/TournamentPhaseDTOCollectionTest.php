@@ -5,12 +5,8 @@ declare(strict_types=1);
 namespace Riot\Tests\Unit\DTO\Clash;
 
 use PHPUnit\Framework\TestCase;
-use Riot\Collection\Clash\PlayerDTOCollection;
 use Riot\Collection\Clash\TournamentPhaseDTOCollection;
-use Riot\Collection\Lol\MasteryDTOCollection;
-use Riot\DTO\Clash\PlayerDTO;
 use Riot\DTO\Clash\TournamentPhaseDTO;
-use Riot\DTO\Lol\MasteryDTO;
 
 final class TournamentPhaseDTOCollectionTest extends TestCase
 {

@@ -6,16 +6,12 @@ namespace Riot\Tests\Unit\DTO\Clash;
 
 use PHPUnit\Framework\TestCase;
 use Riot\Collection\Clash\PlayerDTOCollection;
-use Riot\DTO\Clash\PlayerDTO;
 use Riot\DTO\Clash\TeamDTO;
-use Riot\Enum\PositionEnum;
-use Riot\Enum\TeamRoleEnum;
 
 final class TeamDTOTest extends TestCase
 {
     public function testCreateFromArrayCreatesProperObject(): void
     {
-
         $data = [
             'id' => '1',
             'tournamentId' => 2,

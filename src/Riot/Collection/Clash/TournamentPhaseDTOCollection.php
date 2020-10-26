@@ -18,7 +18,7 @@ final class TournamentPhaseDTOCollection extends AbstractCollection
     }
 
     /**
-     * @param array<array<string, int>> $data
+     * @param array<array<string, int|bool>> $data
      *
      * @return self<TournamentPhaseDTO>
      */

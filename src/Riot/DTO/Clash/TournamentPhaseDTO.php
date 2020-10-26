@@ -21,8 +21,7 @@ final class TournamentPhaseDTO implements DTOInterface
         int $registrationTime,
         int $startTime,
         bool $cancelled
-    )
-    {
+    ) {
         $this->id = $id;
         $this->registrationTime = $registrationTime;
         $this->startTime = $startTime;

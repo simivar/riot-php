@@ -29,8 +29,7 @@ final class TournamentDTO implements DTOInterface
         string $nameKey,
         string $nameKeySecondary,
         TournamentPhaseDTOCollection $schedule
-    )
-    {
+    ) {
         $this->id = $id;
         $this->themeId = $themeId;
         $this->nameKey = $nameKey;

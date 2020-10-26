@@ -6,9 +6,7 @@ namespace Riot\Tests\Unit\DTO\Clash;
 
 use PHPUnit\Framework\TestCase;
 use Riot\Collection\Clash\PlayerDTOCollection;
-use Riot\Collection\Lol\MasteryDTOCollection;
 use Riot\DTO\Clash\PlayerDTO;
-use Riot\DTO\Lol\MasteryDTO;
 
 final class PlayerDTOCollectionTest extends TestCase
 {

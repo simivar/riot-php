@@ -34,8 +34,7 @@ final class TeamDTO implements DTOInterface
         string $captain,
         string $abbreviation,
         PlayerDTOCollection $players
-    )
-    {
+    ) {
         $this->id = $id;
         $this->tournamentId = $tournamentId;
         $this->name = $name;

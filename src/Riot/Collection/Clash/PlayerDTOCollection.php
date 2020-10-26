@@ -18,7 +18,7 @@ final class PlayerDTOCollection extends AbstractCollection
     }
 
     /**
-     * @param array<array<string, int>> $data
+     * @param array<array<string, string>> $data
      *
      * @return self<PlayerDTO>
      */
