@@ -21,7 +21,7 @@ composer require simivar/riot-php symfony/http-client nyholm/psr7
 | Account v1           | [docs](https://developer.riotgames.com/apis#account-v1)           | 100%   |
 | Champion Mastery v4  | [docs](https://developer.riotgames.com/apis#champion-mastery-v4)  | 100%   |
 | Champion v3          | [docs](https://developer.riotgames.com/apis#champion-v3)          | 100%   |
-| Clash v1             | [docs](https://developer.riotgames.com/apis#clash-v1)             | -      |
+| Clash v1             | [docs](https://developer.riotgames.com/apis#clash-v1)             | 100%   |
 | League Exp v4        | [docs](https://developer.riotgames.com/apis#league-exp-v4)        | -      |
 | League v4            | [docs](https://developer.riotgames.com/apis#league-v4)            | 100%   |
 | Lol Status v3        | [docs](https://developer.riotgames.com/apis#lol-status-v3)        | 100%   |
