@@ -14,7 +14,7 @@ use Riot\Enum\RegionEnum;
 use Riot\Exception as RiotException;
 use Riot\Filter\MatchlistFilter;
 
-final class Match extends AbstractApi
+final class Matches extends AbstractApi
 {
     public function getByMatchId(int $matchId, RegionEnum $region): MatchDTO
     {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Riot\Unit\API\Version4;
 
-use Riot\API\Version4\Match;
+use Riot\API\Version4\Matches;
 use Riot\DTO\Lol\MatchDTO;
 use Riot\DTO\Lol\MatchlistDTO;
 use Riot\DTO\Lol\MatchTimelineDTO;
@@ -12,11 +12,11 @@ use Riot\Enum\RegionEnum;
 use Riot\Filter\MatchlistFilter;
 use Riot\Tests\APITestCase;
 
-final class MatchTest extends APITestCase
+final class MatchesTest extends APITestCase
 {
     public function testGetByMatchIdReturnsProperObjectOnSuccess(): void
     {
-        $league = new Match($this->createObjectConnectionMock(
+        $league = new Matches($this->createObjectConnectionMock(
             'lol/match/v4/matches/1',
             [
                 'gameId' => 1234567890,
@@ -41,7 +41,7 @@ final class MatchTest extends APITestCase
 
     public function testGetMatchlistByAccountIdReturnsProperObjectOnSuccess(): void
     {
-        $league = new Match($this->createObjectConnectionMock(
+        $league = new Matches($this->createObjectConnectionMock(
             'lol/match/v4/matchlists/by-account/1?',
             [
                 'matches' => [],
@@ -63,7 +63,7 @@ final class MatchTest extends APITestCase
             ->willReturn('champion=1%2C2')
         ;
 
-        $league = new Match($this->createObjectConnectionMock(
+        $league = new Matches($this->createObjectConnectionMock(
             'lol/match/v4/matchlists/by-account/1?champion=1%2C2',
             [
                 'matches' => [],
@@ -79,7 +79,7 @@ final class MatchTest extends APITestCase
 
     public function testGetTimelineByMatchIdReturnsProperObjectOnSuccess(): void
     {
-        $league = new Match($this->createObjectConnectionMock(
+        $league = new Matches($this->createObjectConnectionMock(
             'lol/match/v4/timelines/by-match/1',
             [
                 'frames' => [],
@@ -93,7 +93,7 @@ final class MatchTest extends APITestCase
 
     public function testGetIdsByTournamentCodeProperObjectOnSuccess(): void
     {
-        $league = new Match($this->createObjectConnectionMock(
+        $league = new Matches($this->createObjectConnectionMock(
             'lol/match/v4/matches/by-tournament-code/1/ids',
             [
                 1234567890,
@@ -108,7 +108,7 @@ final class MatchTest extends APITestCase
 
     public function testGetByMatchIdAndTournamentCodeReturnsProperObjectOnSuccess(): void
     {
-        $league = new Match($this->createObjectConnectionMock(
+        $league = new Matches($this->createObjectConnectionMock(
             'lol/match/v4/matches/1/by-tournament-code/1',
             [
                 'gameId' => 1234567890,
