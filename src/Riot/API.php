@@ -118,4 +118,13 @@ final class API
 
         return $this->apis['matchV4'];
     }
+
+    public function getClasV1(): Version1\Clash
+    {
+        if (!isset($this->apis['clashV1'])) {
+            $this->apis['clashV1'] = new Version1\Clash($this->riotConnection);
+        }
+
+        return $this->apis['clashV1'];
+    }
 }
