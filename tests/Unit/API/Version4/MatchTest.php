@@ -9,6 +9,7 @@ use Riot\DTO\Lol\MatchDTO;
 use Riot\DTO\Lol\MatchlistDTO;
 use Riot\DTO\Lol\MatchTimelineDTO;
 use Riot\Enum\RegionEnum;
+use Riot\Filter\MatchlistFilter;
 use Riot\Tests\APITestCase;
 
 final class MatchTest extends APITestCase
@@ -41,7 +42,7 @@ final class MatchTest extends APITestCase
     public function testGetMatchlistByAccountIdReturnsProperObjectOnSuccess(): void
     {
         $league = new Match($this->createObjectConnectionMock(
-            'lol/match/v4/matchlists/by-account/1',
+            'lol/match/v4/matchlists/by-account/1?',
             [
                 'matches' => [],
                 'startIndex' => 0,
@@ -51,6 +52,28 @@ final class MatchTest extends APITestCase
             'eun1',
         ));
         $result = $league->getMatchlistByAccountId('1', RegionEnum::EUN1());
+        self::assertInstanceOf(MatchlistDTO::class, $result);
+    }
+
+    public function testGetMatchlistCallsEndpointWithAppliedFilters(): void
+    {
+        $filters = $this->createMock(MatchlistFilter::class);
+        $filters->expects(self::once())
+            ->method('getAsHttpQuery')
+            ->willReturn('champion=1%2C2')
+        ;
+
+        $league = new Match($this->createObjectConnectionMock(
+            'lol/match/v4/matchlists/by-account/1?champion=1%2C2',
+            [
+                'matches' => [],
+                'startIndex' => 0,
+                'endIndex' => 100,
+                'totalGames' => 169,
+            ],
+            'eun1',
+        ));
+        $result = $league->getMatchlistByAccountId('1', RegionEnum::EUN1(), $filters);
         self::assertInstanceOf(MatchlistDTO::class, $result);
     }
 

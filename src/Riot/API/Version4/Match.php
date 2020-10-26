@@ -12,6 +12,7 @@ use Riot\DTO\Lol\MatchlistDTO;
 use Riot\DTO\Lol\MatchTimelineDTO;
 use Riot\Enum\RegionEnum;
 use Riot\Exception as RiotException;
+use Riot\Filter\MatchlistFilter;
 
 final class Match extends AbstractApi
 {
@@ -25,11 +26,18 @@ final class Match extends AbstractApi
         return MatchDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
-    public function getMatchlistByAccountId(string $encryptedAccountId, RegionEnum $region): MatchlistDTO
-    {
+    public function getMatchlistByAccountId(
+        string $encryptedAccountId,
+        RegionEnum $region,
+        ?MatchlistFilter $filter = null
+    ): MatchlistDTO {
         $response = $this->riotConnection->get(
             $region->getValue(),
-            sprintf('lol/match/v4/matchlists/by-account/%s', $encryptedAccountId),
+            sprintf(
+                'lol/match/v4/matchlists/by-account/%s?%s',
+                $encryptedAccountId,
+                $filter ? $filter->getAsHttpQuery() : '',
+            ),
         );
 
         return MatchlistDTO::createFromArray($response->getBodyContentsDecodedAsArray());
