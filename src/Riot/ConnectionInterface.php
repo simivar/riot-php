@@ -40,4 +40,42 @@ interface ConnectionInterface
      * @throws ClientExceptionInterface
      */
     public function get(string $region, string $path): ResponseDecoderInterface;
+
+    /**
+     * @param array<mixed> $data
+     *
+     * @throws JsonException
+     * @throws RiotException\BadGatewayException
+     * @throws RiotException\BadRequestException
+     * @throws RiotException\DataNotFoundException
+     * @throws RiotException\ForbiddenException
+     * @throws RiotException\GatewayTimeoutException
+     * @throws RiotException\InternalServerErrorException
+     * @throws RiotException\MethodNotAllowedException
+     * @throws RiotException\RateLimitExceededException
+     * @throws RiotException\ServiceUnavailableException
+     * @throws RiotException\UnauthorizedException
+     * @throws RiotException\UnsupportedMediaTypeException
+     * @throws ClientExceptionInterface
+     */
+    public function post(string $region, string $path, array $data): ResponseDecoderInterface;
+
+    /**
+     * @param array<mixed> $data
+     *
+     * @throws JsonException
+     * @throws RiotException\BadGatewayException
+     * @throws RiotException\BadRequestException
+     * @throws RiotException\DataNotFoundException
+     * @throws RiotException\ForbiddenException
+     * @throws RiotException\GatewayTimeoutException
+     * @throws RiotException\InternalServerErrorException
+     * @throws RiotException\MethodNotAllowedException
+     * @throws RiotException\RateLimitExceededException
+     * @throws RiotException\ServiceUnavailableException
+     * @throws RiotException\UnauthorizedException
+     * @throws RiotException\UnsupportedMediaTypeException
+     * @throws ClientExceptionInterface
+     */
+    public function put(string $region, string $path, array $data): ResponseDecoderInterface;
 }

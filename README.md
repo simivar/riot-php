@@ -34,8 +34,8 @@ composer require simivar/riot-php symfony/http-client nyholm/psr7
 | Tft Match v1         | [docs](https://developer.riotgames.com/apis#tft-match-v1)         | -      |
 | Tft Summoner v1      | [docs](https://developer.riotgames.com/apis#tft-summoner-v1)      | -      |
 | Third Party Code v4  | [docs](https://developer.riotgames.com/apis#third-party-code-v4)  | 100%   |
-| Tournament Stub v4   | [docs](https://developer.riotgames.com/apis#tournament-stub-v4)   | -      |
-| Tournament v4        | [docs](https://developer.riotgames.com/apis#tournament-v4)        | -      |
+| Tournament Stub v4   | [docs](https://developer.riotgames.com/apis#tournament-stub-v4)   | 100%   |
+| Tournament v4        | [docs](https://developer.riotgames.com/apis#tournament-v4)        | 100%   |
 
 # Legal notice
 Riot PHP isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially 

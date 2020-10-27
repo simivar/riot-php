@@ -7,6 +7,7 @@ namespace Riot;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 use Riot\API\ResponseDecoder;
 use Riot\API\ResponseDecoderInterface;
 use Riot\Exception\BadGatewayException;
@@ -31,13 +32,23 @@ final class Connection implements ConnectionInterface
 
     private RequestFactoryInterface $requestFactory;
 
-    public function __construct(ClientInterface $riotClient, string $riotApiToken, RequestFactoryInterface $requestFactory)
-    {
+    private StreamFactoryInterface $streamFactory;
+
+    public function __construct(
+        ClientInterface $riotClient,
+        string $riotApiToken,
+        RequestFactoryInterface $requestFactory,
+        StreamFactoryInterface $streamFactory
+    ) {
         $this->client = $riotClient;
         $this->riotApiToken = $riotApiToken;
         $this->requestFactory = $requestFactory;
+        $this->streamFactory = $streamFactory;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function get(string $region, string $path): ResponseDecoderInterface
     {
         $request = $this->requestFactory->createRequest(
@@ -45,6 +56,49 @@ final class Connection implements ConnectionInterface
             sprintf('https://%s.%s/%s', $region, self::API_URL, $path),
         );
         $request = $request->withAddedHeader('X-Riot-Token', $this->riotApiToken);
+
+        $response = $this->client->sendRequest($request);
+        if (self::STATUS_CODE_OK !== $response->getStatusCode()) {
+            $this->statusCodeToException($response);
+        }
+
+        return new ResponseDecoder($response);
+    }
+
+    public function post(string $region, string $path, array $data): ResponseDecoderInterface
+    {
+        return $this->sendRequestWithData(
+            'POST',
+            $region,
+            $path,
+            $data,
+        );
+    }
+
+    public function put(string $region, string $path, array $data): ResponseDecoderInterface
+    {
+        return $this->sendRequestWithData(
+            'PUT',
+            $region,
+            $path,
+            $data,
+        );
+    }
+
+    /**
+     * @param array<mixed> $data
+     */
+    private function sendRequestWithData(string $method, string $region, string $path, array $data): ResponseDecoderInterface
+    {
+        $request = $this->requestFactory->createRequest(
+            $method,
+            sprintf('https://%s.%s/%s', $region, self::API_URL, $path),
+        );
+        $request = $request->withAddedHeader('X-Riot-Token', $this->riotApiToken);
+        $request = $request->withBody($this->streamFactory->createStream(json_encode(
+            $data,
+            JSON_THROW_ON_ERROR,
+        )));
 
         $response = $this->client->sendRequest($request);
         if (self::STATUS_CODE_OK !== $response->getStatusCode()) {

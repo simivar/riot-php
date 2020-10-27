@@ -127,4 +127,22 @@ final class API
 
         return $this->apis['clashV1'];
     }
+
+    public function getTournamentStubV4(): Version4\TournamentStub
+    {
+        if (!isset($this->apis['tournamentStubV4'])) {
+            $this->apis['tournamentStubV4'] = new Version4\TournamentStub($this->riotConnection);
+        }
+
+        return $this->apis['tournamentStubV4'];
+    }
+
+    public function getTournamentV4(): Version4\Tournament
+    {
+        if (!isset($this->apis['tournamentV4'])) {
+            $this->apis['tournamentV4'] = new Version4\Tournament($this->riotConnection);
+        }
+
+        return $this->apis['tournamentV4'];
+    }
 }
