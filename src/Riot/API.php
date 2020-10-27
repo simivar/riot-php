@@ -145,4 +145,13 @@ final class API
 
         return $this->apis['tournamentV4'];
     }
+
+    public function getLeagueExpV4(): Version4\LeagueExp
+    {
+        if (!isset($this->apis['leagueExpV4'])) {
+            $this->apis['leagueExpV4'] = new Version4\LeagueExp($this->riotConnection);
+        }
+
+        return $this->apis['leagueExpV4'];
+    }
 }
