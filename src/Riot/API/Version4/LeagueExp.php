@@ -6,11 +6,9 @@ namespace Riot\API\Version4;
 
 use Riot\API\AbstractApi;
 use Riot\Collection\LeagueEntryDTOCollection;
-use Riot\DTO\LeagueListDTO;
 use Riot\Enum\DivisionEnum;
 use Riot\Enum\QueueEnum;
 use Riot\Enum\RegionEnum;
-use Riot\Enum\TierEnum;
 use Riot\Enum\TierExpEnum;
 
 final class LeagueExp extends AbstractApi

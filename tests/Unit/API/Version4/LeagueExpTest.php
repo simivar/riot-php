@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Riot\Unit\API\Version4;
 
-use Riot\API\Version4\League;
 use Riot\API\Version4\LeagueExp;
 use Riot\Collection\LeagueEntryDTOCollection;
-use Riot\DTO\LeagueListDTO;
 use Riot\Enum\DivisionEnum;
 use Riot\Enum\QueueEnum;
 use Riot\Enum\RegionEnum;
-use Riot\Enum\TierEnum;
 use Riot\Enum\TierExpEnum;
 use Riot\Tests\APITestCase;
 
