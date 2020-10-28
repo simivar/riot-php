@@ -18,12 +18,9 @@ final class Matches extends AbstractApi
 {
     public function getByMatchId(int $matchId, RegionEnum $region): MatchDTO
     {
-        $response = $this->riotConnection->get(
-            $region->__toString(),
-            sprintf('lol/match/v4/matches/%s', $matchId),
+        return MatchDTO::createFromArray(
+            $this->get($region, sprintf('lol/match/v4/matches/%s', $matchId))
         );
-
-        return MatchDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
     public function getMatchlistByAccountId(
@@ -31,26 +28,21 @@ final class Matches extends AbstractApi
         RegionEnum $region,
         ?MatchlistFilter $filter = null
     ): MatchlistDTO {
-        $response = $this->riotConnection->get(
-            $region->getValue(),
+        return MatchlistDTO::createFromArray($this->get(
+            $region,
             sprintf(
                 'lol/match/v4/matchlists/by-account/%s?%s',
                 $encryptedAccountId,
                 $filter ? $filter->getAsHttpQuery() : '',
             ),
-        );
-
-        return MatchlistDTO::createFromArray($response->getBodyContentsDecodedAsArray());
+        ));
     }
 
     public function getTimelineByMatchId(int $matchId, RegionEnum $region): MatchTimelineDTO
     {
-        $response = $this->riotConnection->get(
-            $region->__toString(),
-            sprintf('lol/match/v4/timelines/by-match/%s', $matchId),
+        return MatchTimelineDTO::createFromArray(
+            $this->get($region, sprintf('lol/match/v4/timelines/by-match/%s', $matchId))
         );
-
-        return MatchTimelineDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
     /**
@@ -72,21 +64,13 @@ final class Matches extends AbstractApi
      */
     public function getIdsByTournamentCode(string $tournamentCode, RegionEnum $region): array
     {
-        $response = $this->riotConnection->get(
-            $region->__toString(),
-            sprintf('lol/match/v4/matches/by-tournament-code/%s/ids', $tournamentCode),
-        );
-
-        return $response->getBodyContentsDecodedAsArray();
+        return $this->get($region, sprintf('lol/match/v4/matches/by-tournament-code/%s/ids', $tournamentCode));
     }
 
     public function getByMatchIdAndTournamentCode(int $matchId, string $tournamentCode, RegionEnum $region): MatchDTO
     {
-        $response = $this->riotConnection->get(
-            $region->__toString(),
-            sprintf('lol/match/v4/matches/%s/by-tournament-code/%s', $matchId, $tournamentCode),
+        return MatchDTO::createFromArray(
+            $this->get($region, sprintf('lol/match/v4/matches/%s/by-tournament-code/%s', $matchId, $tournamentCode))
         );
-
-        return MatchDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 }

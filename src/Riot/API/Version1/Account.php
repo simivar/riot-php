@@ -31,12 +31,9 @@ final class Account extends AbstractApi
      */
     public function getByPuuid(string $puuid, GeoRegionEnum $geoRegion): AccountDTO
     {
-        $response = $this->riotConnection->get(
-            $geoRegion->__toString(),
-            sprintf('riot/account/v1/accounts/by-puuid/%s', $puuid),
+        return AccountDTO::createFromArray(
+            $this->get($geoRegion->__toString(), sprintf('riot/account/v1/accounts/by-puuid/%s', $puuid))
         );
-
-        return AccountDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
     /**
@@ -56,12 +53,9 @@ final class Account extends AbstractApi
      */
     public function getByGameNameAndTagLine(string $gameName, string $tagLine, GeoRegionEnum $geoRegion): AccountDTO
     {
-        $response = $this->riotConnection->get(
-            $geoRegion->__toString(),
-            sprintf('riot/account/v1/accounts/by-riot-id/%s/%s', $gameName, $tagLine),
+        return AccountDTO::createFromArray(
+            $this->get($geoRegion, sprintf('riot/account/v1/accounts/by-riot-id/%s/%s', $gameName, $tagLine))
         );
-
-        return AccountDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
     /**
@@ -81,11 +75,8 @@ final class Account extends AbstractApi
      */
     public function getByGameAndPuuid(string $game, string $puuid, GeoRegionEnum $geoRegion): ActiveShardDTO
     {
-        $response = $this->riotConnection->get(
-            $geoRegion->__toString(),
-            sprintf('riot/account/v1/active-shards/by-game/%s/by-puuid/%s', $game, $puuid),
+        return ActiveShardDTO::createFromArray(
+            $this->get($geoRegion, sprintf('riot/account/v1/active-shards/by-game/%s/by-puuid/%s', $game, $puuid))
         );
-
-        return ActiveShardDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 }

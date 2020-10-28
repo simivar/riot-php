@@ -30,12 +30,9 @@ final class Summoner extends AbstractApi
      */
     public function getByName(string $summonerName, RegionEnum $region): SummonerDTO
     {
-        $response = $this->riotConnection->get(
-            $region->__toString(),
-            sprintf('lol/summoner/v4/summoners/by-name/%s', $summonerName),
+        return SummonerDTO::createFromArray(
+            $this->get($region, sprintf('lol/summoner/v4/summoners/by-name/%s', $summonerName))
         );
-
-        return SummonerDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
     /**
@@ -55,12 +52,9 @@ final class Summoner extends AbstractApi
      */
     public function getByAccountId(string $encryptedAccountId, RegionEnum $region): SummonerDTO
     {
-        $response = $this->riotConnection->get(
-            $region->__toString(),
-            sprintf('lol/summoner/v4/summoners/by-account/%s', $encryptedAccountId),
+        return SummonerDTO::createFromArray(
+            $this->get($region, sprintf('lol/summoner/v4/summoners/by-account/%s', $encryptedAccountId))
         );
-
-        return SummonerDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
     /**
@@ -80,12 +74,9 @@ final class Summoner extends AbstractApi
      */
     public function getByPuuid(string $encryptedPuuid, RegionEnum $region): SummonerDTO
     {
-        $response = $this->riotConnection->get(
-            $region->__toString(),
-            sprintf('lol/summoner/v4/summoners/by-puuid/%s', $encryptedPuuid),
+        return SummonerDTO::createFromArray(
+            $this->get($region, sprintf('lol/summoner/v4/summoners/by-puuid/%s', $encryptedPuuid))
         );
-
-        return SummonerDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
     /**
@@ -105,11 +96,8 @@ final class Summoner extends AbstractApi
      */
     public function getById(string $id, RegionEnum $region): SummonerDTO
     {
-        $response = $this->riotConnection->get(
-            $region->__toString(),
-            sprintf('lol/summoner/v4/summoners/%s', $id),
+        return SummonerDTO::createFromArray(
+            $this->get($region, sprintf('lol/summoner/v4/summoners/%s', $id))
         );
-
-        return SummonerDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 }

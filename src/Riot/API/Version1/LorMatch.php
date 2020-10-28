@@ -32,12 +32,7 @@ final class LorMatch extends AbstractApi
      */
     public function getIdsByPuuid(string $puuid, GeoRegionEnum $geoRegion): array
     {
-        $response = $this->riotConnection->get(
-            $geoRegion->__toString(),
-            sprintf('lor/match/v1/matches/by-puuid/%s/ids', $puuid),
-        );
-
-        return $response->getBodyContentsDecodedAsArray();
+        return $this->get($geoRegion, sprintf('lor/match/v1/matches/by-puuid/%s/ids', $puuid));
     }
 
     /**
@@ -57,11 +52,8 @@ final class LorMatch extends AbstractApi
      */
     public function getById(string $matchId, GeoRegionEnum $geoRegion): MatchDTO
     {
-        $response = $this->riotConnection->get(
-            $geoRegion->__toString(),
-            sprintf('lor/match/v1/matches/%s', $matchId),
+        return MatchDTO::createFromArray(
+            $this->get($geoRegion, sprintf('lor/match/v1/matches/%s', $matchId))
         );
-
-        return MatchDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 }

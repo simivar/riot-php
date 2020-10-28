@@ -30,11 +30,8 @@ final class Champion extends AbstractApi
      */
     public function getChampionRotations(RegionEnum $region): ChampionInfoDTO
     {
-        $response = $this->riotConnection->get(
-            $region->__toString(),
-            'lol/platform/v3/champion-rotations',
+        return ChampionInfoDTO::createFromArray(
+            $this->get($region, 'lol/platform/v3/champion-rotations')
         );
-
-        return ChampionInfoDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 }

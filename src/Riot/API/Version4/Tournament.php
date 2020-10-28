@@ -35,7 +35,7 @@ final class Tournament extends AbstractApi
         Assert::allString($allowedSummonerIds);
         Assert::range($teamSize, 1, 5);
 
-        $response = $this->riotConnection->post(
+        $response = $this->post(
             GeoRegionEnum::AMERICAS()->getValue(),
             sprintf('lol/tournament/v4/codes?count=%d&tournamentId=%d', $count, $tournamentId),
             [
@@ -64,7 +64,7 @@ final class Tournament extends AbstractApi
         Assert::isList($allowedSummonerIds);
         Assert::allString($allowedSummonerIds);
 
-        $this->riotConnection->put(
+        $this->put(
             GeoRegionEnum::AMERICAS()->getValue(),
             sprintf('lol/tournament/v4/codes/%s', $tournamentCode),
             [
@@ -80,27 +80,22 @@ final class Tournament extends AbstractApi
 
     public function getCodeByTournamentCode(string $tournamentCode): TournamentCodeDTO
     {
-        $response = $this->riotConnection->get(
-            GeoRegionEnum::AMERICAS()->getValue(),
-            sprintf('lol/tournament/v4/codes/%s', $tournamentCode),
+        return TournamentCodeDTO::createFromArray(
+            $this->get(GeoRegionEnum::AMERICAS()->getValue(), sprintf('lol/tournament/v4/codes/%s', $tournamentCode))
         );
-
-        return TournamentCodeDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
     public function getLobbyEventsByTournamentCode(string $tournamentCode): LobbyEventDTOWrapperDTO
     {
-        $response = $this->riotConnection->get(
+        return LobbyEventDTOWrapperDTO::createFromArray($this->get(
             GeoRegionEnum::AMERICAS()->getValue(),
             sprintf('lol/tournament/v4/lobby-events/by-code/%s', $tournamentCode),
-        );
-
-        return LobbyEventDTOWrapperDTO::createFromArray($response->getBodyContentsDecodedAsArray());
+        ));
     }
 
     public function createProvider(TournamentRegionEnum $region, string $url): int
     {
-        $response = $this->riotConnection->post(
+        $response = $this->post(
             GeoRegionEnum::AMERICAS()->getValue(),
             'lol/tournament/v4/providers',
             [
@@ -114,7 +109,7 @@ final class Tournament extends AbstractApi
 
     public function createTournament(int $providerId, string $name): int
     {
-        $response = $this->riotConnection->post(
+        $response = $this->post(
             GeoRegionEnum::AMERICAS()->getValue(),
             'lol/tournament/v4/tournaments',
             [
