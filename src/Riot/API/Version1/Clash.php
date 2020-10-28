@@ -30,7 +30,7 @@ final class Clash extends AbstractApi
     public function getTournaments(RegionEnum $region): TournamentDTOCollection
     {
         return TournamentDTOCollection::createFromArray(
-            $this->get($region,'lol/clash/v1/tournaments')
+            $this->get($region, 'lol/clash/v1/tournaments')
         );
     }
 

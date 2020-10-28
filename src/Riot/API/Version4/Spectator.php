@@ -54,7 +54,7 @@ final class Spectator extends AbstractApi
     public function getFeaturedGames(RegionEnum $region): FeaturedGamesDTO
     {
         return FeaturedGamesDTO::createFromArray(
-            $this->get($region,'lol/spectator/v4/featured-games')
+            $this->get($region, 'lol/spectator/v4/featured-games')
         );
     }
 }

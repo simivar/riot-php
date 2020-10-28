@@ -18,25 +18,32 @@ abstract class AbstractApi
     }
 
     /**
-     * @param string|RegionEnum|GeoRegionEnum $region
-     * @param string $path
-     * @return ResponseDecoderInterface
+     * @param string|RegionEnum|GeoRegionEnum $unionRegion
      */
-    private function getData($unionRegion, string $path)
+    private function getData($unionRegion, string $path): ResponseDecoderInterface
     {
+        /** @var string $region * */
         $region = $unionRegion;
         if ($unionRegion instanceof RegionEnum) {
             $region = $unionRegion->getValue();
-        } elseif ($region instanceof GeoRegionEnum) {
+        } elseif ($unionRegion instanceof GeoRegionEnum) {
             $region = $unionRegion->__toString();
         }
+
         return $this->riotConnection->get($region, $path);
     }
 
+    /**
+     * @param array<mixed> $data
+     */
     public function post(string $region, string $path, array $data): ResponseDecoderInterface
     {
         return $this->riotConnection->post($region, $path, $data);
     }
+
+    /**
+     * @param array<mixed> $data
+     */
     public function put(string $region, string $path, array $data): ResponseDecoderInterface
     {
         return $this->riotConnection->put($region, $path, $data);
@@ -44,8 +51,8 @@ abstract class AbstractApi
 
     /**
      * @param string|RegionEnum|GeoRegionEnum $region
-     * @param string $path
-     * @return array
+     *
+     * @return array<mixed>
      */
     protected function get($region, string $path): array
     {
@@ -54,8 +61,6 @@ abstract class AbstractApi
 
     /**
      * @param string|RegionEnum|GeoRegionEnum $region
-     * @param string $path
-     * @return int
      */
     protected function getInt($region, string $path): int
     {
@@ -64,8 +69,6 @@ abstract class AbstractApi
 
     /**
      * @param string|RegionEnum|GeoRegionEnum $region
-     * @param string $path
-     * @return int
      */
     protected function getString($region, string $path): string
     {
