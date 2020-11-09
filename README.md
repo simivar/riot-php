@@ -1,4 +1,4 @@
-# Riot PHP
+# Riot PHP [![codecov](https://codecov.io/gh/simivar/riot-php/branch/main/graph/badge.svg?token=G6N2HQBIM4)](https://codecov.io/gh/simivar/riot-php)
 PHP wrapper around Riot Games APIs. 
 
 ### Features
