@@ -20,17 +20,8 @@ final class LeagueExp extends AbstractApi
         RegionEnum $region,
         int $page = 1
     ): LeagueEntryDTOCollection {
-        $response = $this->riotConnection->get(
-            $region->__toString(),
-            sprintf(
-                'lol/league/v4/entries/%s/%s/%s?page=%d',
-                $queue->__toString(),
-                $tier->__toString(),
-                $division->__toString(),
-                $page
-            ),
+        return LeagueEntryDTOCollection::createFromArray(
+            $this->get($region, sprintf('lol/league/v4/entries/%s/%s/%s?page=%d', $queue, $tier, $division, $page))
         );
-
-        return LeagueEntryDTOCollection::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 }

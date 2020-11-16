@@ -29,11 +29,8 @@ final class ThirdPartyCode extends AbstractApi
      */
     public function getBySummonerId(string $encryptedSummonerId, RegionEnum $region): string
     {
-        $response = $this->riotConnection->get(
-            $region->__toString(),
-            sprintf('lol/platform/v4/third-party-code/by-summoner/%s', $encryptedSummonerId),
+        return $this->getString(
+            $region, sprintf('lol/platform/v4/third-party-code/by-summoner/%s', $encryptedSummonerId),
         );
-
-        return $response->getBodyContentsDecodedAsString();
     }
 }

@@ -33,12 +33,10 @@ final class ChampionMastery extends AbstractApi
      */
     public function getBySummonerId(string $encryptedSummonerId, RegionEnum $region): ChampionMasteryDTOCollection
     {
-        $response = $this->riotConnection->get(
-            $region->__toString(),
-            sprintf('lol/champion-mastery/v4/champion-masteries/by-summoner/%s', $encryptedSummonerId),
+        $championMasteries = $this->get(
+            $region, sprintf('lol/champion-mastery/v4/champion-masteries/by-summoner/%s', $encryptedSummonerId)
         );
 
-        $championMasteries = $response->getBodyContentsDecodedAsArray();
         $collection = new ChampionMasteryDTOCollection();
         foreach ($championMasteries as $championMastery) {
             $collection->add(ChampionMasteryDTO::createFromArray($championMastery));
@@ -67,16 +65,14 @@ final class ChampionMastery extends AbstractApi
         int $championId,
         RegionEnum $region
     ): ChampionMasteryDTO {
-        $response = $this->riotConnection->get(
-            $region->__toString(),
+        return ChampionMasteryDTO::createFromArray($this->get(
+            $region,
             sprintf(
                 'lol/champion-mastery/v4/champion-masteries/by-summoner/%s/by-champion/%s',
                 $encryptedSummonerId,
                 $championId,
             ),
-        );
-
-        return ChampionMasteryDTO::createFromArray($response->getBodyContentsDecodedAsArray());
+        ));
     }
 
     /**
@@ -96,14 +92,6 @@ final class ChampionMastery extends AbstractApi
      */
     public function getScoreBySummonerId(string $encryptedSummonerId, RegionEnum $region): int
     {
-        $response = $this->riotConnection->get(
-            $region->__toString(),
-            sprintf(
-                'lol/champion-mastery/v4/scores/by-summoner/%s',
-                $encryptedSummonerId,
-            ),
-        );
-
-        return $response->getBodyContentsDecodedAsInt();
+        return $this->getInt($region, sprintf('lol/champion-mastery/v4/scores/by-summoner/%s', $encryptedSummonerId));
     }
 }
