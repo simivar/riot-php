@@ -7,9 +7,7 @@ namespace Riot\API\Version1;
 use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
 use Riot\API\AbstractApi;
-use Riot\DTO\LeaderboardDTO;
 use Riot\DTO\SummonerDTO;
-use Riot\Enum\GeoRegionEnum;
 use Riot\Enum\RegionEnum;
 use Riot\Exception as RiotException;
 
