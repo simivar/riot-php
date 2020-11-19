@@ -89,6 +89,7 @@ final class TftLeagueTest extends APITestCase
         );
         self::assertInstanceOf(LeagueEntryDTOCollection::class, $result);
     }
+
     public function testGetGrandmasterLeaguesReturnsProperObjectOnSuccess(): void
     {
         $league = new TftLeague($this->createObjectConnectionMock(
@@ -125,6 +126,7 @@ final class TftLeagueTest extends APITestCase
         );
         self::assertInstanceOf(LeagueListDTO::class, $result);
     }
+
     public function testGetMasterLeaguesReturnsProperObjectOnSuccess(): void
     {
         $league = new TftLeague($this->createObjectConnectionMock(
