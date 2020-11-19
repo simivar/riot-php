@@ -32,6 +32,7 @@ final class Version4 extends AbstractAPIFactory
     {
         /** @var Summoner $api */
         $api = $this->createApi(self::SUMMONER);
+
         return $api;
     }
 
@@ -39,6 +40,7 @@ final class Version4 extends AbstractAPIFactory
     {
         /** @var ThirdPartyCode $api */
         $api = $this->createApi(self::THIRD_PARTY_CODE);
+
         return $api;
     }
 
@@ -46,6 +48,7 @@ final class Version4 extends AbstractAPIFactory
     {
         /** @var ChampionMastery $api */
         $api = $this->createApi(self::CHAMPION_MASTERY);
+
         return $api;
     }
 
@@ -53,6 +56,7 @@ final class Version4 extends AbstractAPIFactory
     {
         /** @var Spectator $api */
         $api = $this->createApi(self::SPECTATOR);
+
         return $api;
     }
 
@@ -60,6 +64,7 @@ final class Version4 extends AbstractAPIFactory
     {
         /** @var League $api */
         $api = $this->createApi(self::LEAGUE);
+
         return $api;
     }
 
@@ -67,6 +72,7 @@ final class Version4 extends AbstractAPIFactory
     {
         /** @var Match_ $api */
         $api = $this->createApi(self::MATCH_);
+
         return $api;
     }
 
@@ -74,6 +80,7 @@ final class Version4 extends AbstractAPIFactory
     {
         /** @var TournamentStub $api */
         $api = $this->createApi(self::TOURNAMENT_STUB);
+
         return $api;
     }
 
@@ -81,6 +88,7 @@ final class Version4 extends AbstractAPIFactory
     {
         /** @var Tournament $api */
         $api = $this->createApi(self::TOURNAMENT);
+
         return $api;
     }
 
@@ -88,6 +96,7 @@ final class Version4 extends AbstractAPIFactory
     {
         /** @var LeagueExp $api */
         $api = $this->createApi(self::LEAGUE_EXP);
+
         return $api;
     }
 

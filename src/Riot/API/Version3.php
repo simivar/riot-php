@@ -18,6 +18,7 @@ final class Version3 extends AbstractAPIFactory
     {
         /** @var Champion $api */
         $api = $this->createApi(self::CHAMPION);
+
         return $api;
     }
 
@@ -25,6 +26,7 @@ final class Version3 extends AbstractAPIFactory
     {
         /** @var LolStatus $api */
         $api = $this->createApi(self::LOL_STATUS);
+
         return $api;
     }
 

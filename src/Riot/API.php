@@ -29,6 +29,7 @@ final class API
     {
         /** @var Version1 $factory */
         $factory = $this->createFactory(self::VERSION_1);
+
         return $factory;
     }
 
@@ -36,6 +37,7 @@ final class API
     {
         /** @var Version3 $factory */
         $factory = $this->createFactory(self::VERSION_3);
+
         return $factory;
     }
 
@@ -43,11 +45,11 @@ final class API
     {
         /** @var Version4 $factory */
         $factory = $this->createFactory(self::VERSION_4);
+
         return $factory;
     }
 
     /**
-     * @param string $key
      * @return AbstractAPIFactory|Version1|Version3|Version4
      */
     private function createFactory(string $key): AbstractAPIFactory
@@ -56,7 +58,7 @@ final class API
             return $this->factories[$key];
         }
 
-        switch($key) {
+        switch ($key) {
             case self::VERSION_1:
                 $api = new Version1($this->connection);
                 break;

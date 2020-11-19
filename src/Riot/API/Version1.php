@@ -22,6 +22,7 @@ final class Version1 extends AbstractAPIFactory
     {
         /** @var Account $api */
         $api = $this->createApi(self::ACCOUNT);
+
         return $api;
     }
 
@@ -29,6 +30,7 @@ final class Version1 extends AbstractAPIFactory
     {
         /** @var LorRanked $api */
         $api = $this->createApi(self::LOR_RANKED);
+
         return $api;
     }
 
@@ -36,6 +38,7 @@ final class Version1 extends AbstractAPIFactory
     {
         /** @var LorMatch $api */
         $api = $this->createApi(self::LOR_MATCH);
+
         return $api;
     }
 
@@ -43,6 +46,7 @@ final class Version1 extends AbstractAPIFactory
     {
         /** @var Clash $api */
         $api = $this->createApi(self::CLASH);
+
         return $api;
     }
 
