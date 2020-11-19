@@ -14,7 +14,7 @@ final class TftSummonerTest extends APITestCase
     public function testGetByNameReturnsSummonerDTOOnSuccess(): void
     {
         $summoner = new TftSummoner($this->createObjectConnectionMock(
-            'tft/summoner/v1/summoners/by-account/simivar',
+            'tft/summoner/v1/summoners/by-name/simivar',
             [
                 'accountId' => '1',
                 'profileIconId' => 2,
@@ -33,7 +33,7 @@ final class TftSummonerTest extends APITestCase
     public function testGetByAccountIdReturnsSummonerDTOOnSuccess(): void
     {
         $summoner = new TftSummoner($this->createObjectConnectionMock(
-            'ft/summoner/v1/summoners/by-name/simivar',
+            'tft/summoner/v1/summoners/by-account/simivar',
             [
                 'accountId' => '1',
                 'profileIconId' => 2,
