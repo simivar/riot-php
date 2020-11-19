@@ -33,7 +33,7 @@ final class TftSummoner extends AbstractApi
     public function getByAccountId(string $encryptedAccountId, RegionEnum $region): SummonerDTO
     {
         $response = $this->riotConnection->get(
-            $region->__toString(),
+            $region->getValue(),
             sprintf('tft/summoner/v1/summoners/by-account/%s', $encryptedAccountId),
         );
 
@@ -58,7 +58,7 @@ final class TftSummoner extends AbstractApi
     public function getByName(string $summonerName, RegionEnum $region): SummonerDTO
     {
         $response = $this->riotConnection->get(
-            $region->__toString(),
+            $region->getValue(),
             sprintf('tft/summoner/v1/summoners/by-name/%s', $summonerName),
         );
 
@@ -83,7 +83,7 @@ final class TftSummoner extends AbstractApi
     public function getByPuuid(string $encryptedPuuid, RegionEnum $region): SummonerDTO
     {
         $response = $this->riotConnection->get(
-            $region->__toString(),
+            $region->getValue(),
             sprintf('tft/summoner/v1/summoners/by-puuid/%s', $encryptedPuuid),
         );
 
@@ -108,7 +108,7 @@ final class TftSummoner extends AbstractApi
     public function getById(string $id, RegionEnum $region): SummonerDTO
     {
         $response = $this->riotConnection->get(
-            $region->__toString(),
+            $region->getValue(),
             sprintf('tft/summoner/v1/summoners/%s', $id),
         );
 
