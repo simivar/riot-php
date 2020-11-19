@@ -9,6 +9,7 @@ use Riot\API\Version1\Account;
 use Riot\API\Version1\Clash;
 use Riot\API\Version1\LorMatch;
 use Riot\API\Version1\LorRanked;
+use Riot\API\Version1\TftLeague;
 use Riot\API\Version1\TftSummoner;
 use Riot\Exception\InvalidApiEndpointException;
 
@@ -19,6 +20,7 @@ final class Version1 extends AbstractAPIFactory
     private const LOR_MATCH = 'lor_match';
     private const CLASH = 'clash';
     private const TFT_SUMMONER = 'tft_summoner';
+    private const TFT_LEAGUE = 'tft_league';
 
     public function getAccount(): Account
     {
@@ -60,8 +62,16 @@ final class Version1 extends AbstractAPIFactory
         return $api;
     }
 
+    public function getTftLeague(): TftLeague
+    {
+        /** @var TftLeague $api */
+        $api = $this->createApi(self::TFT_LEAGUE);
+
+        return $api;
+    }
+
     /**
-     * @return Account|LorRanked|LorMatch|Clash|TftSummoner
+     * @return Account|LorRanked|LorMatch|Clash|TftSummoner|TftLeague
      */
     protected function createApiMap(string $key): AbstractApi
     {
@@ -76,6 +86,8 @@ final class Version1 extends AbstractAPIFactory
                 return new Clash($this->connection);
             case self::TFT_SUMMONER:
                 return new TftSummoner($this->connection);
+            case self::TFT_LEAGUE:
+                return new TftLeague($this->connection);
             default:
                 throw new InvalidApiEndpointException();
         }
