@@ -16,6 +16,21 @@ use Riot\Filter\MatchlistFilter;
 
 final class Match_ extends AbstractApi
 {
+    /**
+     * @throws JsonException
+     * @throws RiotException\BadGatewayException
+     * @throws RiotException\BadRequestException
+     * @throws RiotException\DataNotFoundException
+     * @throws RiotException\ForbiddenException
+     * @throws RiotException\GatewayTimeoutException
+     * @throws RiotException\InternalServerErrorException
+     * @throws RiotException\MethodNotAllowedException
+     * @throws RiotException\RateLimitExceededException
+     * @throws RiotException\ServiceUnavailableException
+     * @throws RiotException\UnauthorizedException
+     * @throws RiotException\UnsupportedMediaTypeException
+     * @throws ClientExceptionInterface
+     */
     public function getByMatchId(int $matchId, RegionEnum $region): MatchDTO
     {
         $response = $this->riotConnection->get(
@@ -26,6 +41,21 @@ final class Match_ extends AbstractApi
         return MatchDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
+    /**
+     * @throws JsonException
+     * @throws RiotException\BadGatewayException
+     * @throws RiotException\BadRequestException
+     * @throws RiotException\DataNotFoundException
+     * @throws RiotException\ForbiddenException
+     * @throws RiotException\GatewayTimeoutException
+     * @throws RiotException\InternalServerErrorException
+     * @throws RiotException\MethodNotAllowedException
+     * @throws RiotException\RateLimitExceededException
+     * @throws RiotException\ServiceUnavailableException
+     * @throws RiotException\UnauthorizedException
+     * @throws RiotException\UnsupportedMediaTypeException
+     * @throws ClientExceptionInterface
+     */
     public function getMatchlistByAccountId(
         string $encryptedAccountId,
         RegionEnum $region,
@@ -43,6 +73,21 @@ final class Match_ extends AbstractApi
         return MatchlistDTO::createFromArray($response->getBodyContentsDecodedAsArray());
     }
 
+    /**
+     * @throws JsonException
+     * @throws RiotException\BadGatewayException
+     * @throws RiotException\BadRequestException
+     * @throws RiotException\DataNotFoundException
+     * @throws RiotException\ForbiddenException
+     * @throws RiotException\GatewayTimeoutException
+     * @throws RiotException\InternalServerErrorException
+     * @throws RiotException\MethodNotAllowedException
+     * @throws RiotException\RateLimitExceededException
+     * @throws RiotException\ServiceUnavailableException
+     * @throws RiotException\UnauthorizedException
+     * @throws RiotException\UnsupportedMediaTypeException
+     * @throws ClientExceptionInterface
+     */
     public function getTimelineByMatchId(int $matchId, RegionEnum $region): MatchTimelineDTO
     {
         $response = $this->riotConnection->get(
@@ -80,6 +125,21 @@ final class Match_ extends AbstractApi
         return $response->getBodyContentsDecodedAsArray();
     }
 
+    /**
+     * @throws JsonException
+     * @throws RiotException\BadGatewayException
+     * @throws RiotException\BadRequestException
+     * @throws RiotException\DataNotFoundException
+     * @throws RiotException\ForbiddenException
+     * @throws RiotException\GatewayTimeoutException
+     * @throws RiotException\InternalServerErrorException
+     * @throws RiotException\MethodNotAllowedException
+     * @throws RiotException\RateLimitExceededException
+     * @throws RiotException\ServiceUnavailableException
+     * @throws RiotException\UnauthorizedException
+     * @throws RiotException\UnsupportedMediaTypeException
+     * @throws ClientExceptionInterface
+     */
     public function getByMatchIdAndTournamentCode(int $matchId, string $tournamentCode, RegionEnum $region): MatchDTO
     {
         $response = $this->riotConnection->get(
