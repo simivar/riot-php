@@ -41,7 +41,25 @@ composer require simivar/riot-php symfony/http-client nyholm/psr7
 | Tournament v4        | [docs](https://developer.riotgames.com/apis#tournament-v4)        | 100%   |
 | Val Content v1       | [docs](https://developer.riotgames.com/apis#val-content-v1)       | 100%   |
 
+# Usage
+```php
+<?php
 
+require_once('vendor/autoload.php');
+
+$httpClient = new \Symfony\Component\HttpClient\Psr18Client();
+$connection = new \Riot\Connection(
+    $httpClient,
+    'PASTE-YOUR-API-KEY-HERE',
+    $httpClient,
+    $httpClient
+);
+$riotApi = new \Riot\API($connection);
+$lolStatus = $riotApi->getVersion4()
+    ->getLolStatus()
+    ->getPlatformData(\Riot\Enum\RegionEnum::EUN1())
+    ;
+```
 
 # Legal notice
 Riot PHP isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially 
