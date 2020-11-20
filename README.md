@@ -39,7 +39,7 @@ composer require simivar/riot-php symfony/http-client nyholm/psr7
 | Third Party Code v4  | [docs](https://developer.riotgames.com/apis#third-party-code-v4)  | 100%   |
 | Tournament Stub v4   | [docs](https://developer.riotgames.com/apis#tournament-stub-v4)   | 100%   |
 | Tournament v4        | [docs](https://developer.riotgames.com/apis#tournament-v4)        | 100%   |
-| Val Content v1       | [docs](https://developer.riotgames.com/apis#val-content-v1)       | -      |
+| Val Content v1       | [docs](https://developer.riotgames.com/apis#val-content-v1)       | 100%   |
 
 
 
