@@ -8,6 +8,7 @@ use Riot\AbstractAPIFactory;
 use Riot\API\Version4\ChampionMastery;
 use Riot\API\Version4\League;
 use Riot\API\Version4\LeagueExp;
+use Riot\API\Version4\LolStatus;
 use Riot\API\Version4\Match_;
 use Riot\API\Version4\Spectator;
 use Riot\API\Version4\Summoner;
@@ -27,6 +28,7 @@ final class Version4 extends AbstractAPIFactory
     private const TOURNAMENT_STUB = 'tournament_stub';
     private const TOURNAMENT = 'tournament';
     private const LEAGUE_EXP = 'league_exp';
+    private const LOL_STATUS = 'lol_status';
 
     public function getSummoner(): Summoner
     {
@@ -100,6 +102,14 @@ final class Version4 extends AbstractAPIFactory
         return $api;
     }
 
+    public function getLolStatus(): LolStatus
+    {
+        /** @var LolStatus $api */
+        $api = $this->createApi(self::LOL_STATUS);
+
+        return $api;
+    }
+
     protected function createApiMap(string $key): AbstractApi
     {
         switch ($key) {
@@ -121,6 +131,8 @@ final class Version4 extends AbstractAPIFactory
                 return new Tournament($this->connection);
             case self::LEAGUE_EXP:
                 return new LeagueExp($this->connection);
+            case self::LOL_STATUS:
+                return new LolStatus($this->connection);
             default:
                 throw new InvalidApiEndpointException();
         }
