@@ -16,7 +16,7 @@ composer require simivar/riot-php symfony/http-client nyholm/psr7
 ```
 
 ## APIs Coverage
-> :warning: API that have their names ~strikethrough~ are deprecated and will be removed.
+> :warning: APIs that have their names ~strikethrough~ are deprecated and will be removed.
 
 | API                  | Docs                                                              | Status | 
 | -------------------- | ----------------------------------------------------------------- | ------ |
