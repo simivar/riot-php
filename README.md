@@ -32,7 +32,7 @@ composer require simivar/riot-php symfony/http-client nyholm/psr7
 | Spectator v4         | [docs](https://developer.riotgames.com/apis#spectator-v4)         | 100%   |
 | Summoner v4          | [docs](https://developer.riotgames.com/apis#summoner-v4)          | 100%   |
 | Tft League v1        | [docs](https://developer.riotgames.com/apis#tft-league-v1)        | 100%   |
-| Tft Match v1         | [docs](https://developer.riotgames.com/apis#tft-match-v1)         | -      |
+| Tft Match v1         | [docs](https://developer.riotgames.com/apis#tft-match-v1)         | 100%   |
 | Tft Summoner v1      | [docs](https://developer.riotgames.com/apis#tft-summoner-v1)      | 100%   |
 | Third Party Code v4  | [docs](https://developer.riotgames.com/apis#third-party-code-v4)  | 100%   |
 | Tournament Stub v4   | [docs](https://developer.riotgames.com/apis#tournament-stub-v4)   | 100%   |
