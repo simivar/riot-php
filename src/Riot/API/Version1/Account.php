@@ -32,7 +32,7 @@ final class Account extends AbstractApi
     public function getByPuuid(string $puuid, GeoRegionEnum $geoRegion): AccountDTO
     {
         $response = $this->riotConnection->get(
-            $geoRegion->__toString(),
+            $geoRegion->getValue(),
             sprintf('riot/account/v1/accounts/by-puuid/%s', $puuid),
         );
 
@@ -57,7 +57,7 @@ final class Account extends AbstractApi
     public function getByGameNameAndTagLine(string $gameName, string $tagLine, GeoRegionEnum $geoRegion): AccountDTO
     {
         $response = $this->riotConnection->get(
-            $geoRegion->__toString(),
+            $geoRegion->getValue(),
             sprintf('riot/account/v1/accounts/by-riot-id/%s/%s', $gameName, $tagLine),
         );
 
@@ -82,7 +82,7 @@ final class Account extends AbstractApi
     public function getByGameAndPuuid(string $game, string $puuid, GeoRegionEnum $geoRegion): ActiveShardDTO
     {
         $response = $this->riotConnection->get(
-            $geoRegion->__toString(),
+            $geoRegion->getValue(),
             sprintf('riot/account/v1/active-shards/by-game/%s/by-puuid/%s', $game, $puuid),
         );
 
