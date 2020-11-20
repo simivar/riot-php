@@ -12,6 +12,7 @@ use Riot\API\Version1\LorRanked;
 use Riot\API\Version1\TftLeague;
 use Riot\API\Version1\TftMatch;
 use Riot\API\Version1\TftSummoner;
+use Riot\API\Version1\ValContent;
 use Riot\Exception\InvalidApiEndpointException;
 
 final class Version1 extends AbstractAPIFactory
@@ -23,6 +24,7 @@ final class Version1 extends AbstractAPIFactory
     private const TFT_SUMMONER = 'tft_summoner';
     private const TFT_LEAGUE = 'tft_league';
     private const TFT_MATCH = 'tft_match';
+    private const VAL_CONTENT = 'val_content';
 
     public function getAccount(): Account
     {
@@ -80,8 +82,16 @@ final class Version1 extends AbstractAPIFactory
         return $api;
     }
 
+    public function getValContent(): ValContent
+    {
+        /** @var ValContent $api */
+        $api = $this->createApi(self::VAL_CONTENT);
+
+        return $api;
+    }
+
     /**
-     * @return Account|LorRanked|LorMatch|Clash|TftSummoner|TftLeague|TftMatch
+     * @return Account|LorRanked|LorMatch|Clash|TftSummoner|TftLeague|TftMatch|ValContent
      */
     protected function createApiMap(string $key): AbstractApi
     {
@@ -100,6 +110,8 @@ final class Version1 extends AbstractAPIFactory
                 return new TftLeague($this->connection);
             case self::TFT_MATCH:
                 return new TftMatch($this->connection);
+            case self::VAL_CONTENT:
+                return new ValContent($this->connection);
             default:
                 throw new InvalidApiEndpointException();
         }
