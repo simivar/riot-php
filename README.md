@@ -16,6 +16,8 @@ composer require simivar/riot-php symfony/http-client nyholm/psr7
 ```
 
 ## APIs Coverage
+> :warning: API that have their names ~strikethrough~ are deprecated and will be removed.
+
 | API                  | Docs                                                              | Status | 
 | -------------------- | ----------------------------------------------------------------- | ------ |
 | Account v1           | [docs](https://developer.riotgames.com/apis#account-v1)           | 100%   |
@@ -24,8 +26,8 @@ composer require simivar/riot-php symfony/http-client nyholm/psr7
 | Clash v1             | [docs](https://developer.riotgames.com/apis#clash-v1)             | 100%   |
 | League Exp v4        | [docs](https://developer.riotgames.com/apis#league-exp-v4)        | 100%   |
 | League v4            | [docs](https://developer.riotgames.com/apis#league-v4)            | 100%   |
-| Lol Status v3        | [docs](https://developer.riotgames.com/apis#lol-status-v3)        | 100%   |
-| Lol Status v4        | [docs](https://developer.riotgames.com/apis#lol-status-v4)        | -      |
+| ~Lol Status v3~      | [docs](https://developer.riotgames.com/apis#lol-status-v3)        | 100%   |
+| Lol Status v4        | [docs](https://developer.riotgames.com/apis#lol-status-v4)        | 100%   |
 | Lor Match v1         | [docs](https://developer.riotgames.com/apis#lor-match-v1)         | 100%   |
 | Lor Ranked v1        | [docs](https://developer.riotgames.com/apis#lor-ranked-v1)        | 100%   |
 | Match v4             | [docs](https://developer.riotgames.com/apis#match-v4)             | 100%   |
@@ -38,6 +40,8 @@ composer require simivar/riot-php symfony/http-client nyholm/psr7
 | Tournament Stub v4   | [docs](https://developer.riotgames.com/apis#tournament-stub-v4)   | 100%   |
 | Tournament v4        | [docs](https://developer.riotgames.com/apis#tournament-v4)        | 100%   |
 | Val Content v1       | [docs](https://developer.riotgames.com/apis#val-content-v1)       | -      |
+
+
 
 # Legal notice
 Riot PHP isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially 
