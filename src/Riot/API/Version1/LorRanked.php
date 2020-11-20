@@ -31,7 +31,7 @@ final class LorRanked extends AbstractApi
     public function getLeaderboards(GeoRegionEnum $geoRegion): LeaderboardDTO
     {
         $response = $this->riotConnection->get(
-            $geoRegion->__toString(),
+            $geoRegion->getValue(),
             'lor/ranked/v1/leaderboards',
         );
 

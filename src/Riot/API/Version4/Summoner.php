@@ -31,7 +31,7 @@ final class Summoner extends AbstractApi
     public function getByName(string $summonerName, RegionEnum $region): SummonerDTO
     {
         $response = $this->riotConnection->get(
-            $region->__toString(),
+            $region->getValue(),
             sprintf('lol/summoner/v4/summoners/by-name/%s', $summonerName),
         );
 
@@ -56,7 +56,7 @@ final class Summoner extends AbstractApi
     public function getByAccountId(string $encryptedAccountId, RegionEnum $region): SummonerDTO
     {
         $response = $this->riotConnection->get(
-            $region->__toString(),
+            $region->getValue(),
             sprintf('lol/summoner/v4/summoners/by-account/%s', $encryptedAccountId),
         );
 
@@ -81,7 +81,7 @@ final class Summoner extends AbstractApi
     public function getByPuuid(string $encryptedPuuid, RegionEnum $region): SummonerDTO
     {
         $response = $this->riotConnection->get(
-            $region->__toString(),
+            $region->getValue(),
             sprintf('lol/summoner/v4/summoners/by-puuid/%s', $encryptedPuuid),
         );
 
@@ -106,7 +106,7 @@ final class Summoner extends AbstractApi
     public function getById(string $id, RegionEnum $region): SummonerDTO
     {
         $response = $this->riotConnection->get(
-            $region->__toString(),
+            $region->getValue(),
             sprintf('lol/summoner/v4/summoners/%s', $id),
         );
 

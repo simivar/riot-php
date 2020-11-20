@@ -33,7 +33,7 @@ final class LorMatch extends AbstractApi
     public function getIdsByPuuid(string $puuid, GeoRegionEnum $geoRegion): array
     {
         $response = $this->riotConnection->get(
-            $geoRegion->__toString(),
+            $geoRegion->getValue(),
             sprintf('lor/match/v1/matches/by-puuid/%s/ids', $puuid),
         );
 
@@ -58,7 +58,7 @@ final class LorMatch extends AbstractApi
     public function getById(string $matchId, GeoRegionEnum $geoRegion): MatchDTO
     {
         $response = $this->riotConnection->get(
-            $geoRegion->__toString(),
+            $geoRegion->getValue(),
             sprintf('lor/match/v1/matches/%s', $matchId),
         );
 

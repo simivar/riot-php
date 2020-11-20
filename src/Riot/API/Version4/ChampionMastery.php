@@ -34,7 +34,7 @@ final class ChampionMastery extends AbstractApi
     public function getBySummonerId(string $encryptedSummonerId, RegionEnum $region): ChampionMasteryDTOCollection
     {
         $response = $this->riotConnection->get(
-            $region->__toString(),
+            $region->getValue(),
             sprintf('lol/champion-mastery/v4/champion-masteries/by-summoner/%s', $encryptedSummonerId),
         );
 
@@ -68,7 +68,7 @@ final class ChampionMastery extends AbstractApi
         RegionEnum $region
     ): ChampionMasteryDTO {
         $response = $this->riotConnection->get(
-            $region->__toString(),
+            $region->getValue(),
             sprintf(
                 'lol/champion-mastery/v4/champion-masteries/by-summoner/%s/by-champion/%s',
                 $encryptedSummonerId,
@@ -97,7 +97,7 @@ final class ChampionMastery extends AbstractApi
     public function getScoreBySummonerId(string $encryptedSummonerId, RegionEnum $region): int
     {
         $response = $this->riotConnection->get(
-            $region->__toString(),
+            $region->getValue(),
             sprintf(
                 'lol/champion-mastery/v4/scores/by-summoner/%s',
                 $encryptedSummonerId,

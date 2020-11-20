@@ -32,7 +32,7 @@ final class Spectator extends AbstractApi
     public function getActiveGamesBySummonerId(string $encryptedSummonerId, RegionEnum $region): CurrentGameInfoDTO
     {
         $response = $this->riotConnection->get(
-            $region->__toString(),
+            $region->getValue(),
             sprintf('lol/spectator/v4/active-games/by-summoner/%s', $encryptedSummonerId),
         );
 
@@ -57,7 +57,7 @@ final class Spectator extends AbstractApi
     public function getFeaturedGames(RegionEnum $region): FeaturedGamesDTO
     {
         $response = $this->riotConnection->get(
-            $region->__toString(),
+            $region->getValue(),
             'lol/spectator/v4/featured-games',
         );
 

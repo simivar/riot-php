@@ -17,8 +17,8 @@ final class League extends AbstractApi
     public function getChallengerLeaguesByQueue(QueueEnum $queue, RegionEnum $region): LeagueListDTO
     {
         $response = $this->riotConnection->get(
-            $region->__toString(),
-            sprintf('lol/league/v4/challengerleagues/by-queue/%s', $queue->__toString()),
+            $region->getValue(),
+            sprintf('lol/league/v4/challengerleagues/by-queue/%s', $queue->getValue()),
         );
 
         return LeagueListDTO::createFromArray($response->getBodyContentsDecodedAsArray());
@@ -27,7 +27,7 @@ final class League extends AbstractApi
     public function getBySummonerId(string $encryptedSummonerId, RegionEnum $region): LeagueEntryDTOCollection
     {
         $response = $this->riotConnection->get(
-            $region->__toString(),
+            $region->getValue(),
             sprintf('lol/league/v4/entries/by-summoner/%s', $encryptedSummonerId),
         );
 
@@ -42,12 +42,12 @@ final class League extends AbstractApi
         int $page = 1
     ): LeagueEntryDTOCollection {
         $response = $this->riotConnection->get(
-            $region->__toString(),
+            $region->getValue(),
             sprintf(
                 'lol/league/v4/entries/%s/%s/%s?page=%d',
-                $queue->__toString(),
-                $tier->__toString(),
-                $division->__toString(),
+                $queue->getValue(),
+                $tier->getValue(),
+                $division->getValue(),
                 $page
             ),
         );
@@ -58,8 +58,8 @@ final class League extends AbstractApi
     public function getGrandmasterLeaguesByQueue(QueueEnum $queue, RegionEnum $region): LeagueListDTO
     {
         $response = $this->riotConnection->get(
-            $region->__toString(),
-            sprintf('lol/league/v4/grandmasterleagues/by-queue/%s', $queue->__toString()),
+            $region->getValue(),
+            sprintf('lol/league/v4/grandmasterleagues/by-queue/%s', $queue->getValue()),
         );
 
         return LeagueListDTO::createFromArray($response->getBodyContentsDecodedAsArray());
@@ -68,7 +68,7 @@ final class League extends AbstractApi
     public function getById(string $leagueId, RegionEnum $region): LeagueListDTO
     {
         $response = $this->riotConnection->get(
-            $region->__toString(),
+            $region->getValue(),
             sprintf('lol/league/v4/leagues/%s', $leagueId),
         );
 
@@ -78,8 +78,8 @@ final class League extends AbstractApi
     public function getMasterLeaguesByQueue(QueueEnum $queue, RegionEnum $region): LeagueListDTO
     {
         $response = $this->riotConnection->get(
-            $region->__toString(),
-            sprintf('lol/league/v4/masterleagues/by-queue/%s', $queue->__toString()),
+            $region->getValue(),
+            sprintf('lol/league/v4/masterleagues/by-queue/%s', $queue->getValue()),
         );
 
         return LeagueListDTO::createFromArray($response->getBodyContentsDecodedAsArray());

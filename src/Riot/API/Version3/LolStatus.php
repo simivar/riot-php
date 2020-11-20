@@ -37,7 +37,7 @@ final class LolStatus extends AbstractApi
     public function getShardData(RegionEnum $region): ShardStatusDTO
     {
         $response = $this->riotConnection->get(
-            $region->__toString(),
+            $region->getValue(),
             'lol/status/v3/shard-data',
         );
 

@@ -21,12 +21,12 @@ final class LeagueExp extends AbstractApi
         int $page = 1
     ): LeagueEntryDTOCollection {
         $response = $this->riotConnection->get(
-            $region->__toString(),
+            $region->getValue(),
             sprintf(
                 'lol/league/v4/entries/%s/%s/%s?page=%d',
-                $queue->__toString(),
-                $tier->__toString(),
-                $division->__toString(),
+                $queue->getValue(),
+                $tier->getValue(),
+                $division->getValue(),
                 $page
             ),
         );
