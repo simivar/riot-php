@@ -26,6 +26,11 @@ final class LeagueEntryDTOCollection extends AbstractCollection
     {
         $collection = new self();
         foreach ($data as $item) {
+
+            if (!isset($item['leagueId'])) {
+                continue;
+            }
+
             $collection->add(LeagueEntryDTO::createFromArray($item));
         }
 
