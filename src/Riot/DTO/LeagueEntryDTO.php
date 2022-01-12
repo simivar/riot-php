@@ -139,12 +139,12 @@ final class LeagueEntryDTO implements DTOInterface
     public static function createFromArray(array $data): self
     {
         return new self(
-            $data['leagueId'],
+            isset($data['leagueId']) ? $data['leagueId'] : '',
             $data['summonerId'],
             $data['summonerName'],
             $data['queueType'],
-            $data['tier'],
-            $data['rank'],
+            isset($data['tier']) ? $data['tier'] : '',
+            isset($data['rank']) ? $data['rank'] : '',
             $data['leaguePoints'],
             $data['wins'],
             $data['losses'],

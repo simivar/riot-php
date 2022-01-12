@@ -42,4 +42,35 @@ final class LeagueEntryDTOTest extends TestCase
         self::assertFalse($object->isHotStreak());
         self::assertNull($object->getMiniSeries());
     }
+
+    public function testCreateFromArrayWithRequiredFieldsCreatesProperObject(): void
+    {
+        $data = [
+            "queueType" => "RANKED_TFT_PAIRS",
+            "summonerId" => "some-summoner-id",
+            "summonerName" => "Player One",
+            "leaguePoints" => 5,
+            "wins" => 34,
+            "losses" => 35,
+            "veteran" => false,
+            "inactive" => false,
+            "freshBlood" => false,
+            "hotStreak" => false
+        ];
+        $object = LeagueEntryDTO::createFromArray($data);
+        self::assertSame('', $object->getLeagueId());
+        self::assertSame('RANKED_TFT_PAIRS', $object->getQueueType());
+        self::assertSame('', $object->getTier());
+        self::assertSame('', $object->getRank());
+        self::assertSame('some-summoner-id', $object->getSummonerId());
+        self::assertSame('Player One', $object->getSummonerName());
+        self::assertSame(5, $object->getLeaguePoints());
+        self::assertSame(34, $object->getWins());
+        self::assertSame(35, $object->getLosses());
+        self::assertFalse($object->isVeteran());
+        self::assertFalse($object->isInactive());
+        self::assertFalse($object->isFreshBlood());
+        self::assertFalse($object->isHotStreak());
+        self::assertNull($object->getMiniSeries());
+    }
 }
