@@ -1,5 +1,5 @@
 {
-    "name": "domenikus/riot-php",
+    "name": "simivar/riot-php",
     "description": "Dependency-injection based wrapper around Riot Games APIs.",
     "keywords": [
         "riot", "riot games", "lol", "league of legends", "valorant", "teamfight tactics", "tft",
