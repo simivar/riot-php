@@ -24,7 +24,6 @@ final class Version4 extends AbstractAPIFactory
     private const CHAMPION_MASTERY = 'champion_mastery';
     private const SPECTATOR = 'spectator';
     private const LEAGUE = 'league';
-    private const MATCH_ = 'match';
     private const TOURNAMENT_STUB = 'tournament_stub';
     private const TOURNAMENT = 'tournament';
     private const LEAGUE_EXP = 'league_exp';
@@ -66,14 +65,6 @@ final class Version4 extends AbstractAPIFactory
     {
         /** @var League $api */
         $api = $this->createApi(self::LEAGUE);
-
-        return $api;
-    }
-
-    public function getMatch(): Match_
-    {
-        /** @var Match_ $api */
-        $api = $this->createApi(self::MATCH_);
 
         return $api;
     }
@@ -123,8 +114,6 @@ final class Version4 extends AbstractAPIFactory
                 return new Spectator($this->connection);
             case self::LEAGUE:
                 return new League($this->connection);
-            case self::MATCH_:
-                return new Match_($this->connection);
             case self::TOURNAMENT_STUB:
                 return new TournamentStub($this->connection);
             case self::TOURNAMENT:

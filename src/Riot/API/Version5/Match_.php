@@ -12,7 +12,7 @@ use Riot\DTO\Lol\MatchlistDTO;
 use Riot\DTO\Lol\MatchTimelineDTO;
 use Riot\Enum\RegionEnum;
 use Riot\Exception as RiotException;
-use Riot\Filter\Version5\MatchlistFilter;
+use Riot\Filter\MatchlistFilter;
 
 final class Match_ extends AbstractApi
 {

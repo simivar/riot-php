@@ -10,42 +10,15 @@ use Webmozart\Assert\Assert;
 class MatchlistFilter implements FilterInterface
 {
     private const ONE_WEEK_IN_MILLISECONDS = 604800000;
-
     public const MAX_TIME_DIFFERENCE = self::ONE_WEEK_IN_MILLISECONDS;
-
-    public const MAX_INDEX_DIFFERENCE = 100;
-
-    /** @var array<int> */
-    private array $champion;
-
+    public const MAX_COUNT = 100;
     /** @var array<int> */
     private array $queue;
-
-    /** @var array<int> */
-    private array $season;
-
+    private int $type;
     private int $endTime;
-
-    private int $beginTime;
-
-    private int $endIndex;
-
-    private int $beginIndex;
-
-    /**
-     * @param array<int> $champion
-     *
-     * @throws InvalidArgumentException
-     */
-    public function setChampion(array $champion): self
-    {
-        Assert::isList($champion);
-        Assert::allInteger($champion);
-
-        $this->champion = $champion;
-
-        return $this;
-    }
+    private int $startTime;
+    private int $count;
+    private int $start;
 
     /**
      * @param array<int> $queue
@@ -63,18 +36,11 @@ class MatchlistFilter implements FilterInterface
     }
 
     /**
-     * @param array<int> $season
-     *
      * @throws InvalidArgumentException
-     *
-     * @deprecated
      */
-    public function setSeason(array $season): self
+    public function setType(int $type): self
     {
-        Assert::isList($season);
-        Assert::allInteger($season);
-
-        $this->season = $season;
+        $this->type = $type;
 
         return $this;
     }
@@ -82,12 +48,12 @@ class MatchlistFilter implements FilterInterface
     /**
      * @throws InvalidArgumentException
      */
-    public function setEndTime(int $miliseconds): self
+    public function setEndTime(int $unixtimestamp): self
     {
-        if (isset($this->beginTime)) {
-            $this->validateBeginAndEndTime($this->beginTime, $miliseconds);
+        if (isset($this->startTime)) {
+            $this->validateStartTimeAndEndTime($this->startTime, $unixtimestamp);
         }
-        $this->endTime = $miliseconds;
+        $this->endTime = $unixtimestamp;
 
         return $this;
     }
@@ -95,33 +61,33 @@ class MatchlistFilter implements FilterInterface
     /**
      * @throws InvalidArgumentException
      */
-    public function setBeginTime(int $miliseconds): self
+    public function setStartTime(int $unixtimestamp): self
     {
         if (isset($this->endTime)) {
-            $this->validateBeginAndEndTime($miliseconds, $this->endTime);
+            $this->validateStartTimeAndEndTime($unixtimestamp, $this->endTime);
         }
-        $this->beginTime = $miliseconds;
+        $this->startTime = $unixtimestamp;
 
         return $this;
     }
 
-    public function setEndIndex(int $endIndex): self
+    public function setCount(int $count): self
     {
-        if (isset($this->beginIndex)) {
-            $this->validateBeginAndEndIndex($this->beginIndex, $endIndex);
+        if (isset($this->start)) {
+            $this->validateStartAndCount($this->start, $count);
         }
 
-        $this->endIndex = $endIndex;
+        $this->count = $count;
 
         return $this;
     }
 
-    public function setBeginIndex(int $beginIndex): self
+    public function setStart(int $start): self
     {
-        if (isset($this->endIndex)) {
-            $this->validateBeginAndEndIndex($beginIndex, $this->endIndex);
+        if (isset($this->count)) {
+            $this->validateStartAndCount($start, $this->count);
         }
-        $this->beginIndex = $beginIndex;
+        $this->start = $start;
 
         return $this;
     }
@@ -129,13 +95,12 @@ class MatchlistFilter implements FilterInterface
     public function getAsHttpQuery(): string
     {
         $parameters = [
-            'champion' => isset($this->champion) ? implode(',', $this->champion) : null,
             'queue' => isset($this->queue) ? implode(',', $this->queue) : null,
-            'season' => isset($this->season) ? implode(',', $this->season) : null,
+            'type' => $this->type ?? null,
             'endTime' => $this->endTime ?? null,
-            'beginTime' => $this->beginTime ?? null,
-            'endIndex' => $this->endIndex ?? null,
-            'beginIndex' => $this->beginIndex ?? null,
+            'startTime' => $this->startTime ?? null,
+            'count' => $this->count ?? null,
+            'start' => $this->start ?? null,
         ];
 
         return http_build_query($parameters);
@@ -144,30 +109,35 @@ class MatchlistFilter implements FilterInterface
     /**
      * @throws InvalidArgumentException
      */
-    private function validateBeginAndEndTime(int $beginTime, int $endTime): void
+    private function validateStartTimeAndEndTime(int $startTime, int $endTime): void
     {
         Assert::greaterThan(
             $endTime,
-            $beginTime,
-            'Expected endTime (%1$s) to have a value greater than beginTime (%2$s).',
+            $startTime,
+            'Expected endTime (%1$s) to have a value greater than startTime (%2$s).',
         );
         Assert::lessThanEq(
-            $endTime - $beginTime,
+            $endTime - $startTime,
             self::MAX_TIME_DIFFERENCE,
-            'Difference between beginTime and endTime must be less than or equal to %2$s. Got: %1$s'
+            'Difference between startTime and endTime must be less than or equal to %2$s. Got: %1$s'
         );
     }
 
-    private function validateBeginAndEndIndex(int $beginIndex, int $endIndex): void
+    private function validateStartAndCount(int $start, int $count): void
     {
         Assert::greaterThan(
-            $endIndex,
-            $beginIndex,
-            'Expected endIndex (%1$s) to have a value greater than beginIndex (%2$s).',
+            $start,
+            0,
+            'Expected start (%1$s) to have a value greater than 0.'
+        );
+        Assert::greaterThan(
+            $count,
+            0,
+            'Expected count (%1$s) to have a value greater than 0.'
         );
         Assert::lessThanEq(
-            $endIndex - $beginIndex,
-            self::MAX_INDEX_DIFFERENCE,
+            $count,
+            self::MAX_COUNT,
             'Difference between beginIndex and endIndex must be less than or equal to %2$s. Got: %1$s'
         );
     }
