@@ -1,8 +1,10 @@
-/var/
-/vendor/
-/.idea/
-/phpunit.xml
-.phpunit.result.cache
-/.php_cs
-/.php_cs.cache
- composer.lock
+.*
+
+!.gitignore
+!.php_cs.dist
+
+composer.lock
+phpunit.xml
+
+var/
+vendor/
